@@ -1,0 +1,42 @@
+DEBUG 22-01-04 10:42:05[File Watcher] [Restarter:249] - Restarting application
+DEBUG 22-01-04 10:42:05[Thread-8] [Restarter:305] - Stopping application
+DEBUG 22-01-04 10:42:05[Thread-8] [ApplicationAvailabilityBean:77] - Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
+DEBUG 22-01-04 10:42:05[Thread-8] [AnnotationConfigServletWebServerApplicationContext:1049] - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@43989f5a, started on Tue Jan 04 10:37:05 KST 2022
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultLifecycleProcessor:365] - Stopping beans in phase 2147483647
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultLifecycleProcessor:238] - Bean 'documentationPluginsBootstrapper' completed its stop procedure
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultLifecycleProcessor:238] - Bean 'webServerGracefulShutdown' completed its stop procedure
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultLifecycleProcessor:365] - Stopping beans in phase 2147483646
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultLifecycleProcessor:238] - Bean 'webServerStartStop' completed its stop procedure
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultLifecycleProcessor:365] - Stopping beans in phase 2147483547
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultLifecycleProcessor:238] - Bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry' completed its stop procedure
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultClientResources:710] - Initiate shutdown (0, 2, SECONDS)
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultEventLoopGroupProvider:317] - Initiate shutdown (0, 2, SECONDS)
+DEBUG 22-01-04 10:42:05[Thread-8] [AnnotationMBeanExporter:452] - Unregistering JMX-exposed beans on shutdown
+DEBUG 22-01-04 10:42:05[Thread-8] [AnnotationMBeanExporter:186] - Unregistering JMX-exposed beans
+DEBUG 22-01-04 10:42:05[Thread-8] [RedisMessageListenerContainer:229] - Stopped RedisMessageListenerContainer
+DEBUG 22-01-04 10:42:05[Thread-8] [AbstractRedisClient:539] - Initiate shutdown (100, 100, MILLISECONDS)
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultClientResources:710] - Initiate shutdown (100, 100, MILLISECONDS)
+DEBUG 22-01-04 10:42:05[Thread-8] [DefaultEventLoopGroupProvider:317] - Initiate shutdown (100, 100, MILLISECONDS)
+INFO  22-01-04 10:42:06[Thread-8] [LocalContainerEntityManagerFactoryBean:651] - Closing JPA EntityManagerFactory for persistence unit 'default'
+DEBUG 22-01-04 10:42:06[Thread-8] [SessionFactoryImpl:792] - HHH000031: Closing
+DEBUG 22-01-04 10:42:06[Thread-8] [TypeConfiguration$Scope:350] - Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@5afef56b] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@4110d079]
+DEBUG 22-01-04 10:42:06[Thread-8] [AbstractServiceRegistryImpl:419] - Implicitly destroying ServiceRegistry on de-registration of all child ServiceRegistries
+DEBUG 22-01-04 10:42:06[Thread-8] [BootstrapServiceRegistryImpl:295] - Implicitly destroying Boot-strap registry on de-registration of all child ServiceRegistries
+INFO  22-01-04 10:42:06[Thread-8] [HikariDataSource:350] - HikariCP - Shutdown initiated...
+DEBUG 22-01-04 10:42:06[Thread-8] [HikariPool:421] - HikariCP - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+DEBUG 22-01-04 10:42:06[HikariCP connection closer] [PoolBase:134] - HikariCP - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@5885659c: (connection evicted)
+DEBUG 22-01-04 10:42:06[HikariCP connection closer] [PoolBase:134] - HikariCP - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@177f9ac7: (connection evicted)
+DEBUG 22-01-04 10:42:06[HikariCP connection closer] [PoolBase:134] - HikariCP - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@64a5a431: (connection evicted)
+DEBUG 22-01-04 10:42:06[HikariCP connection closer] [PoolBase:134] - HikariCP - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@26a20d29: (connection evicted)
+DEBUG 22-01-04 10:42:06[HikariCP connection closer] [PoolBase:134] - HikariCP - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@1c926d7f: (connection evicted)
+DEBUG 22-01-04 10:42:06[HikariCP connection closer] [PoolBase:134] - HikariCP - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@77506588: (connection evicted)
+DEBUG 22-01-04 10:42:06[HikariCP connection closer] [PoolBase:134] - HikariCP - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@3e1dc37f: (connection evicted)
+DEBUG 22-01-04 10:42:06[HikariCP connection closer] [PoolBase:134] - HikariCP - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@8e05ad0: (connection evicted)
+DEBUG 22-01-04 10:42:06[HikariCP connection closer] [PoolBase:134] - HikariCP - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@7962726: (connection evicted)
+DEBUG 22-01-04 10:42:06[HikariCP connection closer] [PoolBase:134] - HikariCP - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@731e7e79: (connection evicted)
+DEBUG 22-01-04 10:42:06[Thread-8] [HikariPool:421] - HikariCP - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+INFO  22-01-04 10:42:06[Thread-8] [HikariDataSource:352] - HikariCP - Shutdown completed.
+DEBUG 22-01-04 10:42:06[Secondary finalizer] [PoolingHttpClientConnectionManager:411] - Connection manager is shutting down
+DEBUG 22-01-04 10:42:06[Secondary finalizer] [PoolingHttpClientConnectionManager:434] - Connection manager shut down
+DEBUG 22-01-04 10:42:06[Thread-8] [Restarter:85] - Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@48a02328
+DEBUG 22-01-04 10:42:06[Thread-8] [Restarter:281] - Starting application com.daon.host.HostApplication with URLs [file:/C:/workspace/HOST/target/classes/]
