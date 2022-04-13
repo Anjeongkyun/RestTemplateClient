@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daon.host.mapper.ApiMapper">
+	
+	<select id="selectUser" resultType="MobileUser">
+        select login_id
+         	  ,login_pw
+         	  ,apt_id
+         	  ,member_nm
+         	  ,member_mobile
+         	  ,blue_id
+         	  ,dong
+         	  ,ho
+         	  ,household_yn
+         	  ,car_no
+         	  ,car_type
+         	  ,user_active
+         	  ,ins_id
+         	  ,ins_date
+         	  ,upd_id
+         	  ,upd_date
+		  from tb_o_mobuser
+		  <where>
+            <if test=" loginId != null and loginId != '' ">
+                and login_id = #{loginId}
+            </if>
+		  </where>
+    </select>
+    
+    <select id="existsByEmail" resultType="int">
+		select count(*)
+		  from tb_o_mobuser 
+		 where login_id = #{loginId} 
+    </select>
+    
+    <insert id="insertUser">
+    	insert into tb_o_mobuser
+    			(
+    			 login_id
+				,login_pw
+				,apt_id
+				,member_nm
+				,member_mobile
+				,blue_id
+				,dong
+				,ho
+				,household_yn
+				,car_no
+				,car_type
+				,user_active
+				,ins_id
+				,ins_date
+				,upd_id
+				,upd_date
+    			)
+    			values
+    			(
+    			 #{login_id}
+				,#{login_pw}
+				,#{apt_id}
+				,#{member_nm}
+				,#{member_mobile}
+				,#{blue_id}
+				,#{dong}
+				,#{ho}
+				,#{household_yn}
+				,#{car_no}
+				,#{car_type}
+				,1
+				,#{ins_id}
+				,now()
+				,#{upd_id}
+				,now()
+    			)
+    </insert>
+    
+    <insert id="insertUserRole">
+    	insert into users_role
+    			(
+    			 users_login_id
+    			,role
+    			)
+    			values
+    			(
+    			 #{loginId}
+    			,#{role}
+    			)
+    </insert>
+    
+    <update id="updateUser">
+    	update tb_o_mobuser
+    	   set apt_id = #{prm.apt_id}
+			   ,member_nm = #{prm.member_nm}
+			   ,member_mobile = #{prm.member_mobile}
+			   ,blue_id = #{prm.blue_id}
+			   ,dong = #{prm.dong}
+			   ,ho = #{prm.ho}
+			   ,household_yn = #{prm.household_yn}
+			   ,car_no = #{prm.car_no}
+			   ,car_type = #{prm.car_type}
+			   ,upd_id = #{loginId}
+			   ,upd_date = now()
+		  where login_id = #{loginId}
+    </update>
+    
+    <delete id="deleteUser">
+    	delete 
+    	  from tb_o_mobuser
+    	 where login_id = #{loginId} 
+    </delete>
+    
+    <delete id="deleteUserRole">
+    	delete 
+    	  from users_role
+    	 where users_login_id = #{loginId} 
+    </delete>
+    
+    <select id="selectComplex" resultType="com.daon.host.vo.BasicInfo$Complex">
+    	select apt_id
+			  ,apt_nm
+		  from tb_o_complex
+    </select>
+    
+    <select id="selectMyComplex" resultType="com.daon.host.vo.BasicInfo$MyComplex">
+    	select apt_id
+			  ,project_id
+			  ,apt_nm
+			  ,apt_address
+			  ,rep_num
+			  ,manager_nm
+			  ,latitude
+			  ,longitude
+		  from tb_o_complex
+		 where apt_id = #{aptId}
+    </select>
+    
+    <select id="selectDongho" resultType="com.daon.host.vo.BasicInfo$Dongho">
+    	select dong
+    	      ,ho
+		  from tb_o_dongho
+		 where apt_id = #{aptId}
+    </select>
+    
+    <select id="selectHouseHold" resultType="String">
+    	select member_nm
+		  from tb_o_mobuser
+		 where apt_id = #{aptId}
+		   and dong = #{dong}
+		   and ho = #{ho}
+		   and household_yn = 'Y'
+    </select>
+    
+    <update id="updatePwd">
+    	update tb_o_mobuser
+    	   set login_pw = #{prm.login_pw}
+			   ,upd_id = #{prm.login_id}
+			   ,upd_date = now()
+		  where login_id = #{prm.login_id}
+    </update>
+    
+    <select id="selectUserCar" resultType="com.daon.host.vo.BasicInfo$UserCar">
+    	select car_no
+		  from tb_o_user_car
+		 where apt_id = #{aptId}
+		   and dong = #{dong}
+		   and ho = #{ho}
+		 order by car_no
+    </select>
+    
+    <select id="existsByUserCar" resultType="int">
+		select count(*)
+		  from tb_o_user_car 
+		 where apt_id = #{prm.apt_id}
+		   and dong = #{prm.dong}
+		   and ho = #{prm.ho}
+		   and car_no = #{prm.car_no}
+    </select>
+    
+    <insert id="insertUserCar">
+    	insert into tb_o_user_car
+    			(
+    			 apt_id
+				,dong
+				,ho
+				,car_no
+				,remk
+    			)
+    			values
+    			(
+    			 #{prm.apt_id}
+				,#{prm.dong}
+				,#{prm.ho}
+				,#{prm.car_no}
+				,#{prm.remk}
+    			)
+    </insert>
+    
+    <select id="selectNotice" resultType="com.daon.host.vo.BasicInfo$Notice">
+    	select notice_no
+    	      ,notice_cont
+    	      ,notice_writer
+    	      ,apt_id
+		  from tb_o_notice
+		<where>
+			<if test="aptId != null and aptId != ''">
+            and apt_id = #{aptId}
+            </if>
+		  </where>
+		 order by notice_no
+    </select>
+    
+    <select id="selectPass" resultType="com.daon.host.vo.BasicInfo$ComplexPass">
+    	select pass_seq
+    	      ,login_id
+    	      ,pass_cd
+    	      ,pass_nm
+    	      ,pass_mobile
+    	      ,pass_s_date
+    	      ,pass_e_date
+    	      ,pass_carno
+    	      ,pass_yn
+    	      ,remk
+		  from tb_o_complex_pass
+		 where pass_mobile = #{passMoblie}
+    </select>
+    
+    <insert id="insertPass">
+    	insert into tb_o_complex_pass
+    			(
+    			 pass_seq
+    	        ,login_id
+    	        ,pass_cd
+    	        ,pass_nm
+    	        ,pass_mobile
+    	        ,pass_s_date
+    	        ,pass_e_date
+    	        ,pass_carno
+    	        ,pass_yn
+    	        ,remk
+    	        ,ins_id
+				,ins_date
+				,upd_id
+				,upd_date
+    			)
+    			values
+    			(
+    			 (select ifnull(max(pass_seq)+1, concat(date_format(now(),'%Y%m%d'),'0001') ) 
+				    from tb_o_complex_pass
+				   where left(pass_seq,8) = date_format(now(),'%Y%m%d') 
+				   order by pass_seq desc)
+    	        ,#{login_id}
+    	        ,#{pass_cd}
+    	        ,#{pass_nm}
+    	        ,#{pass_mobile}
+    	        ,#{pass_s_date}
+    	        ,#{pass_e_date}
+    	        ,#{pass_carno}
+    	        ,#{pass_yn}
+    	        ,#{remk}
+				,#{login_id}
+				,now()
+				,#{login_id}
+				,now()
+    			)
+    </insert>
+    
+</mapper>

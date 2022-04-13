@@ -1,0 +1,11 @@
+
+.panel-group {
+  margin-top:40px;
+}
+
+.panel-body {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
