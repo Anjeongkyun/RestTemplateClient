@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@MapperScan(basePackages = {"com.daon.host.mapper"}
+@MapperScan(basePackages = {"com.daon.host.web.mapper"}
 			,sqlSessionFactoryRef="sqlSessionFactory"
 			,sqlSessionTemplateRef="sqlSessionTemplate")
 public class MybatisConfig {
@@ -21,7 +21,7 @@ public class MybatisConfig {
 	public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource);
-		sqlSessionFactoryBean.setTypeAliasesPackage("com.daon.host.vo");
+		sqlSessionFactoryBean.setTypeAliasesPackage("com.daon.host.web.vo");
 		sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mappers/*Mapper.xml"));
 		return sqlSessionFactoryBean.getObject();
 	}
