@@ -18,6 +18,7 @@ public class UsersController {
 
     @GetMapping("/test")
     public String signUp() {
+		//테스트
     	//112
     //123
 		//123
@@ -26,6 +27,7 @@ public class UsersController {
 		//0000
 		//5678
 		/32890423849203489203
+		//테스트1
         return "index.html";
     }
 
