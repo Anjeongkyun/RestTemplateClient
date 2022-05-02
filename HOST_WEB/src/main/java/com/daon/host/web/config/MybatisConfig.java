@@ -21,7 +21,11 @@ public class MybatisConfig {
 	public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource);
+		 // mapper.xml 의 resultType 패키지 주소 생략
 		sqlSessionFactoryBean.setTypeAliasesPackage("com.daon.host.web.vo");
+		// mybatis 설정 파일 세팅
+		sqlSessionFactoryBean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:mybatis/mybatis-config.xml"));
+		// mapper.xml 위치 패키지 주소
 		sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mappers/*Mapper.xml"));
 		return sqlSessionFactoryBean.getObject();
 	}
