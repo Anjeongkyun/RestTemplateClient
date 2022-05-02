@@ -19,7 +19,7 @@ public class UsersController {
     @GetMapping("/test")
     public String signUp() {
     	//112
-    	//1234
+    	//커밋 테스트
         return "index.html";
     }
 
