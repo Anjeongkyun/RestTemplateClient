@@ -18,14 +18,8 @@ public class UsersController {
 
     @GetMapping("/test")
     public String signUp() {
-    	//112
-    	//커밋 테스트
     	//1234
-		//1234
-		//5678
-		//0000
-		//7777
-		//5555
+    
         return "index.html";
     }
 
