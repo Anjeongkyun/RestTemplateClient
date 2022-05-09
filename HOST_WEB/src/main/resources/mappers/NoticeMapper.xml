@@ -64,4 +64,20 @@
 			#{updDate}		
 		)
 	</insert>
+	
+	<delete id = "delete" parameterType = "string">
+		DELETE FROM tb_o_notice
+			where notice_no = #{noticeNo}
+	</delete>
+	
+	<update id="update">
+		UPDATE tb_o_notice
+		SET
+			notice_title = #{noticeTitle},
+			notice_cont = #{noticeContent}, 
+			remk = #{remark}
+		WHERE
+			notice_no = #{noticeNo}		
+	</update>
+	
 </mapper>

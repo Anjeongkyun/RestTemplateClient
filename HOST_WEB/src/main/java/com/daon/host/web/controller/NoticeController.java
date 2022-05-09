@@ -37,7 +37,6 @@ public class NoticeController {
         if (errors.hasErrors()) {
             return response.invalidFields(Helper.refineErrors(errors));
         }
-    	
         String noticeNo = notice.getNoticeNo();
         
         return noticeService.getDetail(noticeNo);
@@ -49,8 +48,25 @@ public class NoticeController {
         if (errors.hasErrors()) {
             return response.invalidFields(Helper.refineErrors(errors));
         }    	
-        
         return noticeService.insert(notice);
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<?> delete(@Validated @RequestBody Notice notice, Errors errors) {
+        // validation check
+        if (errors.hasErrors()) {
+            return response.invalidFields(Helper.refineErrors(errors));
+        }    	        
+        return noticeService.delete(notice);
+    }
+    
+    @PostMapping("/update")
+    public ResponseEntity<?> update(@Validated @RequestBody Notice notice, Errors errors) {
+        // validation check
+        if (errors.hasErrors()) {
+            return response.invalidFields(Helper.refineErrors(errors));
+        }    	        
+        return noticeService.update(notice);
     }
     
 

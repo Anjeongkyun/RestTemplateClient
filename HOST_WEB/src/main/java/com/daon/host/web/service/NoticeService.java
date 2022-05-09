@@ -63,4 +63,26 @@ public class NoticeService {
 		return response.success("공지사항 작성 OK");
 	}
 	
+	//공지사항 삭제
+	public ResponseEntity<?> delete(Notice notice) {
+    	if(ObjectUtils.isEmpty(notice) ) {
+    		return response.fail("조회 파라미터가 없습니다.", HttpStatus.BAD_REQUEST);
+    	}
+		
+    	noticeMapper.delete(notice);
+    	
+		return response.success("공지사항 삭제 OK");
+	}
+
+	//공지사항 수정
+	public ResponseEntity<?> update(Notice notice) {
+    	if(ObjectUtils.isEmpty(notice) ) {
+    		return response.fail("조회 파라미터가 없습니다.", HttpStatus.BAD_REQUEST);
+    	}
+		
+    	noticeMapper.update(notice);
+    	
+		return response.success("공지사항 수정 OK");
+	}
+	
 }

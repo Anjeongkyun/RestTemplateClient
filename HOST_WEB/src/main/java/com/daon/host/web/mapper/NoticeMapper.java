@@ -12,8 +12,9 @@ import com.daon.host.web.vo.Notice;
 @Mapper
 public interface NoticeMapper {
 	List<Notice> getList();
-	Notice getDetail(@Param("noticeNo") String noticeNo);
-	
+	Notice getDetail(@Param("noticeNo") String noticeNo);	
 	void insert(Notice notice);
+	void delete(Notice notice);
+	void update(Notice notice);
 	
 }
