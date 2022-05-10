@@ -8,35 +8,35 @@
 
     <default-footer />
 
-    <default-settings />
+    <!-- <default-settings /> -->
   </v-app>
 </template>
 
 <script>
-  export default {
-    name: 'DefaultLayout',
+export default {
+  name: 'DefaultLayout',
 
-    components: {
-      DefaultBar: () => import(
-        /* webpackChunkName: "default-app-bar" */
-        './AppBar'
-      ),
-      DefaultDrawer: () => import(
-        /* webpackChunkName: "default-drawer" */
-        './Drawer'
-      ),
-      DefaultFooter: () => import(
-        /* webpackChunkName: "default-footer" */
-        './Footer'
-      ),
-      DefaultSettings: () => import(
-        /* webpackChunkName: "default-settings" */
+  components: {
+    DefaultBar: () => import(
+      /* webpackChunkName: "default-app-bar" */
+      './AppBar'
+    ),
+    DefaultDrawer: () => import(
+      /* webpackChunkName: "default-drawer" */
+      './Drawer'
+    ),
+    DefaultFooter: () => import(
+      /* webpackChunkName: "default-footer" */
+      './Footer'
+    ),
+    /*     DefaultSettings: () => import(
+        /* webpackChunkName: "default-settings"
         './Settings'
-      ),
-      DefaultView: () => import(
-        /* webpackChunkName: "default-view" */
-        './View'
-      ),
-    },
-  }
+      ), */
+    DefaultView: () => import(
+      /* webpackChunkName: "default-view" */
+      './View'
+    ),
+  },
+}
 </script>

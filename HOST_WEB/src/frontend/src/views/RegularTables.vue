@@ -189,7 +189,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'RegularTablesView',
-  }
+export default {
+  name: 'RegularTablesView',
+}
 </script>

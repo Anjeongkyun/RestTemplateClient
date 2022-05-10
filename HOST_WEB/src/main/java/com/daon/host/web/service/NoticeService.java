@@ -20,7 +20,7 @@ public class NoticeService {
 
 	private final Response response;
 	
-	@Autowired
+	@Autowired //생성자,setter,필드를 자동으로
 	private NoticeMapper noticeMapper;
 	
 	public ResponseEntity<?> selectNo(String noticeNo) {

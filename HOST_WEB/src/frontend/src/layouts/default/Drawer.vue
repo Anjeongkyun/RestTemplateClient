@@ -26,10 +26,12 @@
 
       <v-divider class="mx-3 mb-2" />
 
-      <default-list :items="items" />
+      <default-list
+        :items="items"
+      />
     </div>
 
-    <template #append>
+    <!--   <template #append>
       <div class="pa-4 text-center">
         <app-btn
           class="text-none mb-4"
@@ -54,47 +56,50 @@
           Upgrade to Pro
         </app-btn>
       </div>
-    </template>
+    </template> -->
 
     <div class="pt-12" />
   </v-navigation-drawer>
 </template>
 
 <script>
-  // Utilities
-  import { get, sync } from 'vuex-pathify'
+// Utilities
+import { get, sync } from 'vuex-pathify'
 
-  export default {
-    name: 'DefaultDrawer',
+export default {
+  name: 'DefaultDrawer',
 
-    components: {
-      DefaultDrawerHeader: () => import(
-        /* webpackChunkName: "default-drawer-header" */
-        './widgets/DrawerHeader'
-      ),
-      DefaultList: () => import(
-        /* webpackChunkName: "default-list" */
-        './List'
-      ),
-    },
+  components: {
+    DefaultDrawerHeader: () => import(
+      /* webpackChunkName: "default-drawer-header" */
+      './widgets/DrawerHeader'
+    ),
+    DefaultList: () => import(
+      /* webpackChunkName: "default-list" */
+      './List'
+    ),
+  },
 
-    computed: {
-      ...get('user', [
-        'dark',
-        'gradient',
-        'image',
-      ]),
-      ...get('app', [
-        'items',
-        'version',
-      ]),
-      ...sync('app', [
-        'drawer',
-        'drawerImage',
-        'mini',
-      ]),
-    },
+  computed: {
+    ...get('user', [
+      'dark',
+      'gradient',
+      'image',
+    ]),
+    ...get('app', [
+      'items',
+      'version',
+    ]),
+    ...sync('app', [
+      'drawer',
+      'drawerImage',
+      'mini',
+    ]),
+  },
+  methods:{
+  
   }
+}
 </script>
 
 <style lang="sass">

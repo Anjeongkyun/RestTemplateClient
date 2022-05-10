@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'DefaultSearch',
-  }
+export default {
+  name: 'DefaultSearch',
+}
 </script>

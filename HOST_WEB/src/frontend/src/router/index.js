@@ -6,6 +6,7 @@ import {
   layout,
   route,
 } from '@/util/routes'
+import store from '@/store'
 
 Vue.use(Router)
 
@@ -20,7 +21,15 @@ const router = new Router({
   },
   routes: [
     layout('Default', [
-      route('Dashboard'),
+      route('Main'),
+      route('Login', null, 'components/login'),
+      route('ChangePassword', null, 'components/change-password'),
+      route('SiteStatus', null, 'components/site-status'),
+      route('Notice', null, 'components/notice'),
+      route('User', null, 'components/user'),
+      route('Park', null, 'components/park'),
+      route('Memu', null, 'components/menu'),
+      route('LavelMenu', null, 'components/level-menu'),
 
       // Pages
       route('UserProfile', null, 'components/profile'),
@@ -40,6 +49,14 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+
+  var items = store.state.app.items;
+  for (var i in items) { 
+    if (to.path == items[i].to + "/") { 
+      store.state.app.selectDrawerItem = items[i].title
+    }
+  }
+  
   return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))
 })
 
