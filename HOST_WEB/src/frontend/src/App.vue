@@ -12,7 +12,6 @@ export default {
   name: 'App',
   metaInfo: {
     title: 'App',
-    //  titleTemplate: '%s | 22Material Dashboard Free',
     titleTemplate: 'DAVIS',
     htmlAttrs: { lang: 'en' },
     meta: [
