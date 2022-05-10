@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.daon.host.web.dto.Response;
+import com.daon.host.web.mapper.ChangePasswordMapper;
 import com.daon.host.web.mapper.LoginMapper;
 import com.daon.host.web.mapper.NoticeMapper;
+import com.daon.host.web.vo.ChangePasswordVo;
 import com.daon.host.web.vo.LoginVo;
 import com.daon.host.web.vo.Notice;
 
@@ -24,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class LoginService {
+public class ChangePasswordService {
 
 	@Autowired
     private Validator validator;
@@ -32,23 +34,23 @@ public class LoginService {
 	private final Response response;
 
 	@Autowired
-	private LoginMapper loginMapper;
+	private ChangePasswordMapper changePasswordMapper;
 
-	public ResponseEntity<?> getLogin( LoginVo.Login login) {
+	public ResponseEntity<?> setPassword(  ChangePasswordVo.ChangePassword changePassword) {
 		// TODO Auto-generated method stub
 
 
-		if (ObjectUtils.isEmpty(login)) {
+		if (ObjectUtils.isEmpty(changePassword)) {
 			return response.fail("조회 파라미터가 없습니다.", HttpStatus.BAD_REQUEST);
 		}
 
-		LoginVo.Table loginVo2 = loginMapper.getLogin(login);
+		ChangePasswordVo.Table changePasswordVo2 = changePasswordMapper.setChangePassword(changePassword);
 
-		if (ObjectUtils.isEmpty(loginVo2)) {
+		if (ObjectUtils.isEmpty(changePasswordVo2)) {
 			return response.fail("조회된 정보가 없습니다. 확인하신 후 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
-		return response.successLogin(loginVo2, "조회 성공했습니다.", HttpStatus.OK);
+		return response.successLogin(changePasswordVo2, "조회 성공했습니다.", HttpStatus.OK);
 	}
 
 }

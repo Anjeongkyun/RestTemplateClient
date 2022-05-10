@@ -16,7 +16,7 @@ import lombok.Setter;
 
 @Data
 @AllArgsConstructor // 모든 필드 값을 파라미터로 받는 생성자
-public class LoginVo {
+public class ChangePasswordVo {
 
 // db
 //	login_id
@@ -48,7 +48,7 @@ public class LoginVo {
 	}
 	
 	@Data
-	public static class Login {
+	public static class ChangePassword {
 		@NotEmpty(message = "아이디는 필수 입력값입니다.")
 		//@Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$", message = "이메일 형식에 맞지 않습니다.")
 		private String id; // 아이디

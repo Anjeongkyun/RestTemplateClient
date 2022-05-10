@@ -29,7 +29,7 @@ const router = new Router({
       route('User', null, 'components/user'),
       route('Park', null, 'components/park'),
       route('Memu', null, 'components/menu'),
-      route('LavelMenu', null, 'components/level-menu'),
+      route('LevelMenu', null, 'components/level-menu'),
 
       // Pages
       route('UserProfile', null, 'components/profile'),
