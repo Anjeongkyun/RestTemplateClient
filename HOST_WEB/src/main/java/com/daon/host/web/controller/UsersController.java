@@ -33,10 +33,7 @@ public class UsersController {
 	
 	private final LoginService loginService;
 	
-	@PostMapping("/list")
-	public ResponseEntity<?>  post(@RequestBody LoginVo loginVo) {
-		return loginService.putLoginAll(loginVo);
-	}
+	
 	
 		
 }
