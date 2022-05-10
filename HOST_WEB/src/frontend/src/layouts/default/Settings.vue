@@ -237,53 +237,53 @@
 </template>
 
 <script>
-  // Mixins
-  import Proxyable from 'vuetify/lib/mixins/proxyable'
+// Mixins
+import Proxyable from 'vuetify/lib/mixins/proxyable'
 
-  // Vuex
-  import { get, sync } from 'vuex-pathify'
+// Vuex
+import { get, sync } from 'vuex-pathify'
 
-  export default {
-    name: 'DashboardCoreSettings',
+export default {
+  name: 'DashboardCoreSettings',
 
-    mixins: [Proxyable],
+  mixins: [Proxyable],
 
-    data: () => ({
-      color: '#E91E63',
-      colors: [
-        '#9C27b0',
-        '#00CAE3',
-        '#4CAF50',
-        '#ff9800',
-        '#E91E63',
-        '#FF5252',
-      ],
-      menu: false,
-      saveImage: '',
-    }),
+  data: () => ({
+    color: '#E91E63',
+    colors: [
+      '#9C27b0',
+      '#00CAE3',
+      '#4CAF50',
+      '#ff9800',
+      '#E91E63',
+      '#FF5252',
+    ],
+    menu: false,
+    saveImage: '',
+  }),
 
-    computed: {
-      ...sync('app', [
-        'drawer',
-        'drawerImage',
-        'mini',
-      ]),
-      ...sync('user', [
-        'drawer@gradient',
-        'drawer@image',
-      ]),
-      ...get('user', [
-        'images',
-        'gradients',
-      ]),
+  computed: {
+    ...sync('app', [
+      'drawer',
+      'drawerImage',
+      'mini',
+    ]),
+    ...sync('user', [
+      'drawer@gradient',
+      'drawer@image',
+    ]),
+    ...get('user', [
+      'images',
+      'gradients',
+    ]),
+  },
+
+  watch: {
+    color (val) {
+      this.$vuetify.theme.themes[this.isDark ? 'dark' : 'light'].primary = val
     },
-
-    watch: {
-      color (val) {
-        this.$vuetify.theme.themes[this.isDark ? 'dark' : 'light'].primary = val
-      },
-    },
-  }
+  },
+}
 </script>
 
 <style lang="sass">

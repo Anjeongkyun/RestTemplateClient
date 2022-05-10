@@ -19,13 +19,13 @@
 
     <v-toolbar-title
       class="font-weight-light text-h5"
-      v-text="name"
+      v-text="selectDrawerItem"
     />
-
+  
     <v-spacer />
 
-    <default-search class="hidden-sm-and-down" />
-
+    <!-- <default-search class="hidden-sm-and-down" />
+ -->
     <default-go-home />
 
     <default-notifications />
@@ -35,41 +35,55 @@
 </template>
 
 <script>
-  // Utilities
-  import { get, sync } from 'vuex-pathify'
+// Utilities
+import { get, sync } from 'vuex-pathify'
 
-  export default {
-    name: 'DefaultBar',
+export default {
+  name: 'DefaultBar',
 
-    components: {
-      DefaultAccount: () => import(
-        /* webpackChunkName: "default-account" */
-        './widgets/Account'
-      ),
-      DefaultDrawerToggle: () => import(
-        /* webpackChunkName: "default-drawer-toggle" */
-        './widgets/DrawerToggle'
-      ),
-      DefaultGoHome: () => import(
-        /* webpackChunkName: "default-go-home" */
-        './widgets/GoHome'
-      ),
-      DefaultNotifications: () => import(
-        /* webpackChunkName: "default-notifications" */
-        './widgets/Notifications'
-      ),
-      DefaultSearch: () => import(
-        /* webpackChunkName: "default-search" */
-        './widgets/Search'
-      ),
-    },
+  components: {
+    DefaultAccount: () => import(
+      /* webpackChunkName: "default-account" */
+      './widgets/Account'
+    ),
+    DefaultDrawerToggle: () => import(
+      /* webpackChunkName: "default-drawer-toggle" */
+      './widgets/DrawerToggle'
+    ),
+    DefaultGoHome: () => import(
+      /* webpackChunkName: "default-go-home" */
+      './widgets/GoHome'
+    ),
+    DefaultNotifications: () => import(
+      /* webpackChunkName: "default-notifications" */
+      './widgets/Notifications'
+    ),
+    // DefaultSearch: () => import(
+    //   /* webpackChunkName: "default-search" */
+    //   './widgets/Search'
+    // ),
+  },
+  data(){
+    return{
+      
+    }
+  },
+  computed: {
+    ...sync('app', [
+      'drawer',
+      'mini',
+    ]),
+    ...get('app', [
+      'selectDrawerItem'
+    ]),
+    //  name: get('route/name'),
 
-    computed: {
-      ...sync('app', [
-        'drawer',
-        'mini',
-      ]),
-      name: get('route/name'),
-    },
-  }
+  },
+  method:{
+
+  },
+  mounted() {
+    
+  },
+}
 </script>

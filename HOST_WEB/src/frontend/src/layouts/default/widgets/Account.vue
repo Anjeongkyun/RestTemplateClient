@@ -44,16 +44,16 @@
 </template>
 
 <script>
-  export default {
-    name: 'DefaultAccount',
+export default {
+  name: 'DefaultAccount',
 
-    data: () => ({
-      profile: [
-        { title: 'Profile' },
-        { title: 'Settings' },
-        { divider: true },
-        { title: 'Log out' },
-      ],
-    }),
-  }
+  data: () => ({
+    profile: [
+      { title: '마이페이지' },
+      //  { title: 'Settings' },
+      { divider: true },
+      { title: '로그아웃' },
+    ],
+  }),
+}
 </script>

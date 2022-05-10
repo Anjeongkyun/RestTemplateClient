@@ -46,17 +46,17 @@
 </template>
 
 <script>
-  export default {
-    name: 'DefaultNotifications',
+export default {
+  name: 'DefaultNotifications',
 
-    data: () => ({
-      notifications: [
-        'Mike John Responded to your email',
-        'You have 5 new tasks',
-        'You\'re now friends with Andrew',
-        'Another Notification',
-        'Another one',
-      ],
-    }),
-  }
+  data: () => ({
+    notifications: [
+      'Mike John Responded to your email',
+      'You have 5 new tasks',
+      'You\'re now friends with Andrew',
+      'Another Notification',
+      'Another one',
+    ],
+  }),
+}
 </script>
