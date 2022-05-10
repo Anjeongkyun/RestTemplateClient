@@ -34,6 +34,10 @@ build/
 
 ### VS Code ###
 .vscode/
+### Jkan ###
+**/bin/
+**/.metadata/
+
 
 ### Node ###
 src/frontend/node_modules

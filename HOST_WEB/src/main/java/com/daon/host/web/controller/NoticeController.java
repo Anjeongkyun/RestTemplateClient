@@ -3,8 +3,8 @@ package com.daon.host.web.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,33 +20,54 @@ import utils.Helper;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/notice")
-public class NoticeController {
-	
-	/* jpa flow
-	 * Controller -> Service -> Repository(JpaRepository 상속 인터페이스)
-	 * mybatis flow
-	 * Controller -> Service -> Mapper(인터페이스) -> xml(SQL Map XML)
-	 참고: https://blog.jiniworld.me/55
-	 * */
+public class NoticeController {	
 	
 	private final NoticeService noticeService;
 	private final Response response;
+
+    @PostMapping("/list")
+    public ResponseEntity<?> getList() {
+    	
+        return noticeService.getList();
+    }
 	
-    @GetMapping("/list/{noticeNo}")
-    public ResponseEntity<?> selectNo(@Validated Notice notice, @PathVariable String noticeNo,
-    		Errors errors) {
+    @PostMapping("/detail")
+    public ResponseEntity<?> getDetail(@Validated @RequestBody Notice notice, Errors errors) {
         // validation check
         if (errors.hasErrors()) {
             return response.invalidFields(Helper.refineErrors(errors));
         }
-    	
-        return noticeService.selectNo(noticeNo);
+        String noticeNo = notice.getNoticeNo();
+        
+        return noticeService.getDetail(noticeNo);
     }
     
-//    @GetMapping("/list")
-//    public String signUp() {
-//
-//        return "index.html";
-//    }
+    @PostMapping("/insert")
+    public ResponseEntity<?> insert(@Validated @RequestBody Notice notice, Errors errors) {
+        // validation check
+        if (errors.hasErrors()) {
+            return response.invalidFields(Helper.refineErrors(errors));
+        }    	
+        return noticeService.insert(notice);
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<?> delete(@Validated @RequestBody Notice notice, Errors errors) {
+        // validation check
+        if (errors.hasErrors()) {
+            return response.invalidFields(Helper.refineErrors(errors));
+        }    	        
+        return noticeService.delete(notice);
+    }
+    
+    @PostMapping("/update")
+    public ResponseEntity<?> update(@Validated @RequestBody Notice notice, Errors errors) {
+        // validation check
+        if (errors.hasErrors()) {
+            return response.invalidFields(Helper.refineErrors(errors));
+        }    	        
+        return noticeService.update(notice);
+    }
+    
 
 }
