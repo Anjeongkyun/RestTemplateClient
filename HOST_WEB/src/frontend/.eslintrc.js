@@ -23,10 +23,10 @@ module.exports = {
     'template-curly-spacing': 'off',
   //  indent: 'off',
     //
-    'no-unused-vars': 'warn'
-    // 'vuetify/no-deprecated-classes': 'error',
-    // 'vuetify/no-legacy-grid': 'error',
-    // 'indent': ["error", 2]
+    'no-unused-vars': 'warn',
+    'vuetify/no-deprecated-classes': 'error',
+    'vuetify/no-legacy-grid': 'error',
+    'indent': ["error", 2]
         
   },
 

@@ -21,17 +21,18 @@ const router = new Router({
   },
   routes: [
     layout('Default', [
-      route('Main'),
-      route('Login', null, 'components/login'),
-      route('ChangePassword', null, 'components/change-password'),
-      route('SiteStatus', null, 'components/site-status'),
-      route('Notice', null, 'components/notice'),
-      route('User', null, 'components/user'),
-      route('Park', null, 'components/park'),
-      route('Memu', null, 'components/menu'),
-      route('LevelMenu', null, 'components/level-menu'),
+      route('MainView', null, ''),
+      route('LoginView', null, 'components/login'),
+      route('ChangePasswordView', null, 'components/change-password'),
+      route('SiteStatusView', null, 'components/site-status'),
+      route('NoticeView', null, 'components/notice'),
+      route('UserView', null, 'components/user'),
+      route('ParkView', null, 'components/park'),
+      route('MenuView', null, 'components/menu'),
+      route('LevelMenuView', null, 'components/level-menu'),
 
       // Pages
+      route('Dashboard', null, 'components/dashboard'),
       route('UserProfile', null, 'components/profile'),
 
       // Components
@@ -50,13 +51,13 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
 
-  var items = store.state.app.items;
-  for (var i in items) { 
-    if (to.path == items[i].to + "/") { 
-      store.state.app.selectDrawerItem = items[i].title
+  var items = store.state.appStore.items;
+  for (var i in items) {
+    if (to.path == items[i].to) {
+      store.state.appStore.selectDrawerItem = items[i].title
     }
   }
-  
+
   return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))
 })
 

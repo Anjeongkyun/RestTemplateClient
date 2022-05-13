@@ -64,7 +64,7 @@ public class LoginController {
 	public ResponseEntity<?>  getLogin(@Valid @RequestBody LoginVo.Login login, Errors errors) {
 		
 		 if (errors.hasErrors()) {
-	            return response.invalidFields(Helper.refineErrors(errors));
+	            return response.failInvalidFields(Helper.refineErrors(errors));
 	        }
 		return loginService.getLogin(login);
 	}

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.daon.host.web.vo.LoginVo;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -29,7 +30,7 @@ public class Response {
     private static class BodyLogin {
 		private String resultCd;
 		private String resultMsg;
-		private String level;
+		private String levelCd;
 		private String firstRun;
 		private String resetPassword;
     }
@@ -41,6 +42,13 @@ public class Response {
 		private String resultMsg;
     }
     
+    @Getter
+    @Builder
+    private static class BodyResultError{
+		private String resultCd;
+		private String resultMsg;
+        private Object error;
+    }
     @Getter
     @Builder
     private static class BodyList{
@@ -62,39 +70,41 @@ public class Response {
     
    //성공-로그인
     public ResponseEntity<?> successLogin(Object data, String msg, HttpStatus status) {
-    	BodyLogin bodyLogin = BodyLogin.builder()
+    	
+    	LoginVo.LoginResult _data=  (LoginVo.LoginResult)data;
+    	BodyLogin body = BodyLogin.builder()
                 .resultCd("00")
                 .resultMsg(msg)
-                .level("")
-                .firstRun("")
-                .resetPassword("")
+                .levelCd(_data.getLevelCd())
+                .firstRun(_data.getFirstRun())
+                .resetPassword(_data.getResetPassword())
                 .build();
-        return ResponseEntity.ok(bodyLogin);
+        return ResponseEntity.ok(body);
     }
 
     //성공-코드,결과만 반환(비밀번호변경,공지사항 관리, 사용자 ID 중복 확인, 사용자 관리, 단지관리, 권한별 메뉴관리)
     public ResponseEntity<?> successResult(Object data, String msg, HttpStatus status) {
-    	BodyResult bodyResult = BodyResult.builder()
+    	BodyResult body = BodyResult.builder()
                 .resultCd("00")
                 .resultMsg(msg)
                 .build();
-        return ResponseEntity.ok(bodyResult);
+        return ResponseEntity.ok(body);
     }
     
     //성공-리스트(현장상태조회, 공지사항리스트, 사용자리스트, 단지리스트, 메뉴관리, 권한별 메뉴조회)
     public ResponseEntity<?> successList(Object data, String msg, HttpStatus status) {
-    	BodyList bodyList = BodyList.builder()
+    	BodyList body = BodyList.builder()
                 .resultCd("00")
                 .resultMsg(msg)
                 .list(data)
                 .build();
-        return ResponseEntity.ok(bodyList);
+        return ResponseEntity.ok(body);
     }
     
   
   //성공-공지사항상세 조회
     public ResponseEntity<?> successNoticeDetail(Object data, String msg, HttpStatus status) {
-    	BodyNoticeDetail bodyNoticeDetail= BodyNoticeDetail.builder()
+    	BodyNoticeDetail body= BodyNoticeDetail.builder()
                 .resultCd("00")
                 .resultMsg(msg)
                 .title("")
@@ -102,7 +112,35 @@ public class Response {
                 .regMan("")
                 .regDtm("")
                 .build();
-        return ResponseEntity.ok(bodyNoticeDetail);
+        return ResponseEntity.ok(body);
+    }
+    
+  //실패-코드,결과만 반환
+    public ResponseEntity<?> failResult(String msg, HttpStatus status) {
+        return failResult(Collections.emptyList(), msg, status);
+    }
+    
+    //실패-코드,결과만 반환
+    public ResponseEntity<?> failResult(Object data, String msg, HttpStatus status) {
+    	BodyResult body = BodyResult.builder()
+                .resultCd("20")
+                .resultMsg(msg)
+                .build();
+        return ResponseEntity.ok(body);
+    }
+    
+    
+    //validation
+    public ResponseEntity<?> failInvalidFields(LinkedList<LinkedHashMap<String, String>> errors) {
+      
+        
+    	BodyResultError body = BodyResultError.builder()
+                .resultCd("30")
+                .resultMsg("입력값이 유효하지 않습니다.")
+                .error(errors)
+                .build();
+        return ResponseEntity.ok(body);
+        
     }
     
     public ResponseEntity<?> success(Object data, String msg, HttpStatus status) {

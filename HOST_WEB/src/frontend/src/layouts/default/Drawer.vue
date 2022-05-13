@@ -81,23 +81,23 @@ export default {
   },
 
   computed: {
-    ...get('user', [
+    ...get('themeStore', [
       'dark',
       'gradient',
       'image',
     ]),
-    ...get('app', [
+    ...get('appStore', [
       'items',
       'version',
     ]),
-    ...sync('app', [
+    ...sync('appStore', [
       'drawer',
       'drawerImage',
       'mini',
     ]),
   },
   methods:{
-  
+
   }
 }
 </script>

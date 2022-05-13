@@ -63,12 +63,12 @@ public class ChangePasswordController {
 	private final Response response;
 	
 	@PostMapping("/change-password")
-	public ResponseEntity<?>  getLogin(@Valid @RequestBody ChangePasswordVo.ChangePassword changePassword, Errors errors) {
+	public ResponseEntity<?>  setChangePassword(@Valid @RequestBody ChangePasswordVo.ChangePassword changePassword, Errors errors) {
 		
 		 if (errors.hasErrors()) {
-	            return response.invalidFields(Helper.refineErrors(errors));
+	            return response.failInvalidFields(Helper.refineErrors(errors));
 	        }
-		return changePasswordService.setPassword(changePassword);
+		return changePasswordService.setChangePassword(changePassword);
 	}
 
 	

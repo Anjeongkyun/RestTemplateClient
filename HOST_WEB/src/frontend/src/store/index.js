@@ -26,15 +26,15 @@ const store = new Vuex.Store({
   ],
 })
 
-store.subscribe(mutation => {
-  if (!mutation.type.startsWith('user/')) 
-  
-  return
-  store.dispatch('user/update', mutation)
-  // store.dispatch('test/login_axios', mutation)
-})
+// store.subscribe(mutation => {
+//   if (!mutation.type.startsWith('themeStore/'))
 
-store.dispatch('app/init')
+//     return
+//   store.dispatch('themeStore/update', mutation)
+//   // store.dispatch('test/login_axios', mutation)
+// })
+
+store.dispatch('appStore/init')
 
 export default store
 

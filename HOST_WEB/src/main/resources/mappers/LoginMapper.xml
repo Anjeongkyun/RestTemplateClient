@@ -4,14 +4,39 @@
 
 <mapper namespace="com.daon.host.web.mapper.LoginMapper">
 
-	<select id="getLogin" resultType="com.daon.host.web.vo.LoginVo$Table">
+
+	<select id="getLogin" resultType="com.daon.host.web.vo.LoginVo$LoginResult">
+		select 
+			*,
+			(
+				select 
+					reset_password 
+				from tb_c_base
+			) as reset_password 
+		from tb_o_webuser
+
+
+		<where>
+			<if test=" req.id != null and req.id!= '' ">
+				AND login_id = #{req.id}
+			</if>
+			<if test=" req.password != null and req.password != '' ">
+				AND login_pw = #{req.password}
+			</if>
+
+		</where>
+	</select>
+	
+	
+	
+	<select id="getLogin1" resultType="com.daon.host.web.vo.LoginVo$Table">
 		select * from tb_o_webuser
 		<where>
-			<if test=" login.id != null and login.id!= '' ">
-				AND login_id = #{login.id}
+			<if test=" req.id != null and req.id!= '' ">
+				AND login_id = #{req.id}
 			</if>
-			<if test=" login.password != null and login.password != '' ">
-				AND login_pw = #{login.password}
+			<if test=" req.password != null and req.password != '' ">
+				AND login_pw = #{req.password}
 			</if>
 
 		</where>
