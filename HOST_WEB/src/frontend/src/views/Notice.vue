@@ -7,8 +7,18 @@
   
     <view-intro
       heading="공지사항"      
-    />
-    
+    />    
+
+    <div class="selectWrap">                
+      <v-btn 
+        class = "selectBtn" 
+        large
+        depressed        
+        outlined color = "blue"
+        @click="listFetch"
+        >조회</v-btn>    
+    </div>
+
 <material-card
       icon="mdi-clipboard-text"
       icon-small
@@ -22,31 +32,21 @@
               번호
             </th>
             <th class="primary--text">
-              작성자
+              제목
             </th>
             <th class="primary--text">
-              제목
+              내용
             </th>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Dakota Rice</td>
-            <td>Niger</td>
-          </tr>
-
-          <tr>
-            <td>2</td>
-            <td>Minverva Hooper</td>
-            <td>Curaçao</td>
-          </tr>
-
-          <tr>
-            <td>3</td>
-            <td>Sage Rodriguez</td>
-            <td>Netherlands</td>
+          <tr v-for="(list,listKey) in noticeList" 
+          :key="listKey" 
+          @click="rowClick">
+            <td>{{list.noticeNo}}</td>
+            <td>{{list.noticeTitle}}</td>
+            <td>{{list.noticeContent}}</td>
           </tr>
         </tbody>
       </v-simple-table>
@@ -56,10 +56,35 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { get, set, sync, call } from 'vuex-pathify'
+
 export default {
+  mounted() {
+    this.listFetch()    
+  },
+  methods:{
+    listFetch : call('notice/listFetch'),
+    rowClick(row,column, event){
+      console.log(row);
+      console.log(column);
+      console.log(event);
+    }
+  },
+  
   name: 'RegularTablesView',
+  data: () => ({
+  }),
+  components: {
+  },
+  computed: {
+    ...get('notice', [
+      'noticeList'
+    ])
+  }
 }
 </script>
-<style scoped>
-
+<style lang = "scss" scoped>
+.selectWrap{
+}
 </style>
