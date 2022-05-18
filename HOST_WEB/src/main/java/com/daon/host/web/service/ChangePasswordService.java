@@ -36,21 +36,29 @@ public class ChangePasswordService {
 	@Autowired
 	private ChangePasswordMapper changePasswordMapper;
 
-	public ResponseEntity<?> setPassword(  ChangePasswordVo.ChangePassword changePassword) {
+	public ResponseEntity<?> setChangePassword(  ChangePasswordVo.ChangePassword changePassword) {
 		// TODO Auto-generated method stub
-
-
+		
+		
 		if (ObjectUtils.isEmpty(changePassword)) {
-			return response.fail("조회 파라미터가 없습니다.", HttpStatus.BAD_REQUEST);
+			return response.fail("파라미터가 없습니다.", HttpStatus.BAD_REQUEST);
+		}
+		
+		//사용자 비밀번호 확인
+		String changePasswordVo1 = changePasswordMapper.pwCheck(changePassword);
+		
+		if (ObjectUtils.isEmpty(changePasswordVo1)) {
+			return response.fail("현재 비밀번호 확인이 필요합니다.", HttpStatus.BAD_REQUEST);
 		}
 
-		ChangePasswordVo.Table changePasswordVo2 = changePasswordMapper.setChangePassword(changePassword);
+		//확인되면 변경
+		int changePasswordVo2 = changePasswordMapper.setChangePassword(changePassword);
 
 		if (ObjectUtils.isEmpty(changePasswordVo2)) {
-			return response.fail("조회된 정보가 없습니다. 확인하신 후 입력해주세요.", HttpStatus.BAD_REQUEST);
+			return response.fail("변경 실패했습니다.", HttpStatus.BAD_REQUEST);
 		}
 
-		return response.successLogin(changePasswordVo2, "조회 성공했습니다.", HttpStatus.OK);
+		return response.successResult(changePasswordVo2, "변경 성공했습니다.", HttpStatus.OK);
 	}
 
 }

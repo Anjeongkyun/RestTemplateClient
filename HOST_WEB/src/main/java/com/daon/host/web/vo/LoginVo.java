@@ -17,20 +17,23 @@ import lombok.Setter;
 @Data
 @AllArgsConstructor // 모든 필드 값을 파라미터로 받는 생성자
 public class LoginVo {
-
-// db
-//	login_id
-//	login_pw
-//	member_nm
-//	member_role
-//	member_phone
-//	use_yn
-//	ins_id
-//	ins_date
-//	upd_id
-//	upd_date
-
 	
+	@Data
+	public static class LoginResult{
+		private String loginId; // 아이디
+		private String loginPw; // 비밀번호
+		private String memberMm;
+		private String memberRole;
+		private String memberPhone; // 전화번호
+		private String useYn; // 사용여부
+		private String insId; // 입력자
+		private Date insDate; // 입력시간
+		private String updId; // 수정자
+		private Date updDate;// 수정시간
+		private String levelCd;
+		private String firstRun;
+		private String resetPassword;
+	}
 	
 	@Data
 	public static class Table{

@@ -25,7 +25,11 @@ import com.daon.host.web.vo.LoginVo.Table;
 public interface ChangePasswordMapper {
 	
 	
-	ChangePasswordVo.Table setChangePassword(@Param("changePassword") ChangePassword changePassword);
+	String pwCheck(@Param("req") ChangePasswordVo.ChangePassword changePassword);
+	
+	int setChangePassword(@Param("req") ChangePasswordVo.ChangePassword changePassword);
+	
+	
 	
 	
 }

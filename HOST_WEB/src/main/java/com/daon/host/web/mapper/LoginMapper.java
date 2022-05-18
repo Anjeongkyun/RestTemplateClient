@@ -23,7 +23,7 @@ public interface LoginMapper {
 	
 	//@Select("select * from tb_o_webuser where login_id=${loginVo.loginId}")
 	//@Options(useGeneratedKeys = true, keyProperty = "login_id")  // 이런식으로 insert 후 자동 증가 값 까지 조회
-	LoginVo.Table getLogin(@Param("login") LoginVo.Login login); //파라미터로 받은 id를 연결해서 sql 매핑 문장에 #{id}로 전달
+	LoginVo.LoginResult getLogin(@Param("req") LoginVo.Login login); //파라미터로 받은 id를 연결해서 sql 매핑 문장에 #{id}로 전달
 	
 	
 }

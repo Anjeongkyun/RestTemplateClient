@@ -268,11 +268,11 @@ export default {
       'drawerImage',
       'mini',
     ]),
-    ...sync('user', [
+    ...sync('themeStore', [
       'drawer@gradient',
       'drawer@image',
     ]),
-    ...get('user', [
+    ...get('themeStore', [
       'images',
       'gradients',
     ]),

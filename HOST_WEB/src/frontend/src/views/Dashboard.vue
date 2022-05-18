@@ -52,12 +52,7 @@
         large
         depressed
         color="primary"
-        @click="
-          login_axios({
-            'login_id':'1',
-            'login_pw':'2'
-          })
-        "
+
       >
         로그인(login_axios)
       </v-btn>
@@ -456,7 +451,7 @@ export default {
   },
   methods: {
     //  ...mapActions(['login_axios']), // login(){}를 사용하는것과 같음
-    login_axios: call('test/login_axios'),
+  //login_axios: call('test/login_axios'),
   },
 }
 </script>

@@ -22,6 +22,6 @@ import { get } from 'vuex-pathify'
 export default {
   name: 'DefaultDrawerHeader',
 
-  computed: { version: get('app/version') },
+  computed: { version: get('appStore/version') },
 }
 </script>

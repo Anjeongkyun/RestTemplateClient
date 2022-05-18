@@ -21,7 +21,7 @@ export default {
 
   computed: {
 
-    mini: sync('app/mini'),
+    mini: sync('appStore/mini'),
   },
 }
 </script>

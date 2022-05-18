@@ -21,7 +21,7 @@
       class="font-weight-light text-h5"
       v-text="selectDrawerItem"
     />
-  
+
     <v-spacer />
 
     <!-- <default-search class="hidden-sm-and-down" />
@@ -65,15 +65,15 @@ export default {
   },
   data(){
     return{
-      
+
     }
   },
   computed: {
-    ...sync('app', [
+    ...sync('appStore', [
       'drawer',
       'mini',
     ]),
-    ...get('app', [
+    ...get('appStore', [
       'selectDrawerItem'
     ]),
     //  name: get('route/name'),
@@ -83,7 +83,7 @@ export default {
 
   },
   mounted() {
-    
+
   },
 }
 </script>
