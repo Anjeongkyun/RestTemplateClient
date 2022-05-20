@@ -1,26 +1,35 @@
 import axios from 'axios'
 // Pathify
 import {get, sync, call, make} from 'vuex-pathify'
-import _uniqBy from 'lodash/uniqBy'
 
     // Data
     let state = {
-        noticeList: []
+        noticeList: [],
+        detailContents: []
     }    
 
     // computed 계산
     const getters = {}
 
-    const mutations = make.mutations(state)
-    
+    const mutations = {
+        setNoticeList: function (state, payload){
+            state.noticeList = payload;
+        },
+
+        setDetailContents: function(state, payload){
+            state.detailContents = payload;
+        }
+    }
+
     //비동기로 동작
     const actions = {
-        async listFetch() {
-            const url = `http://localhost:8080/notice/list`;
-            const res = await axios.post(url)
-            .then(res => {                
-                console.log(res.data.data);
-                state.noticeList = res.data.data;                
+
+        //리스트 전체조회
+        async listFetch({commit}) {
+            const url = `http://localhost:8080/notice/list`
+            await axios.post(url)
+            .then(res => {             
+                commit('setNoticeList',res.data.data) 
             })
             .catch(err => {
                 alert('error 발생');
@@ -28,16 +37,71 @@ import _uniqBy from 'lodash/uniqBy'
             })
         },
 
-        async listDetail({state,commit}, dataObj) {
-
-            console.log(dataObj);
-
+        //상세조회 (key : noticeNo)
+        async noticeDetail({commit}, payload) {
             const url = `http://localhost:8080/notice/detail`;
-            const res = await axios.post(url, {
-                noticeNo : dataObj.noticeNo
+            await axios.post(url, {
+                noticeNo : payload.noticeNo
             })
-            .then(res => {                
-                state.noticeList = res.data.data;                
+            .then(res => {               
+                commit('setDetailContents',res.data.data) 
+            })
+            .catch(err => {
+                alert('error 발생');
+                console.log(err);
+            })
+        },
+
+        //공지사항 등록 
+        async noticeInsert({commit}, payload) {
+            const url = `http://localhost:8080/notice/insert`;
+            await axios.post(url, {
+                noticeNo : payload.noticeNo,
+                aptId: payload.aptId,
+                noticeTitle : payload.noticeTitle,
+                noticeContent : payload.noticeContent,
+                noticeWriter : payload.noticeWriter,
+                remark : payload.remark,
+                insId : payload.insId,
+                // insDate : payload.insDate,
+                updId : payload.updId
+                // updDate : payload.updDate
+            })
+            .then(res => {               
+                console.log(res.data);
+            })
+            .catch(err => {
+                alert('error 발생');
+                console.log(err);
+            })
+        },
+
+        //공지사항 업데이트
+        async noticeUpdate({commit}, payload) {
+            alert('update');
+            const url = `http://localhost:8080/notice/update`;
+            await axios.post(url, {
+                noticeNo : payload.noticeNo
+                
+            })
+            .then(res => {               
+            })
+            .catch(err => {
+                alert('error 발생');
+                console.log(err);
+            })
+        },
+
+        //공지사항 삭제 (key : noticeNo)
+        async noticeDelete({commit}, payload) {
+            alert('Delete');
+            console.log(payload);
+            const url = `http://localhost:8080/notice/delete`;
+            await axios.post(url, {
+                noticeNo : payload.noticeNo
+            })
+            .then(res => {               
+                console.log(res.data);
             })
             .catch(err => {
                 alert('error 발생');

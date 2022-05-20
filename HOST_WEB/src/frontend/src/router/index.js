@@ -26,6 +26,7 @@ const router = new Router({
       route('ChangePasswordView', null, 'components/change-password'),
       route('SiteStatusView', null, 'components/site-status'),
       route('NoticeView', null, 'components/notice'),
+      route('NoticeDetailView', null, 'components/notice-detail'),
       route('UserView', null, 'components/user'),
       route('ParkView', null, 'components/park'),
       route('MenuView', null, 'components/menu'),
