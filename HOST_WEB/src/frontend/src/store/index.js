@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import pathify from '@/plugins/vuex-pathify'
 import axios from 'axios'
+import createPersistedState from 'vuex-persistedstate';
 
 // Modules
 import * as modules from './modules'
@@ -22,7 +23,10 @@ const store = new Vuex.Store({
   mutations,
   actions,
   plugins: [
-    pathify.plugin,
+    pathify.plugin,    
+    createPersistedState({
+      paths: ["noticeStore"]
+    })
   ],
 })
 

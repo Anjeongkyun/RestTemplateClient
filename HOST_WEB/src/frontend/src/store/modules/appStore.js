@@ -48,6 +48,11 @@ const state = {
       to: '/components/notice/',
       show: true
     },
+    { // 공지사항 상세조회
+      title: '공지사항 상세조회',
+      icon: 'mdi-bell',
+      to: '/components/notice-detail',
+    },
     { // 사용자
       title: '사용자',
       icon: 'mdi-account',

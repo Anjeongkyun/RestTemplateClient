@@ -1,7 +1,7 @@
 export { default as appStore } from './appStore'
 export { default as themeStore } from './themeStore'
 export { default as userStore } from './userStore'
-//export { default as notice } from './notice'
+export { default as noticeStore } from './noticeStore'
 export { default as changePasswordStore } from './changePasswordStore'
 export { default as levelMenuStore } from './levelMenuStore'
 export { default as loginStore } from './loginStore'

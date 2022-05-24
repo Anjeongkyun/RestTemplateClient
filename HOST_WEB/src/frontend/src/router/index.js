@@ -26,11 +26,11 @@ const router = new Router({
       route('ChangePasswordView', null, 'components/change-password'),
       route('SiteStatusView', null, 'components/site-status'),
       route('NoticeView', null, 'components/notice'),
+      route('NoticeDetailView', null, 'components/notice-detail'),
       route('UserView', null, 'components/user'),
       route('ParkView', null, 'components/park'),
       route('MenuView', null, 'components/menu'),
       route('LevelMenuView', null, 'components/level-menu'),
-
 
       // Pages
       route('Dashboard', null, 'components/dashboard'),
@@ -64,7 +64,7 @@ router.beforeEach((to, from, next) => {
 
   var localStorageLoginUserID = localStorage.getItem("loginUserID");
   var localStorageLoginUserYN = localStorage.getItem("loginUserYN");
-  console.log("ํ  loginUser:" + localStorageLoginUserYN)
+  console.log("ศ์ loginUser:" + localStorageLoginUserYN)
 
 
 
@@ -79,10 +79,10 @@ router.beforeEach((to, from, next) => {
   }
 
   if (!localStorageLoginUserYN ) {
-    console.log("๋ก๊ทธ์ธ ์•๋จ" + localStorageLoginUserYN)
+    console.log("ทฮฑืภฮ พศตส" + localStorageLoginUserYN)
 
   } else {
-    console.log("๋ก๊ทธ์ธ๋จ" + localStorageLoginUserYN)
+    console.log("ทฮฑืภฮตส" + localStorageLoginUserYN)
   }
 
 
