@@ -18,5 +18,27 @@ import lombok.Setter;
 @AllArgsConstructor // 모든 필드 값을 파라미터로 받는 생성자
 public class ParkVo {
 	
+	@Data
+	public static class Table{
+		
+		private String updId;
+		private String updDate;
+		private String repNum;
+		private String projectId;
+		private String managerNm;
+		private String longitude;
+		private String latitude;
+		private String insId;
+		private String insDate;
+		private String aptNm;
+		private String aptId;
+	}
 	
+	@Data
+	public static class Park {
+	
+		private String parkSeq; // 단지 구별을 위한 고유값(ex. AAA00 = 전체)
+
+	
+	}
 }

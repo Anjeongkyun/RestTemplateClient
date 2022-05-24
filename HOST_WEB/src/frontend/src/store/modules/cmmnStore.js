@@ -1,47 +1,75 @@
-//store 와 관련된 데이터를 처리하는 공통 함수 파일
+// Pathify
+import {
+  make
+} from 'vuex-pathify'
 
-var res = (res) => {
-  console.log('axios.post res ==================')
-  console.log(res)
+import axios from 'axios'
+import cmmnFnStore from './cmmnFnStore' //store 와 관련된 데이터를 처리하는 공통 함수 파일
 
-  var resultStatus = res.status
-  var resultStstusText = res.statusText
-  var msgStatus = resultStatus + ": " + resultStstusText;
+const state = {
+  cmmnCodeItem: null,
+  useYnItem :
+    [{
+      textItem: "사용",
+      valueItem: "Y",
+    }, {
+      textItem: "미사용",
+      valueItem: "N",
+    }]
 
-  if (res.status == 200) {
+}
 
-    var resultCd = res.data.resultCd;
-    var resultMsg = res.data.resultMsg;
-    var resultError = res.data.error
-    var msgResult = resultCd + ": " + resultMsg;
+//const mutations = make.mutations(state)
 
-    if (resultCd == "00") {
-      alert(msgResult)
-    } else if (resultCd == "20") {
-      alert(msgResult)
-    } else if (resultCd == "30") {
-      alert(msgResult + "(콘솔을 확인하세요.)");
-      for (var i in resultError) {
-        console.log(resultError[i].field + ": " + resultError[i].message);
-      }
-    } else {
-      alert(msgResult);
-    }
+const mutations = {
+  ...make.mutations(state),
+  example(state, payload) {
+    cmmnFnStore.res(payload);
 
-  } else if (res.status == 400) {
-    alert(msgStatus)
+  },
+
+  getList(state, payload) {
+    state.cmmnCodeItem = payload;
   }
-};
+}
+
+const actions = {
+  ...make.actions(state),
+  code({
+    state, // eslint-disable-line no-unused-vars
+    commit, // eslint-disable-line no-unused-vars
+  }, dataObj) {
 
 
-var err = (err) => {
-  console.log('axios.post err ==================')
-  console.log(err)
-  alert(err)
-};
+    const url = '/internal/davis/web/cmmn/code'
+    axios.post(url, {
 
+    })
+      .then(res => {
+        cmmnFnStore.res(res);
+
+        var arr = cmmnFnStore.fn.code(res,"PC");
+
+        console.log(arr)
+        commit('getList', arr)
+      })
+      .catch(err => {
+        cmmnFnStore.err(err);
+        //commit('axiosError', err)
+      })
+
+  },
+
+}
+
+const getters = {
+  ...make.getters(state),
+}
 
 export default {
-  res,
-  err
+  namespaced: true,
+  state,
+  mutations,
+  actions,
+  getters,
 }

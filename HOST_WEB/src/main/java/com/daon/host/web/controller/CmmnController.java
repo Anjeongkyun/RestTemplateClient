@@ -32,12 +32,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.daon.host.web.dto.Response;
 import com.daon.host.web.mapper.LoginMapper;
+import com.daon.host.web.service.CmmnService;
 import com.daon.host.web.service.LoginService;
 import com.daon.host.web.service.NoticeService;
-import com.daon.host.web.service.ParkService;
+import com.daon.host.web.vo.CmmnVo;
 import com.daon.host.web.vo.LoginVo;
 import com.daon.host.web.vo.Notice;
-import com.daon.host.web.vo.ParkVo;
 import com.daon.host.web.vo.UserProfile;
 
 import lombok.Data;
@@ -50,8 +50,8 @@ import utils.Helper;
 //@CrossOrigin(origins = "*", allowedHeaders = "*")
 
 @Data
-@RequestMapping("/internal/davis/web/park")
-public class ParkController {
+@RequestMapping("/internal/davis/web/cmmn")
+public class CmmnController {
 
 	/*
 	 * jpa flow Controller -> Service -> Repository(JpaRepository 상속 인터페이스) mybatis
@@ -59,18 +59,26 @@ public class ParkController {
 	 * https://blog.jiniworld.me/55
 	 */
 
-	private final ParkService parkService;
+	private final CmmnService cmmnService;
 	private final Response response;
 	
-	@PostMapping("/list")
-	public ResponseEntity<?>  getPark(@Valid @RequestBody ParkVo.Park park, Errors errors) {
+	@PostMapping("/code")
+	public ResponseEntity<?>  getLogin(@Valid @RequestBody  CmmnVo.CmmnCode cmmnCode, Errors errors) {
 		
 		 if (errors.hasErrors()) {
 	            return response.failInvalidFields(Helper.refineErrors(errors));
 	        }
-		return parkService.getPark(park);
+		return cmmnService.getCode(cmmnCode);
 	}
-
-
+	
+	@PostMapping("/base")
+	public ResponseEntity<?>  getLogin(@Valid @RequestBody CmmnVo.CmmnBase cmmnBase, Errors errors) {
+		
+		 if (errors.hasErrors()) {
+	            return response.failInvalidFields(Helper.refineErrors(errors));
+	        }
+		return cmmnService.getBase(cmmnBase);
+	}
+	
 	
 }

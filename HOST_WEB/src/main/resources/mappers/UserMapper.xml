@@ -3,6 +3,88 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.daon.host.web.mapper.UserMapper">
-	
 
+	<select id="getUser" resultType="com.daon.host.web.vo.UserVo$Table">
+		select * from tb_o_webuser
+		<where>
+			<if test=" req.loginId != null and req.loginId != '' ">
+				AND login_id LIKE CONCAT('%', #{req.loginId}, '%')
+			</if>
+		<if test=" req.memberNm != null and req.memberNm != ''  ">
+		AND member_nm LIKE CONCAT('%', #{req.memberNm}, '%')
+			</if>
+		</where>
+	</select>
+	
+	
+	<select id="getIdCheck" resultType="com.daon.host.web.vo.UserVo$Table">
+	select * from tb_o_webuser
+		<where>
+			<if test=" req.loginId != null and req.loginId != '' ">
+				AND login_id = #{req.loginId}
+			</if>
+	
+		</where>
+	</select>
+	<insert id="insertUserManage" >
+	insert into tb_o_webuser
+						(
+						login_id,
+						login_pw,
+						member_nm,
+						member_role,
+						member_phone,
+						use_yn,
+						ins_id,
+						ins_date,
+						upd_id,
+						upd_date,
+						level_cd,
+						first_run
+						)
+	values
+						(
+						#{req.loginId              },
+						'',
+						#{req.memberNm             },
+						#{req.memberRole           },
+						#{req.memberPhone          },
+						#{req.useYn                },
+						#{req.loginId              },
+						current_timestamp(),
+						#{req.loginId              },
+						current_timestamp(),
+						#{req.levelCd              },
+						"Y"
+						)
+						
+			
+		
+	</insert>
+	
+	
+	<update id="updateUserManage" >
+		update tb_o_webuser set 
+		member_nm = #{req.memberNm},
+		member_phone = #{req.memberPhone},
+		use_yn = #{req.useYn},
+		level_cd = #{req.levelCd},
+		upd_id= #{req.loginId},
+		upd_date = current_timestamp()
+		<where>
+			<if test=" req.loginId != null and req.loginId != '' ">
+				AND login_id = #{req.loginId}
+			</if>
+		</where>
+	</update>
+	
+	<delete id="deleteUserManage" >
+		delete from tb_o_webuser 
+		
+		<where>
+			<if test=" req.loginId!= null and req.loginId != ''  ">
+				AND login_id = #{req.loginId}
+			</if>
+		</where>
+	</delete>
 </mapper>

@@ -34,7 +34,7 @@
         <app-bar-item
           v-else
           :key="`item-${i}`"
-          to="/"
+          :to="p.to"
         >
           <v-list-item-title v-text="p.title" />
         </app-bar-item>
@@ -44,16 +44,25 @@
 </template>
 
 <script>
+import { get, set, sync, call } from 'vuex-pathify'
+
 export default {
   name: 'DefaultAccount',
 
   data: () => ({
     profile: [
-      { title: '마이페이지' },
+    //  { title: '마이페이지' },
       //  { title: 'Settings' },
+      { title: ' 비밀번호 변경' ,to:"/components/change-password"},
       { divider: true },
-      { title: '로그아웃' },
+      { title: '로그아웃' ,to:"/login" },
     ],
   }),
+  methods: {
+    //  ...mapActions(['login_axios']), // login(){}를 사용하는것과 같음
+    logout(){
+      console.log(this)
+    },
+  },
 }
 </script>

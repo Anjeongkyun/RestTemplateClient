@@ -5,4 +5,16 @@
 <mapper namespace="com.daon.host.web.mapper.ParkMapper">
 
 	
+		
+	<select id="getPark" resultType="com.daon.host.web.vo.ParkVo$Table">
+		select * from tb_o_complex
+		<where>
+			<if test=" req.parkSeq != null and req.parkSeq != '' and req.parkSeq != 'AAA01' ">
+				AND apt_id = #{req.parkSeq}
+			</if>
+		
+
+		</where>
+	</select>
+	
 </mapper>

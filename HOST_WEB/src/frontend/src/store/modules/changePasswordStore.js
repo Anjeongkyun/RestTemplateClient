@@ -3,7 +3,9 @@ import { make } from 'vuex-pathify'
 
 
 import axios from 'axios'
-import cmmnStore from './cmmnStore' //store 와 관련된 데이터를 처리하는 공통 함수 파일
+import cmmnFnStore from './cmmnFnStore' //store 와 관련된 데이터를 처리하는 공통 함수 파일
+import router from "@/router";
+
 // Data
 const state = {
   userPw: '',
@@ -26,8 +28,7 @@ const actions = {
 
 
     const url = '/internal/davis/web/change-password/change-password'
-    console.log("dataObj")
-    console.log(dataObj)
+
 
     //console.log("changePwRe:", changePwRe)
     //  console.log("state.changePwRe: ", state.changePwRe)
@@ -45,10 +46,14 @@ const actions = {
       newPassword: state.changePw,
     })
       .then(res => {
-        cmmnStore.res(res);
+        cmmnFnStore.res(res);
+        
+        router.push({
+          name: "MainView"
+        })
       })
       .catch(err => {
-        cmmnStore.err(err);
+        cmmnFnStore.err(err);
       })
 
   }
