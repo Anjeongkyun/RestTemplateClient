@@ -1,17 +1,16 @@
 <template>
    <v-container fluid>
-     <h3>번호</h3>
+     <h3>게시글 번호</h3>
       <v-row>
         <v-col
           cols="12"
           sm="6"
-          md="1"
+          md="2"
         >
           <v-text-field
-            label="aa"
-            v-model="noticeNo"
-            v-text="detailContents.noticeNo"
-            readonly
+            solo
+            v-model="detailContents.noticeNo"
+            readonly            
           ></v-text-field>
         </v-col>
     </v-row>
@@ -21,13 +20,37 @@
         <v-col
           cols="12"
           sm="6"
-          md="3"
+          md="5"
         >
           <v-text-field
-            label="Solo"
-            placeholder="Placeholder"
             solo
-            v-text="detailContents.noticeTitle"
+            v-model="detailContents.noticeTitle"          
+          ></v-text-field>
+        </v-col>
+      </v-row>
+
+    <h3>작성자</h3>
+      <v-row>
+        <v-col
+          cols="12"
+          md="6"
+        >
+          <v-text-field
+            solo
+            v-model="detailContents.noticeWriter"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+
+    <h3>수정자</h3>
+      <v-row>
+        <v-col
+          cols="12"
+          md="6"
+        >
+          <v-text-field
+            solo
+            v-model="detailContents.updId"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -40,9 +63,7 @@
         >
           <v-textarea
             solo
-            name="input-7-4"
-            label="Solo textarea"
-            v-text="detailContents.noticeContent"
+            v-model="detailContents.noticeContent"
           ></v-textarea>
         </v-col>
       </v-row>
@@ -52,7 +73,7 @@
         large
         depressed        
         outlined color = "blue"
-        @click="fnUpdate"
+        @click="fnUpdate({detailContents})"
         >수정
     </v-btn>    
 
@@ -61,7 +82,7 @@
         large
         depressed        
         outlined color = "blue"    
-        @click="fnDelete(detailContents.noticeNo)"
+        @click="fnDelete({detailContents})"
         >삭제
     </v-btn>    
   </v-container>
@@ -72,28 +93,35 @@ import { get, set, sync, call } from 'vuex-pathify'
 
 export default {
   mounted() {
+  
   },
   methods:{
-    fnDelete: function(noticeNo){
+    fnDelete: function(dataObj){
         this.$store.dispatch('noticeStore/noticeDelete',{
-        noticeNo : noticeNo
+        noticeNo : dataObj.detailContents.noticeNo
       });
       this.$router.push("/components/notice/");
       alert('완료');
     },
+    
    fnUpdate: function(dataObj){
-      //   this.$store.dispatch('noticeStore/noticeUpdate',{
-      //   noticeNo : dataObj.noticeNo
-      // });
-      this.$router.push("/components/notice/");
-      alert('완료');
+        this.$store.dispatch('noticeStore/noticeUpdate',{
+        noticeNo : dataObj.detailContents.noticeNo,
+        noticeTitle : dataObj.detailContents.noticeTitle,
+        noticeContent : dataObj.detailContents.noticeContent,
+        noticeWriter : dataObj.detailContents.noticeWriter,
+        updId : dataObj.detailContents.updId
+      })
+      .then(res => {
+        this.$router.push("/components/notice/");
+        alert('완료');
+      });
 
     }
   },
   
   name: 'RegularTablesView',
   data: () => ({
-    noticeNo: ''
   }),
   components: {
   },

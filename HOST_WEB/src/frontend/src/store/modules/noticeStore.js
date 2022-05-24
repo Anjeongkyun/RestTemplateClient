@@ -43,7 +43,7 @@ import {get, sync, call, make} from 'vuex-pathify'
             await axios.post(url, {
                 noticeNo : payload.noticeNo
             })
-            .then(res => {               
+            .then(res => {  
                 commit('setDetailContents',res.data.data) 
             })
             .catch(err => {
@@ -54,6 +54,11 @@ import {get, sync, call, make} from 'vuex-pathify'
 
         //공지사항 등록 
         async noticeInsert({commit}, payload) {
+
+            if(payload.noticeTitle == '' || payload.noticeTitle == null){
+                alert("제목을 입력해주세요");
+                return;
+            }
             const url = `http://localhost:8080/notice/insert`;
             await axios.post(url, {
                 noticeNo : payload.noticeNo,
@@ -63,9 +68,6 @@ import {get, sync, call, make} from 'vuex-pathify'
                 noticeWriter : payload.noticeWriter,
                 remark : payload.remark,
                 insId : payload.insId,
-                // insDate : payload.insDate,
-                updId : payload.updId
-                // updDate : payload.updDate
             })
             .then(res => {               
                 console.log(res.data);
@@ -81,8 +83,11 @@ import {get, sync, call, make} from 'vuex-pathify'
             alert('update');
             const url = `http://localhost:8080/notice/update`;
             await axios.post(url, {
-                noticeNo : payload.noticeNo
-                
+                noticeNo : payload.noticeNo,
+                noticeTitle : payload.noticeTitle,
+                noticeContent : payload.noticeContent,
+                remark : payload.remark,
+                updId : payload.updId
             })
             .then(res => {               
             })
@@ -95,7 +100,6 @@ import {get, sync, call, make} from 'vuex-pathify'
         //공지사항 삭제 (key : noticeNo)
         async noticeDelete({commit}, payload) {
             alert('Delete');
-            console.log(payload);
             const url = `http://localhost:8080/notice/delete`;
             await axios.post(url, {
                 noticeNo : payload.noticeNo

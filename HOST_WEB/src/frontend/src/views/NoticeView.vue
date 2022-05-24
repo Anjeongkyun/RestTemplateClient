@@ -9,6 +9,20 @@
       heading="공지사항"
     />    
 
+      <v-col
+        cols="12"
+        sm="6"
+        md="4"
+      >
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+      </v-col>
+
 <v-row justify="center">
     <v-dialog
       v-model="dialog"
@@ -25,7 +39,7 @@
           작성
         </v-btn>
       </template>
-      <v-card height="60vh">
+      <v-card>
         <v-card-title>
           <span class="text-h5">공지사항 작성</span>
         </v-card-title>
@@ -41,8 +55,7 @@
                 <v-text-field
                   v-model="noticeTitle"
                   label="제목 입력*"
-                  persistent-hint
-                  required
+                  
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
@@ -89,7 +102,7 @@
         <v-data-table
           :headers="headers"
           :items="noticeList"
-          :items-per-page="10"
+          :items-per-page="5"
           class="elevation-1"
           :search="search"
           @click:row="rowClick"
@@ -115,22 +128,20 @@ export default {
       });
       this.$router.push("/components/notice-detail/")
     },
-
     fnWrite: function(){
-      this.$store.dispatch('noticeStore/noticeInsert',{
-        noticeNo : "202201283010",
+        this.$store.dispatch('noticeStore/noticeInsert',{
+        noticeNo : "202201283050",
         aptId: "ALD01",
         noticeTitle : this.noticeTitle,
         noticeContent : this.noticeContent,
         noticeWriter : "jkan",
         remark : "비고1",
-        insId : "lgh",
-        // insDate : "2021-07-30 00:00:00",
-        updId : "jkan",
-        // updDate : "2021-07-30 00:00:00"
+        insId : "ohhj"
       })
-      this.dialog = false;
-      this.$router.push("/components/notice/");
+      .then(res => {
+        this.dialog = false;
+        this.listFetch();
+      })
     }
   },
   
@@ -142,7 +153,7 @@ export default {
       {text: '제목', value: 'noticeTitle'},
       {text: '내용', value: 'noticeContent', align:' d-none'},
       {text: '작성자', value: 'noticeWriter'},
-      {text: '등록일자', value: 'insDate'},
+      {text: '등록일자', value: 'insDate'}
     ],
     data: false,
     dialog : false,
