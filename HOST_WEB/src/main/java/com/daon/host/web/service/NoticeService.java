@@ -22,7 +22,7 @@ public class NoticeService {
 
 	private final Response response;
 	
-	@Autowired //생성자,setter,필드를 자동으로
+	@Autowired
 	private NoticeMapper noticeMapper;
 	
 	//전체 리스트 조회 

@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.daon.host.web.vo.LoginVo;
+import com.daon.host.web.vo.ParkVo;
 
 @Component
 @Mapper
 public interface ParkMapper {
+
+	List<ParkVo> getList();
 	
 	
 	
