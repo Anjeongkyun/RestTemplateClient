@@ -21,22 +21,4 @@ public class ParkVo {
 	private Date insDate;
 	private String updId;
 	private Date updDate;
-<<<<<<< .mine
-
-
-
-
-=======
-		private String aptNm;
-		private String aptId;
-	}
-	
->>>>>>> .theirs
-	@Data
-	public static class Park {
-	
-		private String parkSeq; // 단지 구별을 위한 고유값(ex. AAA00 = 전체)
-
-	
-	}
 }

@@ -7,23 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.daon.host.web.dto.Response;
 import com.daon.host.web.service.ParkService;
-<<<<<<< .mine
-
-
-
-
-
-
-
-=======
-import com.daon.host.web.service.LoginService;
-import com.daon.host.web.service.NoticeService;
-import com.daon.host.web.service.ParkService;
-import com.daon.host.web.vo.LoginVo;
-import com.daon.host.web.vo.Notice;
-import com.daon.host.web.vo.ParkVo;
-import com.daon.host.web.vo.UserProfile;
->>>>>>> .theirs
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,23 +30,7 @@ public class ParkController {
 	public ResponseEntity<?> getList() {
 		return parkService.getList();
 	}
-<<<<<<< .mine
-	
 
-
-
-
-
-
-=======
-	public ResponseEntity<?>  getPark(@Valid @RequestBody ParkVo.Park park, Errors errors) {
-		
-		 if (errors.hasErrors()) {
-	            return response.failInvalidFields(Helper.refineErrors(errors));
-	        }
-		return parkService.getPark(park);
-	}
->>>>>>> .theirs
 
 	
 }
