@@ -12,7 +12,7 @@ import {get, sync, call, make} from 'vuex-pathify'
     const getters = {}
 
     const mutations = {
-        setNoticeList: function (state, payload){
+        setNoticeList: function(state, payload){
             state.noticeList = payload;
         },
 
@@ -70,7 +70,6 @@ import {get, sync, call, make} from 'vuex-pathify'
                 insId : payload.insId,
             })
             .then(res => {
-                console.log(res.data);
             })
             .catch(err => {
                 alert('error 발생');
@@ -99,13 +98,11 @@ import {get, sync, call, make} from 'vuex-pathify'
 
         //공지사항 삭제 (key : noticeNo)
         async noticeDelete({commit}, payload) {
-            alert('Delete');
             const url = `http://localhost:8080/notice/delete`;
             await axios.post(url, {
                 noticeNo : payload.noticeNo
             })
             .then(res => {
-                console.log(res.data);
             })
             .catch(err => {
                 alert('error 발생');

@@ -6,16 +6,17 @@
 
 	<select id="getList" resultType="Notice">
 		SELECT notice_no,
-		apt_id,
-		notice_writer,
-		notice_content,
-		notice_title,
-		remk,
-		ins_id,
-		ins_date,
-		upd_id,
-		upd_date
+			apt_id,
+			notice_writer,
+			notice_content,
+			notice_title,
+			remk,
+			ins_id,
+			ins_date,
+			upd_id,
+			upd_date
 		FROM tb_o_notice
+		ORDER BY ins_date desc
 	</select>
 
 	<select id="getDetail" resultType="Notice">
@@ -46,22 +47,23 @@
 			notice_title,
 			remk,
 			ins_id,
-			ins_date,
-			upd_id,
-			upd_date
+			ins_date
 		)
 		VALUES
 		(
-			#{noticeNo},
+			(
+			select ifnull(max(notice_no)+1, concat(date_format(now(),'%Y%m%d'),'0001') ) 
+			    from tb_o_notice ALIAS_FOR_SUBQUERY
+			   where left(notice_no,8) = date_format(now(),'%Y%m%d') 
+			   order by notice_no desc
+			),
 			#{aptId},
 			#{noticeWriter},
 			#{noticeContent},
 			#{noticeTitle},
 			#{remark},
 			#{insId},
-			#{insDate},
-			#{updId},
-			#{updDate}		
+			now()	
 		)
 	</insert>
 	
@@ -74,8 +76,10 @@
 		UPDATE tb_o_notice
 		SET
 			notice_title = #{noticeTitle},
-			notice_cont = #{noticeContent}, 
-			remk = #{remark}
+			notice_content = #{noticeContent}, 
+			remk = #{remark},
+			upd_id = #{updId},
+			upd_date = now()
 		WHERE
 			notice_no = #{noticeNo}		
 	</update>

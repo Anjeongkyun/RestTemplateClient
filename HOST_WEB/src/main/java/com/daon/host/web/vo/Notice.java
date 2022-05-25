@@ -2,11 +2,11 @@ package com.daon.host.web.vo;
 
 import java.sql.Date;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
 public class Notice {
 
 	private String noticeNo; // 공지번호
@@ -16,7 +16,9 @@ public class Notice {
 	private String noticeTitle; // 공지제목
 	private String remark; // 비고
 	private String insId; // 입력자
+
 	private Date insDate; // 입력시간
+	
 	private String updId; // 수정자
 	private Date updDate; // 수정시간
 }

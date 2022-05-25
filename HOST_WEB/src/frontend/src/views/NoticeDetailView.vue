@@ -1,20 +1,5 @@
 <template>
    <v-container fluid>
-     <h3>게시글 번호</h3>
-      <v-row>
-        <v-col
-          cols="12"
-          sm="6"
-          md="2"
-        >
-          <v-text-field
-            solo
-            v-model="detailContents.noticeNo"
-            readonly            
-          ></v-text-field>
-        </v-col>
-    </v-row>
-
     <h3>제목</h3>
       <v-row>
         <v-col
@@ -29,7 +14,7 @@
         </v-col>
       </v-row>
 
-    <h3>작성자</h3>
+    <!-- <h3>작성자</h3>
       <v-row>
         <v-col
           cols="12"
@@ -40,9 +25,9 @@
             v-model="detailContents.noticeWriter"
           ></v-text-field>
         </v-col>
-      </v-row>
+      </v-row> -->
 
-    <h3>수정자</h3>
+    <!-- <h3>수정자</h3>
       <v-row>
         <v-col
           cols="12"
@@ -53,23 +38,28 @@
             v-model="detailContents.updId"
           ></v-text-field>
         </v-col>
-      </v-row>
+      </v-row> -->
 
     <h3>내용</h3>
       <v-row>
         <v-col
           cols="12"
-          md="6"
+          sm="6"
+          md="5"          
         >
           <v-textarea
             solo
             v-model="detailContents.noticeContent"
+            counter
+            maxlength="2000"
+            rows="20"
+            row-height="30"
           ></v-textarea>
         </v-col>
       </v-row>
     
     <v-btn 
-        class = "updateBtn" 
+        class="mr-5"
         large
         depressed        
         outlined color = "blue"
@@ -78,13 +68,23 @@
     </v-btn>    
 
     <v-btn 
-        class = "updateBtn" 
+        class="mr-5"
         large
         depressed        
-        outlined color = "blue"    
+        outlined color = "red"    
         @click="fnDelete({detailContents})"
         >삭제
-    </v-btn>    
+    </v-btn> 
+
+    <v-btn 
+        class="mr-2" 
+        large
+        depressed        
+        outlined color = "green"    
+        @click="fnMoveNoticeView"
+        >목록으로
+    </v-btn> 
+
   </v-container>
 </template>
 
@@ -99,9 +99,10 @@ export default {
     fnDelete: function(dataObj){
         this.$store.dispatch('noticeStore/noticeDelete',{
         noticeNo : dataObj.detailContents.noticeNo
-      });
-      this.$router.push("/components/notice/");
-      alert('완료');
+      })
+      .then(res => {
+        this.$router.push("/components/notice/");
+      })
     },
     
    fnUpdate: function(dataObj){
@@ -114,9 +115,11 @@ export default {
       })
       .then(res => {
         this.$router.push("/components/notice/");
-        alert('완료');
       });
 
+    },
+    fnMoveNoticeView : function(){
+        this.$router.push("/components/notice/");
     }
   },
   

@@ -5,10 +5,7 @@
     tag="section"
   >
   
-    <view-intro
-      heading="공지사항"
-    />    
-
+      <v-row justify="center">
       <v-col
         cols="12"
         sm="6"
@@ -22,8 +19,24 @@
         hide-details
       ></v-text-field>
       </v-col>
+      </v-row>
+  <material-card
+        icon="mdi-clipboard-text"
+        icon-small
+        :title="selectDrawerItem"
+        color="accent"
+    >
 
-<v-row justify="center">
+      <v-data-table
+        :headers="headers"
+        :items="noticeList"
+        :items-per-page="listCount"
+        class="row-pointer"
+        :search="search"
+        @click:row="rowClick"
+      ></v-data-table>
+
+  <v-row justify="center">
     <v-dialog
       v-model="dialog"
       persistent
@@ -48,8 +61,7 @@
             <v-row>
               <v-col
                 cols="12"
-                sm="6"
-                md="4"
+
               >
               <h3>제목</h3>
                 <v-text-field
@@ -67,6 +79,8 @@
                   counter
                   maxlength="500"
                   full-width
+                  rows="10"
+                  row-height="30"
                 ></v-textarea>
               </v-col>
             </v-row>
@@ -92,21 +106,6 @@
       </v-card>
     </v-dialog>
   </v-row>
-
-  <material-card
-        icon="mdi-clipboard-text"
-        icon-small
-        :title="selectDrawerItem"
-        color="accent"
-    >
-        <v-data-table
-          :headers="headers"
-          :items="noticeList"
-          :items-per-page="5"
-          class="elevation-1"
-          :search="search"
-          @click:row="rowClick"
-        ></v-data-table>
 
       </material-card>
     </v-container>
@@ -147,15 +146,12 @@ export default {
   
   name: 'RegularTablesView',
   data: () => ({    
+    listCount: 10,
     search: '',
     headers: [
-      {text: '번호', value: 'noticeNo', align:' d-none'},
-      {text: '제목', value: 'noticeTitle'},
-      {text: '내용', value: 'noticeContent', align:' d-none'},
-      {text: '작성자', value: 'noticeWriter'},
+      {text: '제목', value: 'noticeTitle', width : "80%"},
       {text: '등록일자', value: 'insDate'}
     ],
-    data: false,
     dialog : false,
     noticeContent : '',
     noticeTitle : ''
@@ -174,4 +170,7 @@ export default {
 </script>
 
 <style lang = "scss" scoped>
+.row-pointer:hover {
+  cursor: pointer;
+}
 </style>
