@@ -35,6 +35,7 @@ public class UserVo{
 	@Data
 	public static class CRUD{
 		private String regType;
+		private String id;
 		private String loginId;
 		private String loginPw;
 		private String memberNm;

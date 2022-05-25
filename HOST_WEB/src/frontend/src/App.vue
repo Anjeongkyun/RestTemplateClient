@@ -49,7 +49,7 @@ export default {
   },
   mounted(){
     var localStorageLoginUserYN = localStorage.getItem("loginUserYN");
-    if(!localStorageLoginUserYN ) this.$router.push("/login");
+    if(!localStorageLoginUserYN ) this.$router.push("/components/login/");
 
   },
   metaInfo: {

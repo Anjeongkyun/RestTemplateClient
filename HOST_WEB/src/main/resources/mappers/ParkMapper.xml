@@ -4,8 +4,6 @@
 
 <mapper namespace="com.daon.host.web.mapper.ParkMapper">
 
-	
-		
 	<select id="getPark" resultType="com.daon.host.web.vo.ParkVo$Table">
 		select * from tb_o_complex
 		<where>

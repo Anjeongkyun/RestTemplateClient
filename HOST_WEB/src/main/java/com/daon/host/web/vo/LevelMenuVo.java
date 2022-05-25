@@ -19,4 +19,13 @@ import lombok.Setter;
 public class LevelMenuVo {
 	
 	
+	@Data
+	public static class CRUD{
+		private String regType;
+		private String id;
+		private String level;
+		private String menuList;
+	}
+	
+	
 }

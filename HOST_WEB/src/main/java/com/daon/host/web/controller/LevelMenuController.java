@@ -32,11 +32,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.daon.host.web.dto.Response;
 import com.daon.host.web.mapper.LoginMapper;
+import com.daon.host.web.service.LevelMenuService;
 import com.daon.host.web.service.LoginService;
 import com.daon.host.web.service.NoticeService;
+import com.daon.host.web.service.UserService;
+import com.daon.host.web.vo.LevelMenuVo;
 import com.daon.host.web.vo.LoginVo;
+import com.daon.host.web.vo.MenuVo;
 import com.daon.host.web.vo.Notice;
 import com.daon.host.web.vo.UserProfile;
+import com.daon.host.web.vo.UserVo;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +53,7 @@ import utils.Helper;
 //@CrossOrigin(origins = "*", allowedHeaders = "*")
 
 @Data
-@RequestMapping("/internal/davis/web/level-menu")
+@RequestMapping("/internal/davis/web/level/menu")
 public class LevelMenuController {
 
 	/*
@@ -57,6 +62,25 @@ public class LevelMenuController {
 	 * https://blog.jiniworld.me/55
 	 */
 
-
+	private final LevelMenuService levelMenuService;
+	private final Response response;
 	
+	@PostMapping("/list")
+	public ResponseEntity<?>  getUser(@Valid @RequestBody LevelMenuVo.CRUD levelMenu, Errors errors) {
+		
+		 if (errors.hasErrors()) {
+	            return response.failInvalidFields(Helper.refineErrors(errors));
+	        }
+		return levelMenuService.getList(levelMenu);
+	}
+	
+	@PostMapping("/manage")
+	public ResponseEntity<?>  setMenu(@Valid @RequestBody LevelMenuVo.CRUD user, Errors errors) {
+		
+		 if (errors.hasErrors()) {
+	            return response.failInvalidFields(Helper.refineErrors(errors));
+	        }
+		return levelMenuService.setLevel(user);
+		
+	}
 }

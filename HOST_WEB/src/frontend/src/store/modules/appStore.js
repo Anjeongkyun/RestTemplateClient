@@ -17,16 +17,11 @@ const state = {
       to: '/',
       show: true
     },
+
     { // 로그인
       title: '로그인',
       icon: 'mdi-login',
       to: '/components/login/',
-      show:false
-    },
-    { // 로그인
-      title: '로그인',
-      icon: 'mdi-login',
-      to: '/login/',
       show: false
     },
     { // 비밀번호 변경
@@ -51,7 +46,7 @@ const state = {
     { // 공지사항 상세조회
       title: '공지사항 상세조회',
       icon: 'mdi-bell',
-      to: '/components/notice-detail',
+      to: '/components/notice-detail/',
     },
     { // 사용자
       title: '사용자',

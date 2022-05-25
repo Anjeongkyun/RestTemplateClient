@@ -22,32 +22,34 @@ const router = new Router({
   routes: [
     layout('Default', [
       route('MainView', null, ''),
-      route('LoginView', null, 'components/login'),
-      route('ChangePasswordView', null, 'components/change-password'),
-      route('SiteStatusView', null, 'components/site-status'),
-      route('NoticeView', null, 'components/notice'),
-      route('NoticeDetailView', null, 'components/notice-detail'),
-      route('UserView', null, 'components/user'),
-      route('ParkView', null, 'components/park'),
-      route('MenuView', null, 'components/menu'),
-      route('LevelMenuView', null, 'components/level-menu'),
+    //  route('LoginView', null, 'components/login'),
+      route('ChangePasswordView', null, '/components/change-password/'),
+      route('SiteStatusView', null, '/components/site-status/'),
+      route('NoticeView', null, '/components/notice/'),
+      route('NoticeDetailView', null, '/components/notice-detail/'),
+      route('UserView', null, '/components/user/'),
+      route('ParkView', null, '/components/park/'),
+      route('MenuView', null, '/components/menu/'),
+      route('LevelMenuView', null, '/components/level-menu/'),
 
       // Pages
-      route('Dashboard', null, 'components/dashboard'),
-      route('UserProfile', null, 'components/profile'),
+      route('Dashboard', null, '/components/dashboard/'),
+      route('UserProfile', null, '/components/profile/'),
 
       // Components
-      route('Notifications', null, 'components/notifications'),
-      route('Icons', null, 'components/icons'),
-      route('Typography', null, 'components/typography'),
+      route('Notifications', null, '/components/notifications/'),
+      route('Icons', null, '/components/icons/'),
+      route('Typography', null, '/components/typography/'),
 
       // Tables
-      route('Regular Tables', null, 'tables/regular'),
+      route('Regular Tables', null, '/tables/regular/'),
 
       // Maps
-      route('Google Maps', null, 'maps/google'),
+      route('Google Maps', null, '/maps/google/'),
     ]),
-    route('LoginView', null, '/login'),
+
+        route('LoginView', null, '/components/login/'), //
+
   /*   {
       path: '/*',
       redirect: '/'
@@ -64,12 +66,7 @@ router.beforeEach((to, from, next) => {
 
   var localStorageLoginUserID = localStorage.getItem("loginUserID");
   var localStorageLoginUserYN = localStorage.getItem("loginUserYN");
-  console.log("ศ์ loginUser:" + localStorageLoginUserYN)
-
-
-
-  console.log(to.path)
-
+  console.log("loginUser:" + localStorageLoginUserYN)
 
   var items = store.state.appStore.items;
   for (var i in items) {
@@ -79,10 +76,10 @@ router.beforeEach((to, from, next) => {
   }
 
   if (!localStorageLoginUserYN ) {
-    console.log("ทฮฑืภฮ พศตส" + localStorageLoginUserYN)
+    console.log("๋ก๊ทธ์ธ ํ•์”" + localStorageLoginUserYN)
 
   } else {
-    console.log("ทฮฑืภฮตส" + localStorageLoginUserYN)
+    console.log("๋ก๊ทธ์ธ ์ค‘" + localStorageLoginUserYN)
   }
 
 
