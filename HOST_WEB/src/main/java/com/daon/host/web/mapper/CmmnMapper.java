@@ -17,23 +17,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.daon.host.web.vo.CmmnVo;
+import com.daon.host.web.vo.CmmnVo.CmmnBase;
 import com.daon.host.web.vo.LoginVo;
-import com.daon.host.web.vo.ParkVo;
-<<<<<<< .mine
-
-=======
-import com.daon.host.web.vo.ParkVo.Table;
->>>>>>> .theirs
 
 @Component
 @Mapper
-public interface ParkMapper {
-<<<<<<< .mine
+public interface CmmnMapper {
+	List<CmmnVo.CmmnCode> getCmmnCode(@Param("req") CmmnVo.CmmnCode cmmnCode); //파라미터로 받은 id를 연결해서 sql 매핑 문장에 #{id}로 전달
 
-=======
-
->>>>>>> .theirs
-	List<ParkVo> getList();
+	List<CmmnVo.CmmnBase> getCmmnBase(@Param("req") CmmnVo.CmmnBase cmmnBase);
+	
 	
 	
 	

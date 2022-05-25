@@ -143,6 +143,18 @@ public class Response {
         
     }
     
+    //validation
+    public ResponseEntity<?> failError(String msg) {
+      
+        
+    	BodyResultError body = BodyResultError.builder()
+                .resultCd("40")
+                .resultMsg("regType이 유효하지 않습니다.")
+                .error(msg)
+                .build();
+        return ResponseEntity.ok(body);
+        
+    }
     public ResponseEntity<?> success(Object data, String msg, HttpStatus status) {
         Body body = Body.builder()
                 .state(status.value())

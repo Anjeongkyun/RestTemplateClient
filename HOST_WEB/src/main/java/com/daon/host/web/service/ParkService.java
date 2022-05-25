@@ -2,6 +2,17 @@ package com.daon.host.web.service;
 
 import java.util.List;
 
+<<<<<<< .mine
+
+
+
+
+=======
+import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
+import javax.validation.Validator;
+
+>>>>>>> .theirs
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +21,16 @@ import org.springframework.util.ObjectUtils;
 
 import com.daon.host.web.dto.Response;
 import com.daon.host.web.mapper.ParkMapper;
+import com.daon.host.web.vo.ParkVo;
+<<<<<<< .mine
+
+
+
+=======
+import com.daon.host.web.mapper.ParkMapper;
+import com.daon.host.web.vo.LoginVo;
+import com.daon.host.web.vo.Notice;
+>>>>>>> .theirs
 import com.daon.host.web.vo.ParkVo;
 
 import lombok.RequiredArgsConstructor;
@@ -35,5 +56,6 @@ public class ParkService {
     	
 		return response.success(parkList, "조회 성공했습니다.", HttpStatus.OK);
 	}
+	
 
 }

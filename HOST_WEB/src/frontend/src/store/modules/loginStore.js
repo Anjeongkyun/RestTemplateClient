@@ -2,7 +2,9 @@
 import { make } from 'vuex-pathify'
 
 import axios from 'axios'
-import cmmnStore from './cmmnStore' //store 와 관련된 데이터를 처리하는 공통 함수 파일
+import cmmnFnStore from './cmmnFnStore' //store 와 관련된 데이터를 처리하는 공통 함수 파일
+import router from "@/router";
+
 // Data
 const state = {
 }
@@ -10,7 +12,7 @@ const state = {
 const mutations = make.mutations(state)  //sync 사용가능
 
 const actions = {
-  login({
+  async login({
     state, // eslint-disable-line no-unused-vars
     commit, // eslint-disable-line no-unused-vars
   }, dataObj) { // eslint-disable-line no-unused-vars
@@ -22,18 +24,33 @@ const actions = {
     //    commit('loginError')
 
     const url = '/internal/davis/web/login/login'
-    console.log("dataObj")
-    console.log(dataObj)
-    axios.post(url, {
+    var _this = this
+    await axios.post(url, {
       id: dataObj.loginId,
       password: dataObj.loginPw,
     })
       .then(res => {
-        cmmnStore.res(res);
+        cmmnFnStore.res(res);
+
+        //  sessionStorage.setItem("loginUser", dataObj.loginId);
+        localStorage.setItem("loginUserID", dataObj.loginId);
+        localStorage.setItem("loginUserYN", true);
+        //console.log(this)
+        //  console.log(router)
+        //  router.push("/components/notice");
+        //this.$router.push("/login");
       })
+      .then(()=> {
+        return router.push('/')
+      })
+
       .catch(err => {
-        cmmnStore.err(err);
+        cmmnFnStore.err(err);
       })
+
+  /*   router.push({
+      name: "NoticeView"
+    }) */
   },
 
 }

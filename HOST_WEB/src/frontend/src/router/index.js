@@ -31,6 +31,7 @@ const router = new Router({
       route('ParkView', null, 'components/park'),
       route('MenuView', null, 'components/menu'),
       route('LevelMenuView', null, 'components/level-menu'),
+
       // Pages
       route('Dashboard', null, 'components/dashboard'),
       route('UserProfile', null, 'components/profile'),
@@ -46,10 +47,29 @@ const router = new Router({
       // Maps
       route('Google Maps', null, 'maps/google'),
     ]),
+    route('LoginView', null, '/login'),
+  /*   {
+      path: '/*',
+      redirect: '/'
+    }, */
   ],
 })
 
 router.beforeEach((to, from, next) => {
+
+  if (to.path == '/login/') {
+    localStorage.removeItem("loginUserID");
+    localStorage.removeItem("loginUserYN");
+  }
+
+  var localStorageLoginUserID = localStorage.getItem("loginUserID");
+  var localStorageLoginUserYN = localStorage.getItem("loginUserYN");
+  console.log("Èì loginUser:" + localStorageLoginUserYN)
+
+
+
+  console.log(to.path)
+
 
   var items = store.state.appStore.items;
   for (var i in items) {
@@ -57,6 +77,17 @@ router.beforeEach((to, from, next) => {
       store.state.appStore.selectDrawerItem = items[i].title
     }
   }
+
+  if (!localStorageLoginUserYN ) {
+    console.log("·Î±×ÀÎ ¾ÈµÊ" + localStorageLoginUserYN)
+
+  } else {
+    console.log("·Î±×ÀÎµÊ" + localStorageLoginUserYN)
+  }
+
+
+
+
 
   return to.path.endsWith('/') ? next() : next(trailingSlash(to.path))
 })

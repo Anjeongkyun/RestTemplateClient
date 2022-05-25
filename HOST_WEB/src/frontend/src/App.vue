@@ -7,9 +7,51 @@
 <script>
 // Styles
 import '@/styles/overrides.sass'
+import { get, set, sync, call } from 'vuex-pathify'
 
 export default {
   name: 'App',
+  components: {
+
+  },
+  data(){
+    return{
+
+    }
+  },
+  computed: {
+    ...get('appStore', [
+      'selectDrawerItem',
+      'drawerImage',
+      'items',
+      'version',
+    ]),
+    ...get('loginStore', [
+      'data',
+    ]),
+    ...get('themeStore', [
+      'dark',
+      'gradient',
+      'image',
+    ]),
+
+    ...sync('appStore', [
+      'drawer',
+      'drawerImage',
+      'mini'
+    ]),
+    loginUserID (){
+      return localStorage.getItem("loginUserID")
+    },
+    loginUserYN (){
+      return localStorage.getItem("loginUserYN")
+    }
+  },
+  mounted(){
+    var localStorageLoginUserYN = localStorage.getItem("loginUserYN");
+    if(!localStorageLoginUserYN ) this.$router.push("/login");
+
+  },
   metaInfo: {
     title: 'App',
     titleTemplate: 'DAVIS',
