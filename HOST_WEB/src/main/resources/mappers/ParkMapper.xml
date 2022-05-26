@@ -4,6 +4,7 @@
 
 <mapper namespace="com.daon.host.web.mapper.ParkMapper">
 
+		
 	<select id ="getList" resultType="parkVo">
 		SELECT 
 			 apt_id

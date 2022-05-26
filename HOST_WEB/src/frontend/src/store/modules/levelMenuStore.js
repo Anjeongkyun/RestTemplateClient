@@ -1,16 +1,68 @@
 // Pathify
-import { make } from 'vuex-pathify'
+import {
+  make
+} from 'vuex-pathify'
 
 import axios from 'axios'
+
+import cmmnFnStore from './cmmnFnStore' //store 와 관련된 데이터를 처리하는 공통 함수 파일
+
 // Data
 const state = {
-
+  levelMenuList: [],
 }
 
-const mutations = make.mutations(state)
+const mutations = {
+  ...make.mutations(state),
+  getLevelMenuList(state, payload) {
+    state.levelMenuList = payload;
+  }
+}
 
 const actions = {
+  list({
+    state, // eslint-disable-line no-unused-vars
+    commit, // eslint-disable-line no-unused-vars
+  }, dataObj) {
 
+    const url = '/internal/davis/web/level/menu/list'
+    axios.post(url, {
+
+      })
+      .then(res => {
+
+        cmmnFnStore.res(res);
+        commit('getLevelMenuList', res.data.list)
+
+
+      })
+      .catch(err => {
+        cmmnFnStore.err(err);
+        //commit('axiosError', err)
+      })
+
+  },
+
+  submit({
+    state, // eslint-disable-line no-unused-vars
+    commit, // eslint-disable-line no-unused-vars
+  }, dataObj) {
+
+    const url = '/internal/davis/web/level/menu/manage'
+
+    console.log(url)
+    console.log(dataObj)
+    axios.post(url, dataObj)
+      .then(res => {
+        cmmnFnStore.res(res);
+        //store.dispatch('userStore/searchBtnClick')
+        console.log("=====submit ok")
+      })
+      .catch(err => {
+        cmmnFnStore.err(err);
+      })
+
+  },
 }
 
 const getters = {}

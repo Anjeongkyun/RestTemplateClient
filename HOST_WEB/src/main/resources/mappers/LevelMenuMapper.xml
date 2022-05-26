@@ -4,5 +4,8 @@
 
 <mapper namespace="com.daon.host.web.mapper.LevelMenuMapper">
 
+	<select id="getList" resultType="com.daon.host.web.vo.LevelMenuVo$CRUD">
+		select * from tb_c_menu_level
+	</select>
 
 </mapper>

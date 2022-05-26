@@ -6,7 +6,7 @@ import {get, sync, call, make} from 'vuex-pathify'
     let state = {
         noticeList: [],
         detailContents: []
-    }    
+    }
 
     // computed 계산
     const getters = {}
@@ -28,8 +28,8 @@ import {get, sync, call, make} from 'vuex-pathify'
         async listFetch({commit}) {
             const url = `/notice/list`
             await axios.post(url)
-            .then(res => {             
-                commit('setNoticeList',res.data.data) 
+            .then(res => {
+                commit('setNoticeList',res.data.data)
             })
             .catch(err => {
                 alert('error 발생');
@@ -43,8 +43,8 @@ import {get, sync, call, make} from 'vuex-pathify'
             await axios.post(url, {
                 noticeNo : payload.noticeNo
             })
-            .then(res => {  
-                commit('setDetailContents',res.data.data) 
+            .then(res => {
+                commit('setDetailContents',res.data.data)
             })
             .catch(err => {
                 alert('error 발생');
@@ -52,7 +52,7 @@ import {get, sync, call, make} from 'vuex-pathify'
             })
         },
 
-        //공지사항 등록 
+        //공지사항 등록
         async noticeInsert({commit}, payload) {
 
             if(payload.noticeTitle == '' || payload.noticeTitle == null){
@@ -69,7 +69,7 @@ import {get, sync, call, make} from 'vuex-pathify'
                 remark : payload.remark,
                 insId : payload.insId,
             })
-            .then(res => {               
+            .then(res => {
             })
             .catch(err => {
                 alert('error 발생');
@@ -88,7 +88,7 @@ import {get, sync, call, make} from 'vuex-pathify'
                 remark : payload.remark,
                 updId : payload.updId
             })
-            .then(res => {               
+            .then(res => {
             })
             .catch(err => {
                 alert('error 발생');
@@ -102,7 +102,7 @@ import {get, sync, call, make} from 'vuex-pathify'
             await axios.post(url, {
                 noticeNo : payload.noticeNo
             })
-            .then(res => {               
+            .then(res => {
             })
             .catch(err => {
                 alert('error 발생');

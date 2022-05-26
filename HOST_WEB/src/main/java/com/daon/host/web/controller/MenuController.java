@@ -33,10 +33,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.daon.host.web.dto.Response;
 import com.daon.host.web.mapper.LoginMapper;
 import com.daon.host.web.service.LoginService;
+import com.daon.host.web.service.MenuService;
 import com.daon.host.web.service.NoticeService;
+import com.daon.host.web.service.ParkService;
 import com.daon.host.web.vo.LoginVo;
+import com.daon.host.web.vo.MenuVo;
 import com.daon.host.web.vo.Notice;
+import com.daon.host.web.vo.ParkVo;
 import com.daon.host.web.vo.UserProfile;
+import com.daon.host.web.vo.UserVo;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -57,4 +62,27 @@ public class MenuController {
 	 * https://blog.jiniworld.me/55
 	 */
 
+	private final MenuService menuService;
+	private final Response response;
+	
+	@PostMapping("/list")
+	public ResponseEntity<?>  getList(@Valid @RequestBody MenuVo.CRUD menu, Errors errors) {
+		
+		 if (errors.hasErrors()) {
+	            return response.failInvalidFields(Helper.refineErrors(errors));
+	        }
+		return menuService.getList(menu);
+	}
+	
+
+	@PostMapping("/manage")
+	public ResponseEntity<?>  setMenu(@Valid @RequestBody MenuVo.CRUD user, Errors errors) {
+		
+		 if (errors.hasErrors()) {
+	            return response.failInvalidFields(Helper.refineErrors(errors));
+	        }
+		return menuService.setMenu(user);
+		
+	}
+	 
 }

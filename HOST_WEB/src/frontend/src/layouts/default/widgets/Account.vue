@@ -55,7 +55,7 @@ export default {
       //  { title: 'Settings' },
       { title: ' 비밀번호 변경' ,to:"/components/change-password"},
       { divider: true },
-      { title: '로그아웃' ,to:"/login" },
+      { title: '로그아웃' ,to:"/components/login/" },
     ],
   }),
   methods: {

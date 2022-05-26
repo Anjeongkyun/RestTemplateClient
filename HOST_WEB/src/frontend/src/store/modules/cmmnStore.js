@@ -15,7 +15,16 @@ const state = {
     }, {
       textItem: "미사용",
       valueItem: "N",
-    }]
+    }],
+  displayYnItem: [
+    {
+      textItem: "표시",
+      valueItem: "Y",
+    }, {
+      textItem: "미표시",
+      valueItem: "N",
+    }
+  ]
 
 }
 

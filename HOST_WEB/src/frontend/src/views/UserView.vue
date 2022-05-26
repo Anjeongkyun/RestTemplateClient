@@ -564,7 +564,10 @@ export default {
     },
 
     searchObj: {},
-    dataObj:{},
+    dataObj:{
+
+      id: localStorage.getItem("loginUserID"),
+    },
     tableHeaderArr:[],
 
   }),

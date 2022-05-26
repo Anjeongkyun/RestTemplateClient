@@ -18,5 +18,38 @@ import lombok.Setter;
 @AllArgsConstructor // 모든 필드 값을 파라미터로 받는 생성자
 public class MenuVo {
 	
-
+	@Data
+	public static class Menu{
+		private String menuId;
+		private String menuNm;
+		private String description;
+		private String menuIcon;
+		private String menuRouterTo;
+		private String menuShowYn;
+		private String menuOrder;
+		private String menuRouteName;
+		private String menuRouteComponents;
+		private String menuType;
+	}
+	
+	
+	@Data
+	public static class CRUD{
+		private String id;
+		private String regType;
+		private String menuId;
+		private String menuNm;
+		private String description;
+		private String menuIcon;
+		private String menuRouterTo;
+		private String menuShowYn;
+		private String menuOrder;
+		private String menuRouteName;
+		private String menuType;
+		private String insId;
+		private String insDate;
+		private String updId;
+		private String updDate;
+	}
+	
 }

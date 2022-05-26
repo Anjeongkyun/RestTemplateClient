@@ -50,9 +50,9 @@
 						#{req.memberRole           },
 						#{req.memberPhone          },
 						#{req.useYn                },
-						#{req.loginId              },
+						#{req.id              },
 						current_timestamp(),
-						#{req.loginId              },
+						#{req.id              },
 						current_timestamp(),
 						#{req.levelCd              },
 						"Y"
@@ -69,7 +69,7 @@
 		member_phone = #{req.memberPhone},
 		use_yn = #{req.useYn},
 		level_cd = #{req.levelCd},
-		upd_id= #{req.loginId},
+		upd_id= #{req.id},
 		upd_date = current_timestamp()
 		<where>
 			<if test=" req.loginId != null and req.loginId != '' ">
