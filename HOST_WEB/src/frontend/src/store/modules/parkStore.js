@@ -20,10 +20,9 @@ const mutations = {
 const actions = {
   async parkListFetch({commit}, payload) {
 
-   const url = `http://localhost:8080/park/list`
+   const url = `/park/list`
     await axios.post(url)
     .then(res => {             
-        // console.log(payload);
         commit('setParkList',res.data.data) 
     })
     .catch(err => {

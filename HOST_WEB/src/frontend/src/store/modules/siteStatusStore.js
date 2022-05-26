@@ -22,7 +22,7 @@ const actions = {
 
     alert("현장 상태 가져오기");
     return;
-    const url = `http://localhost:8080/site/status`
+    const url = `/site/status`
     await axios.post(url)
     .then(res => {             
         console.log(payload);

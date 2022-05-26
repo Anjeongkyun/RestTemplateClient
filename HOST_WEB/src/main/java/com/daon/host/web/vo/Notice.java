@@ -2,6 +2,7 @@ package com.daon.host.web.vo;
 
 import java.sql.Date;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class Notice {
 
+	@ApiModelProperty(example="공지번호")
 	private String noticeNo; // 공지번호
 	private String aptId; // 단지코드
 	private String noticeWriter; // 공지작성자
