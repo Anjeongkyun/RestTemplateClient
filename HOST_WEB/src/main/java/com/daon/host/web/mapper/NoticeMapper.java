@@ -14,7 +14,7 @@ public interface NoticeMapper {
 	List<Notice> getList();
 	Notice getDetail(@Param("noticeNo") String noticeNo);	
 	void insert(Notice notice);
-	void delete(Notice notice);
+	void delete(@Param("noticeNo") String noticeNo);
 	void update(Notice notice);
 	
 }

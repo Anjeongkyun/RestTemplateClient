@@ -101,19 +101,6 @@ public class Response {
         return ResponseEntity.ok(body);
     }
     
-  
-  //성공-공지사항상세 조회
-    public ResponseEntity<?> successNoticeDetail(Object data, String msg, HttpStatus status) {
-    	BodyNoticeDetail body= BodyNoticeDetail.builder()
-                .resultCd("00")
-                .resultMsg(msg)
-                .title("")
-                .contents("")
-                .regMan("")
-                .regDtm("")
-                .build();
-        return ResponseEntity.ok(body);
-    }
     
   //실패-코드,결과만 반환
     public ResponseEntity<?> failResult(String msg, HttpStatus status) {
