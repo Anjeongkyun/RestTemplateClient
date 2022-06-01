@@ -6,9 +6,7 @@
   >
     <div v-if="loading">
       <v-row>
-        <v-col
-          :cols="viewListCols"
-        >
+        <v-col :cols="viewListCols">
           <material-card
             icon="mdi-account"
             icon-small
@@ -37,39 +35,43 @@
                   cols="12"
                   sm="12"
                   lg="12"
-                >
-                  <div>
-                    <p>{{ menuSelected1 }}</p>
-                    <v-checkbox
-                      v-model="menuSelected1"
-                      label="John"
-                      value="John"
-                    />
-                    <v-checkbox
-                      v-model="menuSelected1"
-                      label="Jacob"
-                      value="Jacob"
-                    />
-                  </div>
-                </v-col>
+                />
               </v-row>
             </v-alert>
 
-            <v-row
-              dense
-            >
+            <v-row dense>
               <v-card-text>
                 <v-data-table
                   :headers="tableHeaderArr"
                   :items="levelMenuList"
+                  class="elevation-1"
                   @click:row="rowClick"
-                />
+                >
+                <!--   <template v-slot:item="{ item }">
+                    <tr>
+                      <v-chip
+
+                        dark
+                      >
+                        {{ item.levelNm }}
+                      </v-chip>
+                    </tr>
+                  </template> -->
+
+                  <!-- <template v-slot:item.level="{ item }">
+                    <v-chip
+                      :value="getColor(item.level)"
+                      dark
+                    >
+                      {{ item.level }}
+                    </v-chip>
+                  </template> -->
+                </v-data-table>
               </v-card-text>
             </v-row>
           </material-card>
         </v-col>
         <v-col
-
           v-show="viewInfoDisabled"
           cols="3"
         >
@@ -93,22 +95,23 @@
                         :disabled="columnObj.level.disabled"
                         required
                       />
+
                       <div>
-                        <p>{{ menuSelected }}</p>
                         <v-checkbox
-                          v-model="menuSelected"
-                          label="전체"
-                          value="all"
+                          v-model="menuSelectedAll"
+                          label="전체 선택"
+                          @click="checkboxAllClick"
                         />
+                      </div>
+
+                      <div
+                        v-for="(item, i) in menuList"
+                        :key="`menuList-${i}`"
+                      >
                         <v-checkbox
                           v-model="menuSelected"
-                          label="John"
-                          value="John"
-                        />
-                        <v-checkbox
-                          v-model="menuSelected"
-                          label="Jacob"
-                          value="Jacob"
+                          :label="item.menuNm"
+                          :value="item.menuId"
                         />
                       </div>
 
@@ -139,6 +142,7 @@
                         :placeholder="columnObj.updDate.placeholder"
                         :disabled="columnObj.updDate.disabled"
                       />
+
                       <v-divider class="mt-12" />
                       <v-row justify="space-between">
                         <v-col cols="4">
@@ -149,7 +153,6 @@
                             취소
                           </v-btn>
                         </v-col>
-
 
                         <v-col cols="4">
                           <v-btn
@@ -167,9 +170,9 @@
               </v-row>
             </v-form>
           </template>
-        <!--   <userForm
-            ref="userForm"
-          /> -->
+          <!--   <userForm
+  ref="userForm"
+/> -->
         </v-col>
       </v-row>
     </div>
@@ -177,299 +180,330 @@
 </template>
 
 <script>
-
-import { get, set, sync, call } from 'vuex-pathify'
+import { get, set, sync, call } from "vuex-pathify";
 
 export default {
-  name: 'LevelMenuView',
+  name: "LevelMenuView",
   data: () => ({
     loginId: null,
     loginPw: null,
 
     loading: false,
     valid: true,
-    regTypeBool:false,
-    regType:null,
-    errorMessages: 'errorMessages 테스트',
+    regTypeBool: false,
+    regType: null,
+    errorMessages: "errorMessages 테스트",
     formHasErrors: false,
 
     viewListCols: 12,
-    viewInfoCols:3,
-    viewInfoDisabled:false,
+    viewInfoCols: 3,
+    viewInfoDisabled: false,
 
- menuSelected1: ['John'],
- menuSelected: ['John'],
+    menuSelectedAll: false,
+    menuSelected: [],
+
     columnObj: {
-
-        level: {
-        text:"권한",
-        value:"level",
-        data:null,
-        update:false,
-        insert:false,
-        tableShow:true,
+      level: {
+        text: "권한",
+        value: "level",
+        data: null,
+        update: false,
+        insert: false,
+        tableShow: true,
         sortable: false,
-        search:false,
-        counter:30,
-        placeholder:" ",
-        disabled:false,
+        search: false,
+        counter: 30,
+        placeholder: " ",
+        disabled: false,
         rules: [
-          v => !!v || '필수 입력',
-          v => (v && v.length <= 30) || '입력 글자 수 초과.',
+          (v) => !!v || "필수 입력",
+          (v) => (v && v.length <= 30) || "입력 글자 수 초과.",
+        ],
+      },
+      levelNm: {
+        text: "권한명",
+        value: "level",
+        data: null,
+        update: false,
+        insert: false,
+        tableShow: true,
+        sortable: false,
+        search: false,
+        counter: 30,
+        placeholder: " ",
+        disabled: false,
+        rules: [
+          (v) => !!v || "필수 입력",
+          (v) => (v && v.length <= 30) || "입력 글자 수 초과.",
+        ],
+      },
+      menuList: {
+        text: "메뉴",
+        value: "menuList",
+        data: null,
+        update: true,
+        insert: true,
+        tableShow: true,
+        sortable: false,
+        search: false,
+        counter: 30,
+        placeholder: " ",
+        disabled: true,
+        rules: [
+          (v) => !!v || "필수 입력",
+          (v) => (v && v.length <= 30) || "입력 글자 수 초과.",
         ],
       },
 
-	    menuList: {
-        text:"메뉴",
-        value:"menuList",
-        data:null,
-        update:true,
-        insert:true,
-        tableShow:true,
+      insId: {
+        text: "등록자",
+        value: "insId",
+        data: null,
+        update: false,
+        insert: false,
+        tableShow: false,
         sortable: false,
-        search:false,
-        counter:30,
-        placeholder:" ",
-        disabled:true,
-        rules: [
-          v => !!v || '필수 입력',
-          v => (v && v.length <= 30) || '입력 글자 수 초과.',
-        ],
-      },
-
-	    insId: {
-        text:"등록자",
-        value:"insId",
-        data:null,
-        update:false,
-        insert:false,
-        tableShow:false,
-        sortable: false,
-        search:false,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: false,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
           //v => !!v || '필수 입력',
-        //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
+          //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
         ],
       },
-	    insDate: {
-        text:"등록일",
-        value:"insDate",
-        data:null,
-        update:false,
-        insert:false,
-        show:false,
+      insDate: {
+        text: "등록일",
+        value: "insDate",
+        data: null,
+        update: false,
+        insert: false,
+        show: false,
         sortable: false,
-        search:false,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: false,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
           //v => !!v || '필수 입력',
-        //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
+          //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
         ],
       },
-	    updId: {
-        text:"수정자",
-        value:"updId",
-        data:null,
-        update:false,
-        insert:false,
-        tableShow:true,
+      updId: {
+        text: "수정자",
+        value: "updId",
+        data: null,
+        update: false,
+        insert: false,
+        tableShow: true,
         sortable: false,
-        search:false,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: false,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
           //v => !!v || '필수 입력',
-        //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
+          //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
         ],
       },
-	    updDate: {
-        text:"수정일",
-        value:"updDate",
-        data:null,
-        update:false,
-        insert:false,
-        tableShow:true,
+      updDate: {
+        text: "수정일",
+        value: "updDate",
+        data: null,
+        update: false,
+        insert: false,
+        tableShow: true,
         sortable: false,
-        search:false,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: false,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
           //v => !!v || '필수 입력',
-        //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
+          //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
         ],
       },
     },
 
     searchObj: {},
-    dataObj:{
+    dataObj: {
       id: localStorage.getItem("loginUserID"),
     },
-    tableHeaderArr:[],
+    tableHeaderArr: [],
   }),
   computed: {
-    ...get('appStore', [
-      'selectDrawerItem'
-    ]),
-    ...get('menuStore', [
-      'menuList'
-    ]),
-    ...get('levelMenuStore', [
-      'levelMenuList'
-    ]),
-    ...sync('userStore',[
-      'parkSeq','id','parkItemSelected',
-    ]),
-    ...get('cmmnStore', [
-      'cmmnCodeItem', 'useYnItem' , 'displayYnItem'
-  ]),
+    ...get("appStore", ["selectDrawerItem"]),
+    ...get("menuStore", ["menuList"]),
+    ...get("levelMenuStore", ["levelMenuList"]),
+    ...sync("userStore", ["parkSeq", "id", "parkItemSelected"]),
+    ...get("cmmnStore", ["cmmnCodeItem", "useYnItem", "displayYnItem"]),
   },
 
-
-  mounted(){
-  //  this.$store.dispatch('userStore/park');
-  //  this.$store.dispatch('cmmnStore/code');
-    this.$store.dispatch('menuStore/list');
-    this.$store.dispatch('levelMenuStore/list');
+  mounted() {
+    //  this.$store.dispatch('userStore/park');
+    //  this.$store.dispatch('cmmnStore/code');
+    this.$nextTick(function () {
+      // 모든 화면이 렌더링된 후 실행합니다.
+    })
+    this.$store.dispatch('cmmnStore/code');
+    this.$store.dispatch("menuStore/list");
+    this.$store.dispatch("levelMenuStore/list");
     this.makeTableHeaderArr();
     this.makeSearchObj();
-    this.loading = true;  // 돔 그린 후 바인딩 하기 위해 처리
+    this.loading = true; // 돔 그린 후 바인딩 하기 위해 처리
   },
 
   methods: {
-
-    manageShow() { //화면 오른쪽에 폼을 표시
+    manageShow() {
+      //화면 오른쪽에 폼을 표시
       this.reset();
-      this.viewListCols =  9;
-      this.viewInfoDisabled =  true;
+      this.viewListCols = 9;
+      this.viewInfoDisabled = true;
     },
-      manageHide() { //화면 오른쪽의 폼을 숨김
+    manageHide() {
+      //화면 오른쪽의 폼을 숨김
       this.reset();
       this.viewListCols = 12;
-      this.viewInfoDisabled= false;
+      this.viewInfoDisabled = false;
     },
 
-
-  makeTableHeaderArr(){  // 테이블의 헤더를 만듦
-
+    makeTableHeaderArr() {
+      // 테이블의 헤더를 만듦
+    /*   this.tableHeaderArr.push({
+        sortable: false,
+        text: "권한",
+        value: "level", // i ==columnObj[i].value
+      }); */
       var columnObj = this.columnObj;
-      for(var i in  columnObj){
-        if(columnObj[i].tableShow){
-
+      for (var i in columnObj) {
+        if (columnObj[i].tableShow) {
           this.tableHeaderArr.push({
             sortable: columnObj[i].sortable,
             text: columnObj[i].text,
-            value: i,   // i ==columnObj[i].value
-          })
+            value: i, // i ==columnObj[i].value
+          });
+
         }
       }
-
     },
 
-    makeSearchObj(){  //검색  객체를 만듦
+    makeSearchObj() {
+      //검색  객체를 만듦
       var columnObj = this.columnObj;
-      for(var i in  columnObj){
-        if(columnObj[i].search){
+      for (var i in columnObj) {
+        if (columnObj[i].search) {
           this.searchObj[i] = {
-            text:columnObj[i].text,
-            value:i,
-            data:null,
-          }
-
+            text: columnObj[i].text,
+            value: i,
+            data: null,
+          };
         }
       }
-
     },
 
-    validate () {
+    validate() {
       var chk = true;
-      if(!this.$refs.form.validate()){
+      if (!this.$refs.form.validate()) {
         alert("필수항목과 글자수를 확인해 주세요.");
         chk = false;
       }
       return chk;
     },
-    validate_old () {
-      this.$refs.form.validate()
+    validate_old() {
+      this.$refs.form.validate();
     },
 
-    reset () {
-      this.$refs.form.reset()
+    reset() {
+      this.$refs.form.reset();
     },
 
-    resetValidation () {
-      this.$refs.form.resetValidation()
+    resetValidation() {
+      this.$refs.form.resetValidation();
     },
 
-    resetForm () {
-      this.errorMessages = []
-      this.formHasErrors = false
+    resetForm() {
+      this.errorMessages = [];
+      this.formHasErrors = false;
     },
 
-    submit: call('menuStore/submit'),
+    submit: call("levelMenuStore/submit"),
 
-    async  rowClick  (event, { item } ) {
-      await   this.manageShow();
-      this.regTypeBool = true
-      this.regType= "change";
-      for(var i in  this.columnObj){
-        this.columnObj[i].disabled= (!this.columnObj[i].update)?true :false
-        this.columnObj[i].data =item[i]   // i ==columnObj[i].value
+    async rowClick(event, { item }) {
+      console.log(item)
+      await this.manageShow();
+      this.regTypeBool = true;
+      this.regType = "change";
+      for (var i in this.columnObj) {
+        this.columnObj[i].disabled = !this.columnObj[i].update ? true : false;
+        this.columnObj[i].data = item[i]; // i ==columnObj[i].value
+
+        var arr = item.menuList.split(',')
+        this.menuSelected= arr
+
       }
-    },
-
-  async searchBtnClick(){
-
-      this.$store.dispatch('menuStore/list');
-      await  this.manageHide();
 
     },
-  async addBtnClick( ){  // 신규 버튼 클릭
-      await  this.manageShow();
+
+    async searchBtnClick() {
+      this.$store.dispatch("levelMenuStore/list");
+      await this.manageHide();
+    },
+
+    async addBtnClick() {
+      // 신규 버튼 클릭
+      await this.manageShow();
       this.regTypeBool = false;
-      this.regType= "add";
-      for(var i in  this.columnObj){
-        this.columnObj[i].disabled= (!this.columnObj[i].insert)?true :false
+      this.regType = "add";
+      for (var i in this.columnObj) {
+        this.columnObj[i].disabled = !this.columnObj[i].insert ? true : false;
       }
     },
-    async  saveBtnCLick () {
 
-      if(!this.validate()) return;
-      this.dataObj.regType = this.regType
-      for(var i in  this.columnObj){
-        this.dataObj[i] = this.columnObj[i].data
+    async saveBtnCLick() {
+      if (!this.validate()) return;
+      this.dataObj.regType = this.regType;
+
+      console.log(this.menuSelected)
+      console.log(this.menuSelected.toString())
+      this.columnObj.menuList.data =this.menuSelected.toString()
+      for (var i in this.columnObj) {
+        this.dataObj[i] = this.columnObj[i].data;
       }
 
-        await   this.submit(this.dataObj);
-        await  this.searchBtnClick(this.searchOj);
-
-
-
+      await this.submit(this.dataObj);
+      await this.searchBtnClick(this.searchOj);
     },
-  cancelBtnCLick(){
+
+    checkboxAllClick() {
+      var _this= this;
+      if (this.menuSelectedAll) {
+        //전체선택이면 모든 메뉴 클릭 상태로
+        //this.menuSelected = ['1','2','3']
+        this.menuList.forEach( item =>{
+          _this.menuSelected.push(item.menuId);
+        });
+      } else {
+        this.menuSelected = [];
+        //전체해제면 모든 메뉴 해제 상태로
+      }
+    },
+    cancelBtnCLick() {
       this.userManageHide();
     },
 
-    async  deleteBtnCLick(){
-      this.dataObj.regType = "delete"
-      //  this.submit()
-      for(var i in  this.columnObj){
-        this.dataObj[i] = this.columnObj[i].data
-      }
-      this.submit(this.dataObj);
-      await  this.searchBtnClick(this.searchOj);
+    getColor (calories) {
+      console.log(this.levelMenuList[0].level)
+      //console.log(  this.columnObj.level)
+      //this.columnObj.level.data= 1234
+      this.levelMenuList[0].level = 1234
+      console.log(calories)
+      if (calories > 400) return 'red'
+      else if (calories > 200) return 'orange'
+      else return 'green'
     },
-    searchBtnClick_old:  call('userStore/searchBtnClick'),
 
   },
-}
+};
 </script>
 <style scoped>
-
 </style>

@@ -15,10 +15,11 @@ public class HostLocalApplication extends SpringBootServletInitializer{
 		SpringApplication.run(HostLocalApplication.class, args);
 	}
 	
-	//war 배포할떄 추가
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) 
-	{
-		return builder.sources(HostLocalApplication.class);
-	}
+	/*
+	 * //war 배포할떄 추가
+	 * 
+	 * @Override protected SpringApplicationBuilder
+	 * configure(SpringApplicationBuilder builder) { return
+	 * builder.sources(HostLocalApplication.class); }
+	 */
 }

@@ -594,7 +594,7 @@ export default {
   },
 
   mounted(){
-    this.$store.dispatch('userStore/park');
+    //this.$store.dispatch('userStore/park');
     this.$store.dispatch('cmmnStore/code');
     this.makeTableHeaderArr();
     this.makeSearchObj();

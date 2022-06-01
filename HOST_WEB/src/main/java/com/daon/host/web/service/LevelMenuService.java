@@ -53,19 +53,19 @@ public class LevelMenuService {
 		return response.successList(list, "조회 성공했습니다.", HttpStatus.OK);
 	}
 
-	public ResponseEntity<?> setLevel(@Valid LevelMenuVo.CRUD user) {
-		if (ObjectUtils.isEmpty(user)) {
+	public ResponseEntity<?> setLevel(@Valid LevelMenuVo.CRUD levelMenu) {
+		if (ObjectUtils.isEmpty(levelMenu)) {
 			return response.failResult("조회 파라미터가 없습니다.", HttpStatus.BAD_REQUEST);
 		}
 
 		int result;
 	
-		if (user.getRegType().equals("add") ) {
-			result = levelMenuMapper.insertLevel(user);
-		} else if (user.getRegType().equals("change") ) {
-			result = levelMenuMapper.updateLevel(user);
-		} else if (user.getRegType().equals("delete") ) {
-			result = levelMenuMapper.deleteLevel(user);
+		if (levelMenu.getRegType().equals("add") ) {
+			result = levelMenuMapper.insertLevel(levelMenu);
+		} else if (levelMenu.getRegType().equals("change") ) {
+			result = levelMenuMapper.updateLevel(levelMenu);
+		} else if (levelMenu.getRegType().equals("delete") ) {
+			result = levelMenuMapper.deleteLevel(levelMenu);
 		} else {
 			return response.failResult("CURD가 올바르지 않습니다.", HttpStatus.BAD_REQUEST);
 		}
