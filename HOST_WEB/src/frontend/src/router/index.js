@@ -22,11 +22,11 @@ const router = new Router({
   routes: [
     layout('Default', [
       route('MainView', null, ''),
-    //  route('LoginView', null, 'components/login'),
+      //  route('LoginView', null, 'components/login'),
       route('ChangePasswordView', null, '/components/change-password/'),
       route('SiteStatusView', null, '/components/site-status/'),
       route('NoticeView', null, '/components/notice/'),
-      route('NoticeDetailView', null, '/components/notice-detail/'),
+      route('NoticeDetailView', null, '/components/notice-detail/:id'),
       route('UserView', null, '/components/user/'),
       route('ParkView', null, '/components/park/'),
       route('MenuView', null, '/components/menu/'),
@@ -48,7 +48,7 @@ const router = new Router({
       route('Google Maps', null, '/maps/google/'),
     ]),
 
-        route('LoginView', null, '/components/login/'), //
+    route('LoginView', null, '/components/login/'), //
 
   /*   {
       path: '/*',
