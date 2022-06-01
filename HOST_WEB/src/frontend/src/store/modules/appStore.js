@@ -47,6 +47,7 @@ const state = {
       title: '공지사항 상세조회',
       icon: 'mdi-bell',
       to: '/components/notice-detail/',
+      show: false
     },
     { // 사용자
       title: '사용자',

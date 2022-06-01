@@ -64,12 +64,12 @@ public class NoticeService {
 	}
 	
 	//공지사항 삭제
-	public ResponseEntity<?> delete(Notice notice) {
-    	if(ObjectUtils.isEmpty(notice) ) {
+	public ResponseEntity<?> delete(String noticeNo) {
+    	if(ObjectUtils.isEmpty(noticeNo) ) {
     		return response.fail("조회 파라미터가 없습니다.", HttpStatus.BAD_REQUEST);
     	}
 		
-    	noticeMapper.delete(notice);
+    	noticeMapper.delete(noticeNo);
     	
 		return response.success("공지사항 삭제 OK");
 	}

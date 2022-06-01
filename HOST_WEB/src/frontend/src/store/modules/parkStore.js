@@ -21,6 +21,7 @@ const actions = {
   async parkListFetch({commit}, payload) {
 
    const url = `/park/list`
+   const url = `/park/list`
     await axios.post(url)
     .then(res => {
         // console.log(payload);

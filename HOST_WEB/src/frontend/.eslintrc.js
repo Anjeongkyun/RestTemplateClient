@@ -24,8 +24,7 @@ module.exports = {
     'no-unused-vars': 'warn',
     'vuetify/no-deprecated-classes': 'error',
     'vuetify/no-legacy-grid': 'error',
-    'indent': ["error", 2],
-    //indent: 'off'
+    'indent': ["error", 2]
   },
 
   overrides: [

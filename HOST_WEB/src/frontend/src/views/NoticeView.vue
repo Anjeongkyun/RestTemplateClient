@@ -1,22 +1,14 @@
 <template>
-  <v-container
-    id="regular-tables-view"
-    fluid
-    tag="section"
-  >
+  <v-container id="regular-tables-view" fluid tag="section">
     <v-row justify="center">
-      <v-col
-        cols="12"
-        sm="6"
-        md="4"
-      >
+      <v-col cols="12" sm="6" md="4">
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
           label="Search"
           single-line
           hide-details
-        />
+        ></v-text-field>
       </v-col>
     </v-row>
     <material-card
@@ -31,22 +23,13 @@
         :items-per-page="listCount"
         class="row-pointer"
         :search="search"
-        @click:row="rowClick"
-      />
+        @click:row="fnRowClick"
+      ></v-data-table>
 
       <v-row justify="center">
-        <v-dialog
-          v-model="dialog"
-          persistent
-          max-width="800px"
-        >
+        <v-dialog v-model="dialog" persistent max-width="800px">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              color="primary"
-              dark
-              v-bind="attrs"
-              v-on="on"
-            >
+            <v-btn color="primary" dark v-bind="attrs" v-on="on">
               작성
             </v-btn>
           </template>
@@ -57,14 +40,12 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col
-                    cols="12"
-                  >
+                  <v-col cols="12">
                     <h3>제목</h3>
                     <v-text-field
                       v-model="noticeTitle"
                       label="제목 입력*"
-                    />
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12">
                     <h3>내용</h3>
@@ -77,25 +58,17 @@
                       full-width
                       rows="10"
                       row-height="30"
-                    />
+                    ></v-textarea>
                   </v-col>
                 </v-row>
               </v-container>
             </v-card-text>
             <v-card-actions>
-              <v-spacer />
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="dialog = false"
-              >
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="dialog = false">
                 닫기
               </v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="fnWrite"
-              >
+              <v-btn color="blue darken-1" text @click="fnWrite">
                 저장
               </v-btn>
             </v-card-actions>
@@ -107,64 +80,61 @@
 </template>
 
 <script>
-import { get, set, sync, call } from 'vuex-pathify'
+import { get, set, sync, call } from "vuex-pathify";
 
 export default {
   mounted() {
     this.listFetch();
   },
-  methods:{
-    listFetch : call('noticeStore/listFetch'),
+  methods: {
+    listFetch: call("noticeStore/listFetch"),
 
-    rowClick: function(dataObj) {
-      this.$store.dispatch('noticeStore/noticeDetail',{
-        noticeNo : dataObj.noticeNo
+    fnRowClick: function(dataObj) {
+      this.$store.dispatch("noticeStore/noticeDetail", {
+        noticeNo: dataObj.noticeNo
       });
-      this.$router.push("/components/notice-detail/"+"202201283050")
+      this.$router
+        .push("/components/notice-detail/" + dataObj.noticeNo)
+        .catch(err => {});
     },
-    fnWrite: function(){
-      this.$store.dispatch('noticeStore/noticeInsert',{
-        noticeNo : "202201283050",
-        aptId: "ALD01",
-        noticeTitle : this.noticeTitle,
-        noticeContent : this.noticeContent,
-        noticeWriter : "jkan",
-        remark : "비고1",
-        insId : "ohhj"
-      })
+    fnWrite: function() {
+      this.$store
+        .dispatch("noticeStore/noticeInsert", {
+          aptId: "ALD01",
+          noticeTitle: this.noticeTitle,
+          noticeContent: this.noticeContent,
+          noticeWriter: "jkan",
+          remark: "비고1",
+          insId: "ohhj"
+        })
         .then(res => {
           this.dialog = false;
           this.listFetch();
-        })
+        });
     }
   },
 
-  name: 'RegularTablesView',
-  components: {
-  },
+  name: "RegularTablesView",
   data: () => ({
     listCount: 10,
-    search: '',
+    search: "",
     headers: [
-      {text: '제목', value: 'noticeTitle', width : "80%"},
-      {text: '등록일자', value: 'insDate'}
+      { text: "제목", value: "noticeTitle", width: "80%" },
+      { text: "등록일자", value: "insDate" }
     ],
-    dialog : false,
-    noticeContent : '',
-    noticeTitle : ''
+    dialog: false,
+    noticeContent: "",
+    noticeTitle: ""
   }),
+  components: {},
   computed: {
-    ...get('appStore', [
-      'selectDrawerItem'
-    ]),
-    ...get('noticeStore', [
-      'noticeList'
-    ])
+    ...get("appStore", ["selectDrawerItem"]),
+    ...get("noticeStore", ["noticeList"])
   }
-}
+};
 </script>
 
-<style lang = "scss" scoped>
+<style lang="scss" scoped>
 .row-pointer:hover {
   cursor: pointer;
 }
