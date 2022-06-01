@@ -6,60 +6,40 @@
 
 <script>
 // Styles
-import '@/styles/overrides.sass'
-import { get, set, sync, call } from 'vuex-pathify'
+import "@/styles/overrides.sass";
+import { get, set, sync, call } from "vuex-pathify";
 
 export default {
-  name: 'App',
-  components: {
-
-  },
-  data(){
-    return{
-
-    }
+  name: "App",
+  components: {},
+  data() {
+    return {};
   },
   computed: {
-    ...get('appStore', [
-      'selectDrawerItem',
-      'drawerImage',
-      'items',
-      'version',
-    ]),
-    ...get('loginStore', [
-      'data',
-    ]),
-    ...get('themeStore', [
-      'dark',
-      'gradient',
-      'image',
-    ]),
+    ...get("appStore", ["selectDrawerItem", "drawerImage", "items", "version"]),
+    ...get("loginStore", ["data"]),
+    ...get("themeStore", ["dark", "gradient", "image"]),
 
-    ...sync('appStore', [
-      'drawer',
-      'drawerImage',
-      'mini'
-    ]),
-    loginUserID (){
-      return localStorage.getItem("loginUserID")
+    ...sync("appStore", ["drawer", "drawerImage", "mini"]),
+    loginUserID() {
+      return localStorage.getItem("loginUserID");
     },
-    loginUserYN (){
-      return localStorage.getItem("loginUserYN")
+    loginUserYN() {
+      return localStorage.getItem("loginUserYN");
     }
   },
-  mounted(){
+  mounted() {
     var localStorageLoginUserYN = localStorage.getItem("loginUserYN");
-    if(!localStorageLoginUserYN ) this.$router.push("/components/login/");
-
+    if (!localStorageLoginUserYN) this.$router.push("/components/login/");
   },
   metaInfo: {
-    title: 'App',
-    titleTemplate: 'DAVIS',
-    htmlAttrs: { lang: 'en' },
+    title: "App",
+    titleTemplate: "DAVIS",
+    htmlAttrs: { lang: "en" },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    ],
-  },
-}
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" }
+    ]
+  }
+};
 </script>

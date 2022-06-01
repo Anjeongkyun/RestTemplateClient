@@ -15,31 +15,14 @@
 			ins_date,
 			upd_id,
 			upd_date
-		FROM tb_o_notice
-		ORDER BY ins_date desc
+		FROM 
+			tb_o_notice
+		ORDER BY 
+			ins_date DESC
 	</select>
 
 	<select id="getDetail" resultType="Notice">
-		SELECT notice_no,
-		apt_id,
-		notice_writer,
-		notice_content,
-		notice_title,
-		remk,
-		ins_id,
-		ins_date,
-		upd_id,
-		upd_date
-		FROM tb_o_notice
-		<where>
-			<if test=" noticeNo != null and noticeNo != '' ">
-				AND notice_no = #{noticeNo}
-			</if>
-		</where>
-	</select>
-
-	<insert id="insert" parameterType="Notice">
-		INSERT INTO tb_o_notice(
+		SELECT 
 			notice_no,
 			apt_id,
 			notice_writer,
@@ -47,7 +30,27 @@
 			notice_title,
 			remk,
 			ins_id,
-			ins_date
+			ins_date,
+			upd_id,
+			upd_date
+		FROM 
+			tb_o_notice
+		WHERE
+			notice_no = #{noticeNo}
+	</select>
+
+	<insert id="insert" parameterType="Notice">
+		INSERT INTO 
+			tb_o_notice
+		(
+				notice_no,
+				apt_id,
+				notice_writer,
+				notice_content,
+				notice_title,
+				remk,
+				ins_id,
+				ins_date
 		)
 		VALUES
 		(
@@ -68,20 +71,23 @@
 	</insert>
 	
 	<delete id = "delete" parameterType = "string">
-		DELETE FROM tb_o_notice
-			where notice_no = #{noticeNo}
+		DELETE FROM 
+			tb_o_notice
+		WHERE
+			notice_no = #{noticeNo}
 	</delete>
 	
 	<update id="update">
-		UPDATE tb_o_notice
+		UPDATE 
+			tb_o_notice
 		SET
-			notice_title = #{noticeTitle},
-			notice_content = #{noticeContent}, 
-			remk = #{remark},
-			upd_id = #{updId},
-			upd_date = now()
+			notice_title 	= 	#{noticeTitle},
+			notice_content	= 	#{noticeContent}, 
+			remk 			=	#{remark},
+			upd_id 			=	#{updId},
+			upd_date 		=	now()
 		WHERE
-			notice_no = #{noticeNo}		
+			notice_no = #{noticeNo}
 	</update>
 	
 </mapper>

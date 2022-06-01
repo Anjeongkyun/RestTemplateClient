@@ -68,7 +68,7 @@
               <v-btn color="blue darken-1" text @click="dialog = false">
                 닫기
               </v-btn>
-              <v-btn color="blue darken-1" text @click="fnWrite">
+              <v-btn color="blue darken-1" text @click="fnInsert">
                 저장
               </v-btn>
             </v-card-actions>
@@ -90,14 +90,14 @@ export default {
     listFetch: call("noticeStore/listFetch"),
 
     fnRowClick: function(dataObj) {
-      this.$store.dispatch("noticeStore/noticeDetail", {
-        noticeNo: dataObj.noticeNo
-      });
+      // this.$store.dispatch("noticeStore/noticeDetail", {
+      //   noticeNo: dataObj.noticeNo
+      // });
       this.$router
         .push("/components/notice-detail/" + dataObj.noticeNo)
         .catch(err => {});
     },
-    fnWrite: function() {
+    fnInsert: function() {
       this.$store
         .dispatch("noticeStore/noticeInsert", {
           aptId: "ALD01",

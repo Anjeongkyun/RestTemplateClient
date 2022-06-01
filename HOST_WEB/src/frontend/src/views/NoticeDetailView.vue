@@ -7,31 +7,27 @@
       </v-col>
     </v-row>
 
-    <!-- <h3>작성자</h3>
-      <v-row>
-        <v-col
-          cols="12"
-          md="6"
-        >
-          <v-text-field
-            solo
-            v-model="detailContents.noticeWriter"
-          ></v-text-field>
-        </v-col>
-      </v-row> -->
+    <h3>작성자</h3>
+    <v-row>
+      <v-col cols="12" md="6">
+        <v-text-field
+          solo
+          readonly
+          v-model="detailContents.insId"
+        ></v-text-field>
+      </v-col>
+    </v-row>
 
-    <!-- <h3>수정자</h3>
-      <v-row>
-        <v-col
-          cols="12"
-          md="6"
-        >
-          <v-text-field
-            solo
-            v-model="detailContents.updId"
-          ></v-text-field>
-        </v-col>
-      </v-row> -->
+    <h3>작성일자</h3>
+    <v-row>
+      <v-col cols="12" md="6">
+        <v-text-field
+          solo
+          readonly
+          v-model="detailContents.insDate"
+        ></v-text-field>
+      </v-col>
+    </v-row>
 
     <h3>내용</h3>
     <v-row>
@@ -123,9 +119,7 @@ export default {
   },
 
   name: "RegularTablesView",
-  data: () => ({
-    noticeNo: store.state.noticeStore.detailContents.noticeNo
-  }),
+  data: () => ({}),
   components: {},
   computed: {
     ...get("noticeStore", ["detailContents"])

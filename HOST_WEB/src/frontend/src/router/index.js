@@ -26,9 +26,9 @@ const router = new Router({
       route("NoticeDetailView", null, "/components/notice-detail/:noticeNo"),
       route("UserView", null, "/components/user/"),
       route("ParkView", null, "/components/park/"),
+      route("ParkDetailView", null, "/components/park-detail/:aptId"),
       route("MenuView", null, "/components/menu/"),
       route("LevelMenuView", null, "/components/level-menu/"),
-
       // Pages
       route("Dashboard", null, "/components/dashboard/"),
       route("UserProfile", null, "/components/profile/"),
