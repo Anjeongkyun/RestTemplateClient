@@ -10,7 +10,7 @@ import org.springframework.util.ObjectUtils;
 
 import com.daon.host.web.dto.Response;
 import com.daon.host.web.mapper.ParkMapper;
-import com.daon.host.web.vo.Notice;
+import com.daon.host.web.vo.NoticeVo;
 import com.daon.host.web.vo.ParkVo;
 
 import lombok.RequiredArgsConstructor;

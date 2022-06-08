@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-import com.daon.host.web.vo.Notice;
+import com.daon.host.web.vo.NoticeVo;
 import com.daon.host.web.vo.ParkVo;
 
 @Component

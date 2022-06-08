@@ -2,9 +2,7 @@
   <v-container>
     <div v-if="loading">
       <v-row>
-        <v-col
-          :cols="viewListCols"
-        >
+        <v-col :cols="viewListCols">
           <material-card
             icon="mdi-account"
             icon-small
@@ -18,10 +16,7 @@
               border="left"
               class="pl-6 pr-6 ml-6 mr-6"
             >
-              <v-row
-                dense
-                class="pl-6 pr-6"
-              >
+              <v-row dense class="pl-6 pr-6">
                 <v-col
                   class="d-flex justify-center mb-1"
                   cols="4"
@@ -97,7 +92,7 @@
                     block
                     depressed
                     color="primary "
-                    @click="searchBtnClick(searchObj) "
+                    @click="searchBtnClick(searchObj)"
                   >
                     검색
                   </v-btn>
@@ -114,7 +109,7 @@
                     block
                     depressed
                     color="salary"
-                    @click="addBtnClick({ })"
+                    @click="addBtnClick({})"
                   >
                     신규
                   </v-btn>
@@ -122,11 +117,7 @@
               </v-row>
             </v-alert>
 
-
-
-            <v-row
-              dense
-            >
+            <v-row dense>
               <v-card-text>
                 <v-data-table
                   :headers="tableHeaderArr"
@@ -138,17 +129,9 @@
           </material-card>
         </v-col>
 
-        <v-col
-
-          v-show="viewInfoDisabled"
-          cols="3"
-        >
+        <v-col v-show="viewInfoDisabled" cols="3">
           <template>
-            <v-form
-              ref="form"
-              v-model="valid"
-              lazy-validation
-            >
+            <v-form ref="form" v-model="valid" lazy-validation>
               <v-row>
                 <v-col>
                   <v-card>
@@ -206,7 +189,6 @@
                       <v-select
                         v-model="columnObj.useYn.data"
                         :label="columnObj.useYn.text"
-
                         :rules="columnObj.useYn.rules"
                         :items="useYnItem"
                         item-text="textItem"
@@ -289,11 +271,7 @@
                     <v-divider class="mt-12" />
                     <v-row justify="space-between">
                       <v-col cols="4">
-                        <v-btn
-
-                          text
-                          @click="cancelBtnCLick()"
-                        >
+                        <v-btn text @click="cancelBtnCLick()">
                           취소
                         </v-btn>
                       </v-col>
@@ -309,11 +287,7 @@
                         </v-btn>
                       </v-col>
                       <v-col cols="4">
-                        <v-btn
-                          color="secondary"
-                          text
-                          @click="saveBtnCLick()"
-                        >
+                        <v-btn color="secondary" text @click="saveBtnCLick()">
                           저장
                         </v-btn>
                       </v-col>
@@ -323,7 +297,7 @@
               </v-row>
             </v-form>
           </template>
-        <!--   <userForm
+          <!--   <userForm
             ref="userForm"
           /> -->
         </v-col>
@@ -333,10 +307,10 @@
 </template>
 
 <script>
-import { get, set, sync, call } from 'vuex-pathify'
+import { get, set, sync, call } from "vuex-pathify";
 
 export default {
-  name: 'UserView',
+  name: "UserView",
 
   components: {
     //userForm: () => import('@/components/form/userForm'),
@@ -344,266 +318,258 @@ export default {
 
   data: () => ({
     valid: true,
-    regTypeBool:false,
-    regType:null,
-    items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-    errorMessages: 'errorMessages 테스트',
+    regTypeBool: false,
+    regType: null,
+    items: ["Foo", "Bar", "Fizz", "Buzz"],
+    errorMessages: "errorMessages 테스트",
     formHasErrors: false,
 
     viewListCols: 12,
-    viewInfoCols:3,
-    viewInfoDisabled:false,
+    viewInfoCols: 3,
+    viewInfoDisabled: false,
 
     loading: false,
 
     columnObj: {
-      loginId : {
-        text:"ID",
-        value:"loginId",
-        data:null,
-        update:false,
-        insert:true,
-        tableShow:true,
+      loginId: {
+        text: "ID",
+        value: "loginId",
+        data: null,
+        update: false,
+        insert: true,
+        tableShow: true,
         sortable: false,
-        search:true,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: true,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
-          v => !!v || '필수 입력',
-          v => (v && v.length <= 5) || '입력 글자 수 초과.',
-        ],
+          v => !!v || "필수 입력",
+          v => (v && v.length <= 5) || "입력 글자 수 초과."
+        ]
       },
-	    loginPw: {
-        text:"비밀번호",
-        value:"loginPw",
-        data:null,
-        update:false,
-        insert:false,
-        tableShow:false,
+      loginPw: {
+        text: "비밀번호",
+        value: "loginPw",
+        data: null,
+        update: false,
+        insert: false,
+        tableShow: false,
         sortable: false,
-        search:false,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: false,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
-          v => !!v || '필수 입력',
-          v => (v && v.length <= 5) || '입력 글자 수 초과.',
-        ],
+          v => !!v || "필수 입력",
+          v => (v && v.length <= 5) || "입력 글자 수 초과."
+        ]
       },
-	    memberNm: {
-        text:"이름",
-        value:"memberNm",
-        data:null,
-        update:true,
-        insert:true,
-        tableShow:true,
+      memberNm: {
+        text: "이름",
+        value: "memberNm",
+        data: null,
+        update: true,
+        insert: true,
+        tableShow: true,
         sortable: false,
-        search:true,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: true,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
-          v => !!v || '필수 입력',
-          v => (v && v.length <= 5) || '입력 글자 수 초과.',
-        ],
+          v => !!v || "필수 입력",
+          v => (v && v.length <= 5) || "입력 글자 수 초과."
+        ]
       },
-	    memberRole: {
-        text:"memberRole",
-        value:"memberRole",
-        data:null,
-        update:true,
-        insert:true,
-        tableShow:false,
+      memberRole: {
+        text: "memberRole",
+        value: "memberRole",
+        data: null,
+        update: true,
+        insert: true,
+        tableShow: false,
         sortable: false,
-        search:false,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
-        rules: [
-          //v => !!v || '필수 입력',
-          v => (!v || v.length <= 5) || '입력 글자 수 초과.',
-        ],
-      },
-	    memberPhone: {
-        text:"전화번호",
-        value:"memberPhone",
-        data:null,
-        update:true,
-        insert:true,
-        tableShow:true,
-        sortable: false,
-        search:false,
-        counter:20,
-        placeholder:" ",
-        disabled:true,
+        search: false,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
           //v => !!v || '필수 입력',
-          v => (!v || v.length <= 20) || '입력 글자 수 초과.',
-        ],
+          v => !v || v.length <= 5 || "입력 글자 수 초과."
+        ]
       },
-	    useYn: {
-        text:"사용",
-        value:"useYn",
-        data:null,
-        update:true,
-        insert:true,
-        tableShow:true,
+      memberPhone: {
+        text: "전화번호",
+        value: "memberPhone",
+        data: null,
+        update: true,
+        insert: true,
+        tableShow: true,
         sortable: false,
-        search:false,
-        counter:1,
-        placeholder:" ",
-        disabled:true,
-        rules: [
-          v => !!v || '필수 입력',
-        //  v => (!v || v.length <= 1) || '입력 글자 수 초과.',
-        ],
-      },
-	    levelCd: {
-        text:"권한",
-        value:"levelCd",
-        data:null,
-        update:true,
-        insert:true,
-        tableShow:true,
-        sortable: false,
-        search:false,
-        counter:6,
-        placeholder:" ",
-        disabled:true,
-        rules: [
-          v => !!v || '필수 입력',
-        //  v => (v && v.length <= 6) || '입력 글자 수 초과.',
-        ],
-      },
-	    firstRun: {
-        text:"초기실행여부",
-        value:"firstRun",
-        data:null,
-        update:false,
-        insert:false,
-        show:false,
-        sortable: false,
-        search:false,
-        counter:1,
-        placeholder:" ",
-        disabled:true,
-        rules: [
-          v => !!v || '필수 입력',
-          v => (v && v.length <= 1) || '입력 글자 수 초과.',
-        ],
-      },
-	    insId: {
-        text:"등록자",
-        value:"insId",
-        data:null,
-        update:false,
-        insert:false,
-        tableShow:false,
-        sortable: false,
-        search:false,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: false,
+        counter: 20,
+        placeholder: " ",
+        disabled: true,
         rules: [
           //v => !!v || '필수 입력',
-        //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
-        ],
+          v => !v || v.length <= 20 || "입력 글자 수 초과."
+        ]
       },
-	    insDate: {
-        text:"등록일",
-        value:"insDate",
-        data:null,
-        update:false,
-        insert:false,
-        show:false,
+      useYn: {
+        text: "사용",
+        value: "useYn",
+        data: null,
+        update: true,
+        insert: true,
+        tableShow: true,
         sortable: false,
-        search:false,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: false,
+        counter: 1,
+        placeholder: " ",
+        disabled: true,
+        rules: [
+          v => !!v || "필수 입력"
+          //  v => (!v || v.length <= 1) || '입력 글자 수 초과.',
+        ]
+      },
+      levelCd: {
+        text: "권한",
+        value: "levelCd",
+        data: null,
+        update: true,
+        insert: true,
+        tableShow: true,
+        sortable: false,
+        search: false,
+        counter: 6,
+        placeholder: " ",
+        disabled: true,
+        rules: [
+          v => !!v || "필수 입력"
+          //  v => (v && v.length <= 6) || '입력 글자 수 초과.',
+        ]
+      },
+      firstRun: {
+        text: "초기실행여부",
+        value: "firstRun",
+        data: null,
+        update: false,
+        insert: false,
+        show: false,
+        sortable: false,
+        search: false,
+        counter: 1,
+        placeholder: " ",
+        disabled: true,
+        rules: [
+          v => !!v || "필수 입력",
+          v => (v && v.length <= 1) || "입력 글자 수 초과."
+        ]
+      },
+      insId: {
+        text: "등록자",
+        value: "insId",
+        data: null,
+        update: false,
+        insert: false,
+        tableShow: false,
+        sortable: false,
+        search: false,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
           //v => !!v || '필수 입력',
-        //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
-        ],
+          //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
+        ]
       },
-	    updId: {
-        text:"수정자",
-        value:"updId",
-        data:null,
-        update:false,
-        insert:false,
-        tableShow:true,
+      insDate: {
+        text: "등록일",
+        value: "insDate",
+        data: null,
+        update: false,
+        insert: false,
+        show: false,
         sortable: false,
-        search:false,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: false,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
           //v => !!v || '필수 입력',
-        //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
-        ],
+          //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
+        ]
       },
-	    updDate: {
-        text:"수정일",
-        value:"updDate",
-        data:null,
-        update:false,
-        insert:false,
-        tableShow:true,
+      updId: {
+        text: "수정자",
+        value: "updId",
+        data: null,
+        update: false,
+        insert: false,
+        tableShow: true,
         sortable: false,
-        search:false,
-        counter:5,
-        placeholder:" ",
-        disabled:true,
+        search: false,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
         rules: [
           //v => !!v || '필수 입력',
-        //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
-        ],
+          //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
+        ]
       },
+      updDate: {
+        text: "수정일",
+        value: "updDate",
+        data: null,
+        update: false,
+        insert: false,
+        tableShow: true,
+        sortable: false,
+        search: false,
+        counter: 5,
+        placeholder: " ",
+        disabled: true,
+        rules: [
+          //v => !!v || '필수 입력',
+          //  v => (!v || v.length <= 5) || '입력 글자 수 초과.',
+        ]
+      }
     },
 
     searchObj: {},
-    dataObj:{
-
-      id: localStorage.getItem("loginUserID"),
+    dataObj: {
+      id: localStorage.getItem("loginUserID")
     },
-    tableHeaderArr:[],
-
+    tableHeaderArr: []
   }),
 
   computed: {
-    ...get('appStore', [
-      'selectDrawerItem'
-    ]),
-    ...get('userStore', [
-      'parkItem','tableData'
-    ]),
-    ...sync('userStore',[
-      'parkSeq','id','parkItemSelected',
-    ]),
-    ...get('cmmnStore', [
-      'cmmnCodeItem', 'useYnItem'
+    ...get("appStore", ["selectDrawerItem"]),
+    ...get("userStore", ["parkItem", "tableData"]),
+    ...sync("userStore", ["parkSeq", "id", "parkItemSelected"]),
+    ...get("cmmnStore", [
+      "cmmnCodeItem",
+      "useYnItem"
 
       // cdNm: "사용자"
       // cmCd: "PC0403"
       // grCd: "PC"
       // subCd: "03"
       // subKindCd: "04"
-    ]),
+    ])
   },
 
-  mounted(){
+  mounted() {
     //this.$store.dispatch('userStore/park');
-    this.$store.dispatch('cmmnStore/code');
+    this.$store.dispatch("cmmnStore/code");
     this.makeTableHeaderArr();
     this.makeSearchObj();
-    this.loading = true;  // 돔 그린 후 바인딩 하기 위해 처리
+    this.loading = true; // 돔 그린 후 바인딩 하기 위해 처리
   },
 
   methods: {
-
-    test_col(){
+    test_col() {
       /*
 login_id
 login_pw
@@ -633,150 +599,142 @@ updDate
 */
     },
     //함수=======================================
-    userManageShow() { //화면 오른쪽에 폼을 표시
+    userManageShow() {
+      //화면 오른쪽에 폼을 표시
       this.reset();
-      this.viewListCols =  9;
-      this.viewInfoDisabled =  true;
+      this.viewListCols = 9;
+      this.viewInfoDisabled = true;
     },
 
-    userManageHide() { //화면 오른쪽의 폼을 숨김
+    userManageHide() {
+      //화면 오른쪽의 폼을 숨김
       this.reset();
       this.viewListCols = 12;
-      this.viewInfoDisabled= false;
+      this.viewInfoDisabled = false;
     },
 
-    makeTableHeaderArr(){  // 테이블의 헤더를 만듦
+    makeTableHeaderArr() {
+      // 테이블의 헤더를 만듦
 
       var columnObj = this.columnObj;
-      for(var i in  columnObj){
-        if(columnObj[i].tableShow){
-
+      for (var i in columnObj) {
+        if (columnObj[i].tableShow) {
           this.tableHeaderArr.push({
             sortable: columnObj[i].sortable,
             text: columnObj[i].text,
-            value: i,   // i ==columnObj[i].value
-          })
+            value: i // i ==columnObj[i].value
+          });
         }
       }
-
     },
 
-    makeSearchObj(){  //검색  객체를 만듦
+    makeSearchObj() {
+      //검색  객체를 만듦
       var columnObj = this.columnObj;
-      for(var i in  columnObj){
-        if(columnObj[i].search){
+      for (var i in columnObj) {
+        if (columnObj[i].search) {
           this.searchObj[i] = {
-            text:columnObj[i].text,
-            value:i,
-            data:null,
-          }
-
+            text: columnObj[i].text,
+            value: i,
+            data: null
+          };
         }
       }
-
     },
-    validate () {
+    validate() {
       var chk = true;
-      if(!this.$refs.form.validate()){
+      if (!this.$refs.form.validate()) {
         alert("필수항목과 글자수를 확인해 주세요.");
         chk = false;
       }
       return chk;
     },
 
-    validate_old () {
-      this.$refs.form.validate()
+    validate_old() {
+      this.$refs.form.validate();
     },
 
-    reset () {
-      this.$refs.form.reset()
+    reset() {
+      this.$refs.form.reset();
     },
 
-    resetValidation () {
-      this.$refs.form.resetValidation()
+    resetValidation() {
+      this.$refs.form.resetValidation();
     },
 
-    resetForm () {
-      this.errorMessages = []
-      this.formHasErrors = false
+    resetForm() {
+      this.errorMessages = [];
+      this.formHasErrors = false;
     },
 
-    submit: call('userStore/submit'),
-    idCheck: call('userStore/idCheck'),
+    submit: call("userStore/submit"),
+    idCheck: call("userStore/idCheck"),
 
     //이벤트=====================================
-    async  rowClick  (event, { item } ) {
-      await   this.userManageShow();
-      this.regTypeBool = true
-      this.regType= "change";
-      for(var i in  this.columnObj){
-        this.columnObj[i].disabled= (!this.columnObj[i].update)?true :false
-        this.columnObj[i].data =item[i]   // i ==columnObj[i].value
+    async rowClick(event, { item }) {
+      await this.userManageShow();
+      this.regTypeBool = true;
+      this.regType = "change";
+      for (var i in this.columnObj) {
+        this.columnObj[i].disabled = !this.columnObj[i].update ? true : false;
+        this.columnObj[i].data = item[i]; // i ==columnObj[i].value
       }
     },
 
-    async searchBtnClick(){
-
-      this.$store.dispatch('userStore/searchBtnClick',this.searchObj);
-      await  this.userManageHide();
-
+    async searchBtnClick() {
+      this.$store.dispatch("userStore/searchBtnClick", this.searchObj);
+      await this.userManageHide();
     },
 
-    async addBtnClick( ){  // 신규 버튼 클릭
-      await  this.userManageShow();
+    async addBtnClick() {
+      // 신규 버튼 클릭
+      await this.userManageShow();
       this.regTypeBool = false;
-      this.regType= "add";
-      for(var i in  this.columnObj){
-        this.columnObj[i].disabled= (!this.columnObj[i].insert)?true :false
+      this.regType = "add";
+      for (var i in this.columnObj) {
+        this.columnObj[i].disabled = !this.columnObj[i].insert ? true : false;
       }
     },
 
-    async  saveBtnCLick () {
-
-      if(!this.validate()) return;
-      this.dataObj.regType = this.regType
-      for(var i in  this.columnObj){
-        this.dataObj[i] = this.columnObj[i].data
+    async saveBtnCLick() {
+      if (!this.validate()) return;
+      this.dataObj.regType = this.regType;
+      for (var i in this.columnObj) {
+        this.dataObj[i] = this.columnObj[i].data;
       }
       var chk = true;
-      if(this.regType == "add"){  // 신규일때만 ID 중복 검사
+      if (this.regType == "add") {
+        // 신규일때만 ID 중복 검사
 
-        chk =  await this.idCheck(this.dataObj);
+        chk = await this.idCheck(this.dataObj);
       }
 
-      if( await chk) {
-        await   this.submit(this.dataObj);
-        await  this.searchBtnClick(this.searchOj);
-
+      if (await chk) {
+        await this.submit(this.dataObj);
+        await this.searchBtnClick(this.searchOj);
       }
-
     },
 
-    cancelBtnCLick(){
+    cancelBtnCLick() {
       this.userManageHide();
     },
 
-    async  deleteBtnCLick(){
-      this.dataObj.regType = "delete"
+    async deleteBtnCLick() {
+      this.dataObj.regType = "delete";
       //  this.submit()
-      for(var i in  this.columnObj){
-        this.dataObj[i] = this.columnObj[i].data
+      for (var i in this.columnObj) {
+        this.dataObj[i] = this.columnObj[i].data;
       }
       this.submit(this.dataObj);
-      await  this.searchBtnClick(this.searchOj);
+      await this.searchBtnClick(this.searchOj);
     },
-    searchBtnClick_old:  call('userStore/searchBtnClick'),
-
-  },
-
-}
-
+    searchBtnClick_old: call("userStore/searchBtnClick")
+  }
+};
 </script>
 
 <style scoped>
-
-div >>> .v-alert .v-input__control .v-messages__message{
-  color: #ffffff
+div >>> .v-alert .v-input__control .v-messages__message {
+  color: #ffffff;
 }
-
 </style>

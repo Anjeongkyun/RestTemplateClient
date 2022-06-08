@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.daon.host.web.dto.Response;
 import com.daon.host.web.service.NoticeService;
-import com.daon.host.web.vo.Notice;
+import com.daon.host.web.vo.NoticeVo;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +49,7 @@ public class NoticeController {
     @ApiOperation(value= "공지사항 작성",
 	notes="공지사항을 작성한다.")  
     @PostMapping
-    public ResponseEntity<?> insert(@Validated @RequestBody Notice notice, Errors errors) {
+    public ResponseEntity<?> insert(@Validated @RequestBody NoticeVo notice, Errors errors) {
         // validation check
         if (errors.hasErrors()) {
             return response.invalidFields(Helper.refineErrors(errors));
@@ -68,7 +68,7 @@ public class NoticeController {
     @ApiOperation(value= "공지사항 수정",
 	notes="공지사항 데이터를 수정한다.")  
     @PutMapping
-    public ResponseEntity<?> update(@Validated @RequestBody Notice notice, Errors errors) {
+    public ResponseEntity<?> update(@Validated @RequestBody NoticeVo notice, Errors errors) {
         // validation check
         if (errors.hasErrors()) {
             return response.invalidFields(Helper.refineErrors(errors));

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.daon.host.web.dto.Response;
 import com.daon.host.web.service.ParkService;
-import com.daon.host.web.vo.Notice;
 import com.daon.host.web.vo.ParkVo;
 
 import io.swagger.annotations.ApiOperation;

@@ -35,7 +35,7 @@ import com.daon.host.web.mapper.LoginMapper;
 import com.daon.host.web.service.LoginService;
 import com.daon.host.web.service.NoticeService;
 import com.daon.host.web.vo.LoginVo;
-import com.daon.host.web.vo.Notice;
+import com.daon.host.web.vo.NoticeVo;
 import com.daon.host.web.vo.UserProfile;
 
 import lombok.Data;

@@ -20,7 +20,7 @@ import com.daon.host.web.mapper.NoticeMapper;
 import com.daon.host.web.mapper.ParkMapper;
 import com.daon.host.web.vo.LoginVo;
 import com.daon.host.web.vo.MenuVo;
-import com.daon.host.web.vo.Notice;
+import com.daon.host.web.vo.NoticeVo;
 import com.daon.host.web.vo.ParkVo;
 
 import lombok.RequiredArgsConstructor;

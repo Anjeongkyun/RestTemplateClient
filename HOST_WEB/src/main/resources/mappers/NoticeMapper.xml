@@ -4,7 +4,7 @@
 
 <mapper namespace="com.daon.host.web.mapper.NoticeMapper">
 
-	<select id="getList" resultType="Notice">
+	<select id="getList" resultType="NoticeVo">
 		SELECT notice_no,
 			apt_id,
 			notice_writer,
@@ -21,7 +21,7 @@
 			ins_date DESC
 	</select>
 
-	<select id="getDetail" resultType="Notice">
+	<select id="getDetail" resultType="NoticeVo">
 		SELECT 
 			notice_no,
 			apt_id,
@@ -39,7 +39,7 @@
 			notice_no = #{noticeNo}
 	</select>
 
-	<insert id="insert" parameterType="Notice">
+	<insert id="insert" parameterType="NoticeVo">
 		INSERT INTO 
 			tb_o_notice
 		(
