@@ -37,12 +37,19 @@ export default {
   data() {
     return {
       map: null,
-      mapCenter: this.center,
+      mapCenter: [],
       latitude: "",
       longitude: ""
     };
   },
-
+  computed: {
+    getLatitude() {
+      return this.$store.state.parkStore.detailContents.latitude;
+    },
+    getLongitude() {
+      return this.$store.state.parkStore.detailContents.longitude;
+    }
+  },
   watch: {
     width(val) {
       this.$refs.map.style.width = val + "px";
@@ -59,6 +66,12 @@ export default {
       const container = this.$refs.map;
       container.style.width = this.width + "px";
       container.style.height = this.height + "px";
+
+      if (this.getLatitude === null || this.getLongitude === null) {
+        this.mapCenter = ["37.484456", "126.878974"];
+      } else {
+        this.mapCenter = [this.getLatitude, this.getLongitude];
+      }
 
       const mapOptions = {
         center: new kakao.maps.LatLng(...this.mapCenter),

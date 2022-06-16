@@ -32,14 +32,20 @@
     <h3>내용</h3>
     <v-row>
       <v-col cols="12" sm="6" md="5">
-        <v-textarea
+        <EditorTiptap
+          :options="options"
+          :contents="detailContents.noticeContent"
+          v-model="detailContents.noticeContent"
+        />
+
+        <!-- <v-textarea
           solo
           v-model="detailContents.noticeContent"
           counter
           maxlength="2000"
           rows="20"
           row-height="30"
-        ></v-textarea>
+        ></v-textarea> -->
       </v-col>
     </v-row>
 
@@ -105,7 +111,7 @@ export default {
         .dispatch("noticeStore/noticeUpdate", {
           noticeNo: dataObj.detailContents.noticeNo,
           noticeTitle: dataObj.detailContents.noticeTitle,
-          noticeContent: dataObj.detailContents.noticeContent,
+          noticeContent: this.options.content,
           noticeWriter: dataObj.detailContents.noticeWriter,
           updId: dataObj.detailContents.updId
         })
@@ -119,8 +125,16 @@ export default {
   },
 
   name: "RegularTablesView",
-  data: () => ({}),
-  components: {},
+  data: () => ({
+    options: {
+      editable: false,
+      supportImage: true
+    },
+    contents: ""
+  }),
+  components: {
+    EditorTiptap: () => import("../components/EditorTiptap")
+  },
   computed: {
     ...get("noticeStore", ["detailContents"])
   }

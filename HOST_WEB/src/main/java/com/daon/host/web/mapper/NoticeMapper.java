@@ -10,11 +10,8 @@ import com.daon.host.web.vo.NoticeVo;
 
 @Component
 @Mapper
-public interface NoticeMapper {
-	List<NoticeVo> getList();
-	NoticeVo getDetail(@Param("noticeNo") String noticeNo);	
+public interface NoticeMapper {	
 	void insert(NoticeVo notice);
-	void delete(@Param("noticeNo") String noticeNo);
 	void update(NoticeVo notice);
 	
 }

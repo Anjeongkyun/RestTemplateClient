@@ -4,40 +4,6 @@
 
 <mapper namespace="com.daon.host.web.mapper.NoticeMapper">
 
-	<select id="getList" resultType="NoticeVo">
-		SELECT notice_no,
-			apt_id,
-			notice_writer,
-			notice_content,
-			notice_title,
-			remk,
-			ins_id,
-			ins_date,
-			upd_id,
-			upd_date
-		FROM 
-			tb_o_notice
-		ORDER BY 
-			ins_date DESC
-	</select>
-
-	<select id="getDetail" resultType="NoticeVo">
-		SELECT 
-			notice_no,
-			apt_id,
-			notice_writer,
-			notice_content,
-			notice_title,
-			remk,
-			ins_id,
-			ins_date,
-			upd_id,
-			upd_date
-		FROM 
-			tb_o_notice
-		WHERE
-			notice_no = #{noticeNo}
-	</select>
 
 	<insert id="insert" parameterType="NoticeVo">
 		INSERT INTO 
@@ -69,13 +35,6 @@
 			now()	
 		)
 	</insert>
-	
-	<delete id = "delete" parameterType = "string">
-		DELETE FROM 
-			tb_o_notice
-		WHERE
-			notice_no = #{noticeNo}
-	</delete>
 	
 	<update id="update">
 		UPDATE 

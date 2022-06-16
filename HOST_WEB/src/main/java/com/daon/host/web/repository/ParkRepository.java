@@ -6,13 +6,14 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.daon.host.web.entity.NoticeEntity;
+import com.daon.host.web.entity.ParkEntity;
 
 @Repository
-public interface NoticeRepository extends JpaRepository<NoticeEntity, String> {
-	Optional<NoticeEntity> findByNoticeNo(String noticeNo);
-	
+public interface ParkRepository extends JpaRepository<ParkEntity, String> {
+	Optional<ParkEntity> findByAptId(String aptId);
+
 	@Transactional
-	void deleteByNoticeNo(String noticeNo);
+	void deleteByAptId(String aptId);
+	
 	
 }

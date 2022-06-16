@@ -1,7 +1,5 @@
 package com.daon.host.web.entity;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,9 +8,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Builder
 @NoArgsConstructor
@@ -20,7 +16,7 @@ import lombok.Setter;
 @Data
 @Entity
 @Table(name="tb_o_notice")
-public class Notice{
+public class NoticeEntity extends BaseTimeEntity{
 
 	@Id
 	@Column(name = "notice_no")
@@ -44,12 +40,14 @@ public class Notice{
 	@Column(name = "ins_id")
 	private String insId; // 입력자
 	
-	@Column(name = "ins_date")
-	private Date insDate; // 입력시간
+//	@CreationTimestamp
+//	@Column(name = "ins_date")
+//	private LocalDateTime insDate; // 입력시간
 	
 	@Column(name = "upd_id")
 	private String updId; // 수정자
 	
-	@Column(name = "upd_date")
-	private Date updDate; // 수정시간
+//	@UpdateTimestamp
+//	@Column(name = "upd_date")
+//	private LocalDateTime updDate; // 수정시간
 }

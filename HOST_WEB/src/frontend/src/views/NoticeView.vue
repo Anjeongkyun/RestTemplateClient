@@ -49,7 +49,12 @@
                   </v-col>
                   <v-col cols="12">
                     <h3>내용</h3>
-                    <v-textarea
+                    <EditorTiptap
+                      :options="options"
+                      v-model="options.content"
+                    />
+
+                    <!-- <v-textarea
                       v-model="noticeContent"
                       outline
                       label="Outline textarea"
@@ -58,7 +63,7 @@
                       full-width
                       rows="10"
                       row-height="30"
-                    ></v-textarea>
+                    ></v-textarea> -->
                   </v-col>
                 </v-row>
               </v-container>
@@ -90,9 +95,6 @@ export default {
     listFetch: call("noticeStore/listFetch"),
 
     fnRowClick: function(dataObj) {
-      // this.$store.dispatch("noticeStore/noticeDetail", {
-      //   noticeNo: dataObj.noticeNo
-      // });
       this.$router
         .push("/components/notice-detail/" + dataObj.noticeNo)
         .catch(err => {});
@@ -102,7 +104,7 @@ export default {
         .dispatch("noticeStore/noticeInsert", {
           aptId: "ALD01",
           noticeTitle: this.noticeTitle,
-          noticeContent: this.noticeContent,
+          noticeContent: this.options.content,
           noticeWriter: "jkan",
           remark: "비고1",
           insId: "ohhj"
@@ -124,9 +126,18 @@ export default {
     ],
     dialog: false,
     noticeContent: "",
-    noticeTitle: ""
+    noticeTitle: "",
+    options: {
+      content: "test text",
+      editable: false,
+      supportImage: true,
+      supportVideo: true
+    }
   }),
-  components: {},
+  components: {
+    // KakaoMap
+    EditorTiptap: () => import("../components/EditorTiptap")
+  },
   computed: {
     ...get("appStore", ["selectDrawerItem"]),
     ...get("noticeStore", ["noticeList"])
