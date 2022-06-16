@@ -23,4 +23,84 @@
 			tb_o_complex			
 	</select>
 	
+	<select id="getDetail" resultType="parkVo">
+		SELECT 
+			 apt_id
+			,project_id
+			,apt_nm
+			,apt_address
+			,rep_num
+			,manager_nm
+			,latitude
+			,longitude
+			,ins_id
+			,ins_date
+			,upd_id
+			,upd_date
+		FROM 
+			tb_o_complex
+		WHERE	
+			apt_id = #{aptId}		
+	</select>
+	
+		<insert id="insert" parameterType="parkVo">
+		INSERT INTO 
+			tb_o_complex
+		(
+				 apt_id
+				,project_id
+				,apt_nm
+				,apt_address
+				,rep_num
+				,manager_nm
+				,latitude
+				,longitude
+				,ins_id
+				,ins_date
+		)
+		VALUES
+		(
+			(select 
+				concat('ALD',lpad(max(right(apt_id,2)) + 1,2,'0'))  
+			 from 
+			 	tb_o_complex ALIAS_FOR_SUBQUERY
+			 ),
+			(select 
+				concat('ALD',lpad(max(right(apt_id,2)) + 1,2,'0'))  
+			 from 
+			 	tb_o_complex ALIAS_FOR_SUBQUERY
+			 ),
+			#{aptNm},
+			#{aptAddress},
+			#{repNum},
+			#{managerNm},
+			#{latitude},
+			#{longitude},
+			#{insId},
+			now()	
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE 
+			tb_o_complex
+		SET  
+			apt_nm 		=	#{aptNm}, 
+			apt_address	= 	#{aptAddress}, 
+			rep_num 	=	#{repNum}, 
+			manager_nm 	= 	#{managerNm}, 
+			latitude 	=	#{latitude}, 
+			longitude 	= 	#{longitude},  
+			upd_id 		=	#{updId}, 
+			upd_date 	=	now()
+		WHERE
+			apt_id 		=	#{aptId}
+	</update>
+	
+	<delete id = "delete" parameterType = "string">
+		DELETE FROM 
+			tb_o_complex
+		WHERE
+			apt_id = #{aptId}
+	</delete>
 </mapper>

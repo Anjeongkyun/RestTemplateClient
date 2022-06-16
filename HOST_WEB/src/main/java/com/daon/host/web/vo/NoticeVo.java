@@ -2,13 +2,17 @@ package com.daon.host.web.vo;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class Notice {
+public class NoticeVo {
 
 	@ApiModelProperty(example="공지번호")
 	private String noticeNo; // 공지번호

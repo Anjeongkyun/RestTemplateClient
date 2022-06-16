@@ -6,18 +6,14 @@
 
 <script>
 // Styles
-import '@/styles/overrides.sass'
-import { get, set, sync, call } from 'vuex-pathify'
+import "@/styles/overrides.sass";
+import { get, set, sync, call } from "vuex-pathify";
 
 export default {
-  name: 'App',
-  components: {
-
-  },
-  data(){
-    return{
-
-    }
+  name: "App",
+  components: {},
+  data() {
+    return {};
   },
   computed: {
     ...get('appStore', [
@@ -35,25 +31,21 @@ export default {
       'image',
     ]),
 
-    ...sync('appStore', [
-      'drawer',
-      'drawerImage',
-      'mini'
-    ]),
-  
+   
   },
+ 
 
   async mounted(){
 
   },
   metaInfo: {
-    title: 'App',
-    titleTemplate: 'DAVIS',
-    htmlAttrs: { lang: 'en' },
+    title: "App",
+    titleTemplate: "DAVIS",
+    htmlAttrs: { lang: "en" },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    ],
-  },
-}
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" }
+    ]
+  }
+};
 </script>

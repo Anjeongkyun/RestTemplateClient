@@ -4,10 +4,18 @@ import Vuex from "vuex";
 import pathify from "@/plugins/vuex-pathify";
 import axios from "axios";
 import createPersistedState from 'vuex-persistedstate';
+import VueMarkdownEditor from "@kangc/v-md-editor";
+import "@kangc/v-md-editor/lib/style/base-editor.css";
+import vuepressTheme from "@kangc/v-md-editor/lib/theme/vuepress.js";
+
 // Modules
 import * as modules from "./modules";
 
 Vue.prototype.$http = axios;
+
+VueMarkdownEditor.use(vuepressTheme);
+
+Vue.use(VueMarkdownEditor);
 
 Vue.use(Vuex);
 const state = {};
@@ -23,11 +31,11 @@ const store = new Vuex.Store({
   actions,
   plugins: [
     pathify.plugin,
-    createPersistedState({ //vuex-persistedstate ì‚¬ìš©
+    createPersistedState({ //vuex-persistedstate »ç¿ë
       whiteList: ["scalar", "person.name"],
-      paths: ["cmmnStore"] , // í•„ìš”í•œ ë°ì´í„°ë§Œ ê´€ë¦¬
-      key: 'vuexStore', // storateì˜ item ì´ë¦„ ì„¤ì •
-      storage: window.sessionStorage, // localStorage(default) ë˜ëŠ” sessionStorage ì¤‘ ì„ íƒ
+      paths: ["cmmnStore"] , // ÇÊ¿äÇÑ µ¥ÀÌÅÍ¸¸ °ü¸®
+      key: 'vuexStore', // storateÀÇ item ÀÌ¸§ ¼³Á¤
+      storage: window.sessionStorage, // localStorage(default) ¶Ç´Â sessionStorage Áß ¼±ÅÃ
     })
   ]
 });

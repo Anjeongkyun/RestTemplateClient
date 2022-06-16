@@ -16,7 +16,7 @@ import com.daon.host.web.dto.Response;
 import com.daon.host.web.mapper.LoginMapper;
 import com.daon.host.web.mapper.NoticeMapper;
 import com.daon.host.web.vo.LoginVo;
-import com.daon.host.web.vo.Notice;
+import com.daon.host.web.vo.NoticeVo;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

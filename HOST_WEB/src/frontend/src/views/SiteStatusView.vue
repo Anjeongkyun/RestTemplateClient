@@ -1,6 +1,18 @@
 <template>
   <div>   
     
+    <v-row justify="center">
+      <v-col cols="12" sm="6" md="4">
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-col>
+    </v-row>
+
   <v-row class="justify-end">
     <v-btn 
         class="mr-4 px-16"
@@ -194,6 +206,7 @@ export default {
 
   },
   data: () => ({
+    search: "",
     date: null,
     trip: {
       name: '',

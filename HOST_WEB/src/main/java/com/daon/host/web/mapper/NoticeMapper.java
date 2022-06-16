@@ -6,15 +6,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-import com.daon.host.web.vo.Notice;
+import com.daon.host.web.vo.NoticeVo;
 
 @Component
 @Mapper
 public interface NoticeMapper {
-	List<Notice> getList();
-	Notice getDetail(@Param("noticeNo") String noticeNo);	
-	void insert(Notice notice);
+	List<NoticeVo> getList();
+	NoticeVo getDetail(@Param("noticeNo") String noticeNo);	
+	void insert(NoticeVo notice);
 	void delete(@Param("noticeNo") String noticeNo);
-	void update(Notice notice);
+	void update(NoticeVo notice);
 	
 }
