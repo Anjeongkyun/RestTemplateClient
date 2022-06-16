@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daon.host.web.mapper.MenuMapper">
+
+	<select id="getList" resultType="com.daon.host.web.vo.MenuVo$CRUD">
+		select * from tb_c_menu order by  menu_order
+	</select>
+
+<select id="getListShowYN" resultType="com.daon.host.web.vo.MenuVo$CRUD">
+		select * from tb_c_menu where menu_show_yn ='Y' order by  menu_order
+	</select>
+	
+	<insert id="insertMenu" >
+	insert into tb_c_menu
+	(
+		menu_nm, 
+		description, 
+		menu_icon, 
+		menu_router_to, 
+		menu_show_yn, 
+		menu_order, 
+		menu_route_name, 
+		menu_type, 
+		insId, 
+		ins_date, 
+		upd_id, 
+		upd_date
+	)
+	 values
+	(
+		#{req.menuNm              }, 
+		#{req.description              },
+		'',
+		'',
+		#{req.menuShowYn              },
+		#{req.menuOrder              },
+		'', 
+		'layout',
+		#{req.id              }, 
+		current_timestamp(), 
+		#{req.id              }, 
+		current_timestamp()
+	)
+		
+	</insert>
+<insert id="insertMenu_old" >
+	insert into tb_c_menu
+	(
+		menu_nm, 
+		description, 
+		menu_icon, 
+		menu_router_to, 
+		menu_show_yn, 
+		menu_order, 
+		menu_route_name, 
+		menu_route_components, 
+		menu_type, 
+		insId, 
+		ins_date, 
+		upd_id, 
+		upd_date
+	)
+	 values
+	(
+		#{req.menuNm              }, 
+		#{req.description              },
+		#{req.menuIcon              },
+		#{req.menuRouterTo              },
+		#{req.menuShowYn              },
+		#{req.menuOrder              },
+		#{req.menuRouteName              }, 
+		#{req.menuRouteComponents              }, 
+		#{req.menuType              },
+		#{req.id              }, 
+		current_timestamp(), 
+		#{req.id              }, 
+		current_timestamp()
+	)
+		
+	</insert>
+
+	<update id="updateMenu" >
+	
+		update tb_c_menu set 
+		 menu_nm=#{req.menuNm}, 
+		 description=#{req.description}, 
+		 menu_show_yn=#{req.menuShowYn}, 
+		 menu_order=#{req.menuOrder}, 
+		 upd_id=#{req.id}, 
+		 upd_date=current_timestamp()
+		 
+		<where>
+			<if test=" req.menuId != null and req.menuId != '' ">
+				AND menu_id = #{req.menuId}
+			</if>
+		</where>
+	</update>
+	
+	<delete id="deleteMenu" >
+		delete from tb_c_menu 
+		
+		<where>
+			<if test=" req.menuId != null and req.menuId != '' ">
+				AND menu_id = #{req.menuId}
+			</if>
+		</where>
+	</delete>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daon.host.web.mapper.LoginMapper">
+
+
+	<select id="getLogin" resultType="com.daon.host.web.vo.LoginVo$LoginResult">
+				
+		SELECT 	login_id, member_nm, member_role, member_phone, 
+				use_yn, ins_id, ins_date, upd_id, upd_date, level_cd, first_run
+		FROM tb_o_webuser
+
+		<where>
+			<if test=" req.id != null and req.id!= '' ">
+				AND login_id = #{req.id}
+			</if>
+			<if test=" req.password != null and req.password != '' ">
+				AND login_pw = #{req.password}
+			</if>
+
+		</where>
+	</select>
+	
+	
+	<select id="getLogin_old" resultType="com.daon.host.web.vo.LoginVo$LoginResult">
+		select 
+			*,
+			(
+				select 
+					reset_password 
+				from tb_c_base
+			) as reset_password 
+		from tb_o_webuser
+
+
+		<where>
+			<if test=" req.id != null and req.id!= '' ">
+				AND login_id = #{req.id}
+			</if>
+			<if test=" req.password != null and req.password != '' ">
+				AND login_pw = #{req.password}
+			</if>
+
+		</where>
+	</select>
+	
+	
+	
+	<select id="getLogin1" resultType="com.daon.host.web.vo.LoginVo$Table">
+		select * from tb_o_webuser
+		<where>
+			<if test=" req.id != null and req.id!= '' ">
+				AND login_id = #{req.id}
+			</if>
+			<if test=" req.password != null and req.password != '' ">
+				AND login_pw = #{req.password}
+			</if>
+
+		</where>
+	</select>
+
+</mapper>
