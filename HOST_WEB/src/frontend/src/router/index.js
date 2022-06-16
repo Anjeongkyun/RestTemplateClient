@@ -117,12 +117,17 @@ const router = new Router({
 router.beforeEach
 ( async  (to, from, next) => {
 
-
-
-  if (to.path == "/components/login/") {
+  if (to.path == "/components/login/") {  // 로그인 화면이면 데이터 null 로 리셋
     await store.dispatch("cmmnStore/resetData"); //공통 데이터 및 로그인 정보 초기화
-    await store.dispatch("cmmnStore/setCmmnData");  // 공통 정보 불러오기
   }
+
+  var cmmnDataYN = store.getters["cmmnStore/cmmnDataYN"]
+  console.log("cmmnDataYN: ", cmmnDataYN)
+  if (!cmmnDataYN) {   // 데이터가 없으면 공통정보 불러오기
+    await store.dispatch("cmmnStore/setCmmnData"); // 공통 정보 불러오기
+  }
+  console.log("cmmnDataYN: ", cmmnDataYN)
+
   var loginUserYN = store.getters["cmmnStore/loginUserYN"]
   var loginUserLevel = store.getters["cmmnStore/loginUserLevel"]
   var menuList = store.getters["cmmnStore/cmmnMenu"]
@@ -149,15 +154,15 @@ router.beforeEach
           if (e2.menuShowYn == "Y") {  // 화면에 표시가능한 메뉴
             if (e1 == e2.menuId) {  // 메뉴 ID가 같다면 현재 사용자가 볼수 있는 화면
               setLoginUserMenu.push(e2);
-            }  
-      
+            }
+
           }
         });
 
-      
+
       });
 
-      
+
     }
   });
 
@@ -166,7 +171,7 @@ router.beforeEach
 
 
   var loginUserMenu = store.getters["cmmnStore/loginUserMenu"]
-  
+
   /*   //현재 사용자의 권한에 따라 페이지 접근 제한
   if (to.meta.roles && !to.meta.roles.includes(loginUserLevel)) {
   //  alert('해당 페이지에 접근 권한이 없습니다.\n로그인 후 이용해주세요.')
@@ -174,8 +179,8 @@ router.beforeEach
   } else {
 
     var loginUserYN = store.getters["cmmnStore/loginUserYN"]
-    
-  
+
+
 
     return next()
   } */
