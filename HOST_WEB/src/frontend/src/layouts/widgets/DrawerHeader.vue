@@ -1,5 +1,8 @@
 <template>
-  <v-list-item class="mb-0 justify-space-between pl-3">
+  <v-list-item
+    class="mb-0 justify-space-between pl-3"
+    to="/"
+  >
     <v-list-item-avatar>
       <v-img
         :src="
@@ -25,3 +28,10 @@ export default {
   computed: { version: get('appStore/version') },
 }
 </script>
+
+
+<style scoped>
+.v-application a {
+    color: white;
+}
+</style>

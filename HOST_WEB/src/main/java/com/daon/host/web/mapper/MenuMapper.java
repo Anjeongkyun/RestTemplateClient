@@ -27,6 +27,7 @@ import com.daon.host.web.vo.MenuVo.Menu;
 public interface MenuMapper {
 
 	List<CRUD> getList(@Param("req") MenuVo.CRUD menu);
+	List<CRUD> getListShowYN(@Param("req") MenuVo.CRUD menu);
 	int insertMenu(@Param("req")  MenuVo.CRUD user);
 	int updateMenu(@Param("req")  MenuVo.CRUD user);
 	int deleteMenu(@Param("req")  MenuVo.CRUD user);

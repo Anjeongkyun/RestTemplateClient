@@ -1,14 +1,22 @@
 <template>
-  <v-container id="regular-tables-view" fluid tag="section">
+  <v-container
+    id="regular-tables-view"
+    fluid
+    tag="section"
+  >
     <v-row justify="center">
-      <v-col cols="12" sm="6" md="4">
+      <v-col
+        cols="12"
+        sm="6"
+        md="4"
+      >
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
           label="Search"
           single-line
           hide-details
-        ></v-text-field>
+        />
       </v-col>
     </v-row>
     <material-card
@@ -24,12 +32,21 @@
         class="row-pointer"
         :search="search"
         @click:row="fnRowClick"
-      ></v-data-table>
+      />
 
       <v-row justify="center">
-        <v-dialog v-model="dialog" persistent max-width="800px">
+        <v-dialog
+          v-model="dialog"
+          persistent
+          max-width="800px"
+        >
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark v-bind="attrs" v-on="on">
+            <v-btn
+              color="primary"
+              dark
+              v-bind="attrs"
+              v-on="on"
+            >
               작성
             </v-btn>
           </template>
@@ -45,7 +62,7 @@
                     <v-text-field
                       v-model="noticeTitle"
                       label="제목 입력*"
-                    ></v-text-field>
+                    />
                   </v-col>
                   <v-col cols="12">
                     <h3>내용</h3>
@@ -58,17 +75,25 @@
                       full-width
                       rows="10"
                       row-height="30"
-                    ></v-textarea>
+                    />
                   </v-col>
                 </v-row>
               </v-container>
             </v-card-text>
             <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog = false">
+              <v-spacer />
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="dialog = false"
+              >
                 닫기
               </v-btn>
-              <v-btn color="blue darken-1" text @click="fnWrite">
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="fnWrite"
+              >
                 저장
               </v-btn>
             </v-card-actions>
@@ -115,6 +140,7 @@ export default {
   },
 
   name: "RegularTablesView",
+  components: {},
   data: () => ({
     listCount: 10,
     search: "",
@@ -126,7 +152,6 @@ export default {
     noticeContent: "",
     noticeTitle: ""
   }),
-  components: {},
   computed: {
     ...get("appStore", ["selectDrawerItem"]),
     ...get("noticeStore", ["noticeList"])

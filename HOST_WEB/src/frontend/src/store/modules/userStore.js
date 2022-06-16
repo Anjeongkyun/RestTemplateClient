@@ -3,8 +3,11 @@ import {
   make
 } from 'vuex-pathify'
 
-import axios from 'axios'
 import cmmnFnStore from './cmmnFnStore' //store 와 관련된 데이터를 처리하는 공통 함수 파일
+
+
+
+import axios from 'axios'
 
 const state = {
   parkSeq:'AAA01',
@@ -35,6 +38,10 @@ const mutations = {
   },
   getList (state, payload){
     state.parkItem = payload;
+  },
+  getUserList(state, payload) {
+    state.tableData = payload
+    state.userList = payload;
   }
 }
 
@@ -55,7 +62,6 @@ const actions = {
         cmmnFnStore.res(res);
         commit('getList', list)
 
-
       })
       .catch(err => {
         cmmnFnStore.err(err);
@@ -64,26 +70,58 @@ const actions = {
 
   },
 
-  searchBtnClick({
+  async searchBtnClick({
     state, // eslint-disable-line no-unused-vars
     commit, // eslint-disable-line no-unused-vars
   }, dataObj) {
-    console.log(this)
     const url = '/internal/davis/web/user/list'
-    console.log("dataObj")
-    console.log(dataObj)
-
-    axios.post(url, {
+    console.log(url)
+    return axios.post(url, {
 
       loginId: dataObj.loginId.data,
       memberNm: dataObj.memberNm.data
     })
-      .then( res => {
-        cmmnFnStore.res(res);
+      .then(async res => {
 
-        var list =  res.data.list;
-        state.tableData =  list
-        console.log("=====searchBtnClick ok")
+        cmmnFnStore.res(res);
+        var list = res.data.list;
+
+        var cmmnCode = this.getters["cmmnStore/cmmnCode"];
+        var cmmnUseYn = this.getters["cmmnStore/useYnItem"] //this.state.cmmnStore.useYnItem;
+
+        list.forEach(element => {
+        //  element.levelNm = element.levelCd;
+
+          //PC0401 을 시스템 관리자로 매핑
+          cmmnCode.forEach(element1 => {
+            if (element.levelCd == element1.cmCd) {
+              element.levelNm = element1.cdNm;
+            }
+          });
+
+          //사용 여부 매핑
+          cmmnUseYn.forEach(element1 => {
+            if (element.useYn == element1.valueItem) {
+              element.useNm = element1.textItem
+            }
+          });
+
+          //사용자 매핑
+          list.forEach(element1 => {
+            if (element.updId == element1.loginId) {
+              element.updNm = element1.memberNm;
+            }
+            if (element.insId == element1.loginId) {
+              element.insNm = element1.memberNm
+
+            }
+          });
+        });
+        commit('getUserList',  await list)
+
+
+        //var list =  res.data.list;
+        //state.tableData =  list
       })
       .catch(err => {
         cmmnFnStore.err(err);
@@ -91,19 +129,18 @@ const actions = {
 
   },
 
-  submit({
+  async submit({
     state, // eslint-disable-line no-unused-vars
     commit, // eslint-disable-line no-unused-vars
   }, dataObj) {
 
     const url = '/internal/davis/web/user/manage'
+    console.log(url)
 
-
-    axios.post(url, dataObj)
+    return  axios.post(url, dataObj)
       .then(res => {
         cmmnFnStore.res(res);
-        //store.dispatch('userStore/searchBtnClick')
-        console.log("=====submit ok")
+        return res.data.resultCd
       })
       .catch(err => {
         cmmnFnStore.err(err);

@@ -32,7 +32,7 @@ public class Response {
 		private String resultMsg;
 		private String levelCd;
 		private String firstRun;
-		private String resetPassword;
+	//	private String resetPassword;
     }
     
     @Getter
@@ -77,7 +77,7 @@ public class Response {
                 .resultMsg(msg)
                 .levelCd(_data.getLevelCd())
                 .firstRun(_data.getFirstRun())
-                .resetPassword(_data.getResetPassword())
+             //   .resetPassword(_data.getResetPassword())
                 .build();
         return ResponseEntity.ok(body);
     }

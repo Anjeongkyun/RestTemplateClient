@@ -4,18 +4,26 @@
 
 <mapper namespace="com.daon.host.web.mapper.LevelMenuMapper">
 
-	<select id="getList" resultType="com.daon.host.web.vo.LevelMenuVo$CRUD">
+	<select id="getList"
+		resultType="com.daon.host.web.vo.LevelMenuVo$CRUD">
 		select * from tb_c_menu_level
 	</select>
 
 
-<update id="updateLevel" >
-	
-		update tb_c_menu_level set 
-		 menu_list=#{req.menuList}, 
-		 upd_id=#{req.id}, 
-		 upd_date=current_timestamp()
-		 
+	<select id="getListUser"
+		resultType="com.daon.host.web.vo.LevelMenuVo$CRUD">
+		select * from tb_c_menu_level where level = #{req.level}
+	</select>
+
+
+
+	<update id="updateLevel">
+
+		update tb_c_menu_level set
+		menu_list=#{req.menuList},
+		upd_id=#{req.id},
+		upd_date=current_timestamp()
+
 		<where>
 			<if test=" req.level!= null and req.level != '' ">
 				AND level = #{req.level}

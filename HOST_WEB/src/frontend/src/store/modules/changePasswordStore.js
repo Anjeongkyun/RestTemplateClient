@@ -13,7 +13,14 @@ const state = {
   changePwRe: ''
 }
 
-const mutations = make.mutations(state)
+const mutations = {
+  ...make.mutations(state),
+  resetData(state, payload) {
+    state.userPw = ""
+    state.changePw = ""
+    state.changePwRe = ""
+  }
+}
 
 const actions = {
   changePassword({
@@ -28,7 +35,7 @@ const actions = {
 
 
     const url = '/internal/davis/web/change-password/change-password'
-
+    console.log("url: " + url)
 
     //console.log("changePwRe:", changePwRe)
     //  console.log("state.changePwRe: ", state.changePwRe)
@@ -39,18 +46,20 @@ const actions = {
       return;
     }
 
+
     axios.post(url, {
-      id: "1",
-      resetYn: "N",  // 비밀번호 변경시 N, 초기화면 Y
+      id: this.getters["cmmnStore/loginUserID"],
+      firstRun: "N",  // 비밀번호 변경시 N, 초기화면 Y
       password: state.userPw,
       newPassword: state.changePw,
     })
       .then(res => {
         cmmnFnStore.res(res);
-        
-        router.push({
-          name: "MainView"
-        })
+        alert("초기화")
+
+        commit('resetData', {})
+        router.push("/");
+
       })
       .catch(err => {
         cmmnFnStore.err(err);

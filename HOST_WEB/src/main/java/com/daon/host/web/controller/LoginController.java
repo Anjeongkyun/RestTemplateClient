@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -59,15 +60,29 @@ public class LoginController {
 
 	private final LoginService loginService;
 	private final Response response;
-	
+
+	private PasswordEncoder passwordEncoder;
+
 	@PostMapping("/login")
-	public ResponseEntity<?>  getLogin(@Valid @RequestBody LoginVo.Login login, Errors errors) {
-		
-		 if (errors.hasErrors()) {
-	            return response.failInvalidFields(Helper.refineErrors(errors));
-	        }
+	public ResponseEntity<?> getLogin(@Valid @RequestBody LoginVo.Login login, Errors errors) {
+
+		if (errors.hasErrors()) {
+			return response.failInvalidFields(Helper.refineErrors(errors));
+		}
+		// given
+		/*
+		 * String rawPassword = "12345678";
+		 * 
+		 * // when String encodedPassword = passwordEncoder.encode(rawPassword);
+		 * 
+		 * // then
+		 * 
+		 * assertAll( () -> assertNotEquals(rawPassword, encodedPassword), () ->
+		 * assertTrue(passwordEncoder.matches(rawPassword, encodedPassword)) );
+		 * 
+		 */
+
 		return loginService.getLogin(login);
 	}
 
-	
 }

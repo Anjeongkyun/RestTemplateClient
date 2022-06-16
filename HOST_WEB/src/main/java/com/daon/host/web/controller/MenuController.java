@@ -75,6 +75,15 @@ public class MenuController {
 	}
 	
 
+	@PostMapping("/list/show")
+	public ResponseEntity<?>  getListShowYN(@Valid @RequestBody MenuVo.CRUD menu, Errors errors) {
+		
+		 if (errors.hasErrors()) {
+	            return response.failInvalidFields(Helper.refineErrors(errors));
+	        }
+		return menuService.getListShowYN(menu);
+	}
+
 	@PostMapping("/manage")
 	public ResponseEntity<?>  setMenu(@Valid @RequestBody MenuVo.CRUD user, Errors errors) {
 		

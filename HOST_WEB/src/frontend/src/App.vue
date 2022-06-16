@@ -23,7 +23,7 @@ export default {
     ...get('appStore', [
       'selectDrawerItem',
       'drawerImage',
-      'items',
+      //  'items',
       'version',
     ]),
     ...get('loginStore', [
@@ -40,16 +40,10 @@ export default {
       'drawerImage',
       'mini'
     ]),
-    loginUserID (){
-      return localStorage.getItem("loginUserID")
-    },
-    loginUserYN (){
-      return localStorage.getItem("loginUserYN")
-    }
+  
   },
-  mounted(){
-    var localStorageLoginUserYN = localStorage.getItem("loginUserYN");
-    if(!localStorageLoginUserYN ) this.$router.push("/components/login/");
+
+  async mounted(){
 
   },
   metaInfo: {

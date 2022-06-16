@@ -14,6 +14,9 @@ module.exports = {
    ],
   parserOptions: {
     parser: 'babel-eslint',
+     ecmaFeatures: {
+       legacyDecorators: true
+     },
   },
 
   rules: {
@@ -24,7 +27,9 @@ module.exports = {
     'no-unused-vars': 'warn',
     'vuetify/no-deprecated-classes': 'error',
     'vuetify/no-legacy-grid': 'error',
-    'indent': ["error", 2]
+    'indent': ["error", 2, {
+      "ignoredNodes": ["TemplateLiteral"]
+    }],
   },
 
   overrides: [

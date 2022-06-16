@@ -20,14 +20,41 @@ export function error (code = 404) {
 export function layout (layout = 'Default', children, path = '') {
   const dir = kebabCase(layout)
 
-  return {
-    children,
-    component: () => import(
-      /* webpackChunkName: "layout-[request]" */
-      `@/layouts/${dir}/Index`
-    ),
-    path,
+  if (layout == "Default") {
+
+    return {
+      children,
+      component: () => import(
+        /* webpackChunkName: "layout-[request]" */
+        `@/layouts/${dir}/Index`
+      ),
+      path,
+    }
   }
+
+  else if (layout == "Main") {
+
+    return {
+      children,
+      component: () => import(
+        /* webpackChunkName: "layout-[request]" */
+        `@/layouts/${dir}/Index`
+      ),
+      path,
+    }
+  } else {
+    return {
+      children,
+      component: () => import(
+          /* webpackChunkName: "layout-[request]" */
+          `@/layouts/${dir}/Index`
+      ),
+      path,
+    }
+  }
+
+
+
 }
 
 export function redirect (
@@ -52,13 +79,18 @@ export function redirect (
   }
 }
 
-export function route (name, component, path = '') {
+export function route(name, component, path = '', meta = { roles :[]}) {
+
+  /*     meta: {
+  roles: [] // 누구나 접근 가능
+   roles: ['ROLE_ADMIN', 'ROLE_USER'] // 관리자, 사용자 권한이 있어야 접근 가능
+     roles: ['ROLE_ADMIN'] // 관리자 권한이 있어야 접근 가능
+  } */
   component = Object(component) === component
     ? component
     : { default: name.replace(' ', '') }
 
   const components = {}
-
   for (const [key, value] of Object.entries(component)) {
     components[key] = () => import(
       /* webpackChunkName: "views-[request]" */
@@ -70,5 +102,6 @@ export function route (name, component, path = '') {
     name,
     components,
     path,
+    meta
   }
 }

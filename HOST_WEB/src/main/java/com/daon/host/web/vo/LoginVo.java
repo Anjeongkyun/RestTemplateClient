@@ -21,8 +21,8 @@ public class LoginVo {
 	@Data
 	public static class LoginResult{
 		private String loginId; // 아이디
-		private String loginPw; // 비밀번호
-		private String memberMm;
+		//private String loginPw; // 비밀번호
+		private String memberNm;
 		private String memberRole;
 		private String memberPhone; // 전화번호
 		private String useYn; // 사용여부
@@ -32,15 +32,15 @@ public class LoginVo {
 		private Date updDate;// 수정시간
 		private String levelCd;
 		private String firstRun;
-		private String resetPassword;
+		//private String resetPassword;
 	}
 	
 	@Data
 	public static class Table{
 		
 		private String loginId; // 아이디
-		private String loginPw; // 비밀번호
-		private String memberMm;
+		//private String loginPw; // 비밀번호
+		private String memberNm;
 		private String memberRole;
 		private String memberPhone; // 전화번호
 		private String useYn; // 사용여부

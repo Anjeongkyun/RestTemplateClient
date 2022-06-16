@@ -14,7 +14,22 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 public class WebErrorController implements ErrorController{
 	
-	@GetMapping("/error")
+	  private final String ERROR_PATH = "/error";
+
+	    @GetMapping(ERROR_PATH)
+	    public String redirectRoot(){
+	        return "forward:/index.html";  //redirect 404 에러 처리
+	    }
+
+	     
+//	    @GetMapping("/")
+//	    public String redirectRoot1(){
+//	        return "forward:/index.html";
+//	    }
+//
+//	     
+	    
+	@GetMapping("/error1")
     public String handleError(HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
@@ -36,4 +51,9 @@ public class WebErrorController implements ErrorController{
 
         return "error/error";
     }
+	
+	public String getErrorPath(){
+        return "/error";
+    }
+	
 }

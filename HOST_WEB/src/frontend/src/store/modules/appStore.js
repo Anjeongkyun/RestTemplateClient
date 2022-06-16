@@ -30,7 +30,12 @@ const state = {
       to: '/components/change-password/',
       show: false
     },
-
+    { // 메인 대쉬
+      title: '메인대쉬보드',
+      icon: 'mdi-key',
+      to: '/components/main-dashboard/',
+      show: true
+    },
     { // 현장 상태 조회
       title: '현장상태조회',
       icon: 'mdi-laptop',
@@ -116,19 +121,77 @@ const state = {
       show: true
     },
   ],
+
+  loginId: null,
+  loginName: null,
+  loginRole: null,
+
 }
 
-const mutations = make.mutations(state)
+// computed 계산
+const getters = {
+  turnMessage(state) {
+    return state.turn + '님이 승리하셨습니다.';
+  },
+
+};
+
+const mutations = {
+  ...make.mutations(state),
+  SET_MEMBER(state, payload) {
+    cmmnFnStore.res(payload);
+  },
+  SET_TOKEN(state, payload) {
+    cmmnFnStore.res(payload);
+  },
+  setLoginUser(state, payload) {
+    state.loginId = payload.loginId
+    state.loginName = payload.loginName
+    state.loginRole = payload.loginRole
+
+  },
+  removeLoginUser(state, payload) {
+    state.loginId = null
+    state.loginName = null
+    state.loginRole = null
+  },
+  setSelectDrawerItem(state, payload) {
+    state.selectDrawerItem = payload
+  },
+}
 
 const actions = {
   ...make.actions(state),
   init: async ({ dispatch }) => {
     //
 
+  },
+
+  	async signIn({
+  	  commit,
+  	  state
+  	}) {
+
+  	  commit('login', null);
+
+  	},
+  	async signOut({
+  	  commit,
+  	  state
+  	}) {
+
+  	  commit('logout', null);
+
+  },
+  setSelectDrawerItem({
+    state, // eslint-disable-line no-unused-vars
+    commit, // eslint-disable-line no-unused-vars
+  }, dataObj) {
+    commit('setSelectDrawerItem', dataObj)
   }
+
 }
 
-const getters = {}
 
 export default {
   namespaced: true,

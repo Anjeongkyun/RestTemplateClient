@@ -53,6 +53,21 @@ public class MenuService {
 
 		return response.successList(list, "조회 성공했습니다.", HttpStatus.OK);
 	}
+	
+
+	public ResponseEntity<?> getListShowYN(@Valid MenuVo.CRUD menu) {
+		if (ObjectUtils.isEmpty(menu)) {
+			return response.failResult("조회 파라미터가 없습니다.", HttpStatus.BAD_REQUEST);
+		}
+
+		List<MenuVo.CRUD> list = menuMapper.getListShowYN(menu);
+
+		if (ObjectUtils.isEmpty(list)) {
+			return response.failResult("조회된 정보가 없습니다. 확인하신 후 입력해주세요.", HttpStatus.BAD_REQUEST);
+		}
+
+		return response.successList(list, "조회 성공했습니다.", HttpStatus.OK);
+	}
 
 
 	public ResponseEntity<?> setMenu(@Valid MenuVo.CRUD user) {

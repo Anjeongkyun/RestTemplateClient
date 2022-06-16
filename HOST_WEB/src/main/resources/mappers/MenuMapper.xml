@@ -8,6 +8,10 @@
 		select * from tb_c_menu order by  menu_order
 	</select>
 
+<select id="getListShowYN" resultType="com.daon.host.web.vo.MenuVo$CRUD">
+		select * from tb_c_menu where menu_show_yn ='Y' order by  menu_order
+	</select>
+	
 	<insert id="insertMenu" >
 	insert into tb_c_menu
 	(

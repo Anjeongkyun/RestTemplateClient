@@ -50,18 +50,37 @@ export default {
   name: 'DefaultAccount',
 
   data: () => ({
-    profile: [
-    //  { title: '마이페이지' },
-      //  { title: 'Settings' },
-      { title: ' 비밀번호 변경' ,to:"/components/change-password"},
-      { divider: true },
-      { title: '로그아웃' ,to:"/components/login/" },
-    ],
+    profile: [],
   }),
+  mounted(){
+    var loginUserYN = this.$store.getters["cmmnStore/loginUserYN"]
+
+    if(loginUserYN ) {
+      this.profile= [
+        { title: ' 비밀번호 변경' ,to:"/components/change-password/"},
+        { divider: true },
+        { title: '로그아웃' ,to:"/components/login/" },
+      ]
+    }else{
+      this.profile= [
+        { title: ' 로그인' ,to:"/components/login/"},
+      ]
+    }
+
+  },
   methods: {
     //  ...mapActions(['login_axios']), // login(){}를 사용하는것과 같음
-    logout(){
+    logout_old(){
       console.log(this)
+    },
+    async logout() {
+      await this.signOut();
+
+      this.$toast.info(`로그아웃 하였습니다.`);
+
+      this.$router.push("/");
+
+
     },
   },
 }

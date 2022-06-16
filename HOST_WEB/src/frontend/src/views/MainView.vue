@@ -1,11 +1,25 @@
 <template dark>
-  <v-container
-    id="dashboard-view"
-    fluid
-    tag="section"
-  >
-    메인
-  </v-container>
+  <div>
+    <v-container
+      align="center"
+      class="grey lighten-5 mb-6"
+    >
+      <div>
+        <v-row>
+          <v-col
+            :cols="12"
+          >
+            <material-card
+              icon="mdi-account"
+              icon-small
+              :title="selectDrawerItem"
+              color="accent"
+            />
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -23,9 +37,11 @@ export default {
     loginUser : null
   }),
   computed: {
+    ...get('appStore', [
+      'selectDrawerItem'
+    ]),
   },
   mounted(){
-
   },
   methods: {
 

@@ -6,6 +6,24 @@
 
 
 	<select id="getLogin" resultType="com.daon.host.web.vo.LoginVo$LoginResult">
+				
+		SELECT 	login_id, member_nm, member_role, member_phone, 
+				use_yn, ins_id, ins_date, upd_id, upd_date, level_cd, first_run
+		FROM tb_o_webuser
+
+		<where>
+			<if test=" req.id != null and req.id!= '' ">
+				AND login_id = #{req.id}
+			</if>
+			<if test=" req.password != null and req.password != '' ">
+				AND login_pw = #{req.password}
+			</if>
+
+		</where>
+	</select>
+	
+	
+	<select id="getLogin_old" resultType="com.daon.host.web.vo.LoginVo$LoginResult">
 		select 
 			*,
 			(

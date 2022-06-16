@@ -54,7 +54,7 @@ public class ChangePasswordVo {
 		private String id; // 아이디
 
 		@NotEmpty(message = "초기화여부는 필수 입력값입니다.")
-		private String resetYn;
+		private String firstRun;
 		
 		@NotEmpty(message = "비밀번호는 필수 입력값입니다.")
 		//@Pattern(regexp = "^(?=.*[a-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[a-z\\d~!@#$%^&*()+|=]{8,16}$", message = "비밀번호는 8~16자 영문 소문자, 숫자, 특수문자를 사용하세요.")

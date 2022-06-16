@@ -16,19 +16,14 @@
     />
 
     <default-drawer-toggle class="hidden-sm-and-down" />
-
+    
     <v-toolbar-title
       class="font-weight-light text-h5"
       v-text="selectDrawerItem"
     />
 
+
     <v-spacer />
-
-    <!-- <default-search class="hidden-sm-and-down" />
- -->
-    <!--   <default-go-home /> -->
-
-    <default-notifications />
 
     <default-account />
   </v-app-bar>
@@ -50,19 +45,7 @@ export default {
       /* webpackChunkName: "default-drawer-toggle" */
       '../widgets/DrawerToggle'
     ),
-    /*     DefaultGoHome: () => import(
-      /* webpackChunkName: "default-go-home"
-      './widgets/GoHome'
-    ),
-    */
-    DefaultNotifications: () => import(
-      /* webpackChunkName: "default-notifications" */
-      '../widgets/Notifications'
-    ),
-    // DefaultSearch: () => import(
-    //   /* webpackChunkName: "default-search" */
-    //   '../widgets/Search'
-    // ),
+
   },
   data(){
     return{
@@ -84,6 +67,7 @@ export default {
 
   },
   mounted() {
+
   },
 }
 </script>

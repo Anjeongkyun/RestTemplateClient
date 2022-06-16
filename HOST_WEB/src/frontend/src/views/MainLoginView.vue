@@ -1,9 +1,43 @@
 <template dark>
   <div>
     <v-container
-      fluid
-      tag="section"
+      align="center"
+      class="grey lighten-5 mb-6"
     >
+      <div>
+        <v-row
+          align="center"
+          class="pa-12"
+        >
+          <v-col
+            class="pa-12"
+            cols="3"
+            align-self="center"
+          />
+        </v-row>
+
+        <v-row
+          align="center"
+          class="pa-12"
+        >
+          <v-col
+            class="pa-12"
+            cols="3"
+            align-self="center"
+          />
+        </v-row>
+
+        <v-row
+          align="center"
+          class="pa-12"
+        >
+          <v-col
+            class="pa-12"
+            cols="3"
+            align-self="center"
+          />
+        </v-row>
+      </div>
       <v-row
         align="center"
       >
@@ -43,7 +77,10 @@
                 depressed
                 color="#e91e63 !important"
                 @click="
-                  fnLoginBtnClick()
+                  login({
+                    loginId, // v-model로 지정된 login_id text
+                    loginPw, // v-model로 지정된 login_pw text
+                  })
                 "
                 v-text="selectDrawerItem"
               />
@@ -64,7 +101,7 @@ import '@/styles/overrides.sass'
 import { get, set, sync, call } from 'vuex-pathify'
 
 export default {
-  name: 'LoginView',
+  name: 'MainLoginView',
   data: () => ({
     loginId: null,
     loginPw: null,
@@ -96,39 +133,31 @@ export default {
       'mini'
     ]),
   },
-  created(){
 
-  },
   mounted() {
 
+    this.$nextTick(function () {
+      // 모든 화면이 렌더링된 후 실행합니다.
+    });
 
-  //  this.fnSetCmmnCode();
-    //this.$nextTick(function () {   }); // 모든 화면이 렌더링된 후 실행
+    // this.$store.dispatch("cmmnStore/code");
+    // this.$store.dispatch("menuStore/list");
+    // this.$store.dispatch("menuStore/listShow");
+    // this.$store.dispatch("levelMenuStore/list");
+
+
+    //  this.$store.state.appStore.selectDrawerItem = "로그인"
+
   },
 
   methods: {
-    fnSetCmmnCode(){ // 공통으로 필요한 사전 데이터 조회
-      this.$store.dispatch("menuStore/listShow");
-      this.$store.dispatch("levelMenuStore/list");
-    },
     //  ...mapActions(['login_axios']), // login(){}를 사용하는것과 같음
-    //  fnLogin: call('loginStore/login'),
-    fnLoginBtnClick(){
-      this.$store
-        .dispatch("loginStore/login",{
-          loginId:  this.loginId, // v-model로 지정된 login_id text
-          loginPw:  this.loginPw, // v-model로 지정된 login_pw text
-        })
-        .then(res => {
-          if(!res) return;
-          this.$router
-            .push("/" )
-            .catch(err => {
-              alert(err);
-              console.log(err)
-            });
-        });
-
+    login: call('loginStore/login'),
+    async   loginBtnClick(){
+      await this.login({
+        loginId:  this.loginId, // v-model로 지정된 login_id text
+        loginPw:  this.loginPw, // v-model로 지정된 login_pw text
+      })
     }
 
   },

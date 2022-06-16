@@ -48,7 +48,7 @@ public class LoginService {
 			return response.failResult("조회된 정보가 없습니다. 확인하신 후 입력해주세요.", HttpStatus.BAD_REQUEST);
 		}
 
-		return response.successLogin(loginVo2, "조회 성공했습니다.", HttpStatus.OK);
+		return response.successList(loginVo2, "조회 성공했습니다.", HttpStatus.OK);
 	}
 
 }

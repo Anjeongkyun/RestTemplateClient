@@ -14,13 +14,11 @@
       v-if="drawerImage"
       #img="props"
     >
-    
-        <v-img
-          :key="image"
-          :gradient="gradient"
-          v-bind="props"
-        />
-    
+      <v-img
+        :key="image"
+        :gradient="gradient"
+        v-bind="props"
+      />
     </template>
 
     <div class="px-2">

@@ -4,215 +4,214 @@
     fluid
     tag="section"
   >
-    <div v-if="loading">
-      <v-row>
-        <v-col
-          :cols="viewListCols"
+    <v-row>
+      <v-col
+        :cols="viewListCols"
+      >
+        <material-card
+          icon="mdi-account"
+          icon-small
+          :title="selectDrawerItem"
+          color="accent"
         >
-          <material-card
-            icon="mdi-account"
-            icon-small
-            :title="selectDrawerItem"
-            color="accent"
+          <v-alert
+            color="accent lighten-3"
+            dark
+            icon="mdi-yeast"
+            border="left"
+            class="pl-6 pr-6 ml-6 mr-6"
           >
-            <v-alert
-              color="accent lighten-3"
-              dark
-              icon="mdi-yeast"
-              border="left"
-              class="pl-6 pr-6 ml-6 mr-6"
-            >
-              <v-row
-                dense
-                class="pl-6 pr-6"
-              >
-                <v-col
-                  class="d-flex justify-center mb-1"
-                  cols="10"
-                  sm="12"
-                  lg="10"
-                />
-                <v-col
-                  class="d-flex justify-center mb-1"
-                  cols="2"
-                  sm="12"
-                  lg="2"
-                >
-                  <v-btn
-                    class="mb-3"
-                    block
-                    depressed
-                    color="salary"
-                    @click="addBtnClick({ })"
-                  >
-                    신규
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-alert>
-
             <v-row
               dense
+              class="pl-6 pr-6"
             >
-              <v-card-text>
-                <v-data-table
-                  :headers="tableHeaderArr"
-                  :items="menuList"
-                  @click:row="rowClick"
-                />
-              </v-card-text>
+              <v-col
+                class="d-flex justify-center mb-1"
+                cols="10"
+                sm="12"
+                lg="10"
+              />
+              <v-col
+                class="d-flex justify-center mb-1"
+                cols="2"
+                sm="12"
+                lg="2"
+              >
+                <v-btn
+                  class="mb-3"
+                  block
+                  depressed
+                  color="salary"
+                  @click="addBtnClick({ })"
+                >
+                  신규
+                </v-btn>
+              </v-col>
             </v-row>
-          </material-card>
-        </v-col>
-        <v-col
+          </v-alert>
 
-          v-show="viewInfoDisabled"
-          cols="3"
-        >
-          <template>
-            <v-form
-              ref="form"
-              v-model="valid"
-              lazy-validation
-            >
-              <v-row>
-                <v-col>
-                  <v-card>
-                    <v-card-text>
-                      <v-text-field
-                        v-show="columnObj.menuId.tableShow"
-                        v-model="columnObj.menuId.data"
-                        :label="columnObj.menuId.text"
-                        :rules="columnObj.menuId.rules"
-                        :placeholder="columnObj.menuId.placeholder"
-                        :counter="columnObj.menuId.counter"
+          <v-row
+            dense
+          >
+            <v-card-text>
+              <v-data-table
+                :headers="tableHeaderArr"
+                :items="menuList"
+                @click:row="rowClick"
+              />
+            </v-card-text>
+          </v-row>
+        </material-card>
+      </v-col>
+      <v-col
 
-                        :disabled="columnObj.menuId.disabled"
-                        required
-                      />
+        v-show="viewInfoDisabled"
+        cols="3"
+      >
+        <template>
+          <v-form
+            ref="form"
+            v-model="valid"
+            lazy-validation
+          >
+            <v-row>
+              <v-col>
+                <v-card>
+                  <v-card-text>
+                    <v-text-field
+                      v-show="columnObj.menuId.tableShow"
+                      v-model="columnObj.menuId.data"
+                      :label="columnObj.menuId.text"
+                      :rules="columnObj.menuId.rules"
+                      :placeholder="columnObj.menuId.placeholder"
+                      :counter="columnObj.menuId.counter"
 
-                      <v-text-field
-                        v-model="columnObj.menuNm.data"
-                        :label="columnObj.menuNm.text"
-                        :rules="columnObj.menuNm.rules"
-                        :placeholder="columnObj.menuNm.placeholder"
-                        :counter="columnObj.menuNm.counter"
-                        :disabled="columnObj.menuNm.disabled"
-                        required
-                      />
+                      :disabled="columnObj.menuId.disabled"
+                      required
+                    />
 
-                      <v-text-field
-                        v-model="columnObj.description.data"
-                        :label="columnObj.description.text"
-                        :rules="columnObj.description.rules"
-                        :placeholder="columnObj.description.placeholder"
-                        :counter="columnObj.description.counter"
-                        :disabled="columnObj.description.disabled"
-                        required
-                      />
+                    <v-text-field
+                      v-model="columnObj.menuNm.data"
+                      :label="columnObj.menuNm.text"
+                      :rules="columnObj.menuNm.rules"
+                      :placeholder="columnObj.menuNm.placeholder"
+                      :counter="columnObj.menuNm.counter"
+                      :disabled="columnObj.menuNm.disabled"
+                      required
+                    />
 
-
-
-
-                      <v-select
-                        v-model="columnObj.menuShowYn.data"
-                        :label="columnObj.menuShowYn.text"
-
-                        :rules="columnObj.menuShowYn.rules"
-                        :items="displayYnItem"
-                        item-text="textItem"
-                        item-value="valueItem"
-                        required
-                      />
+                    <v-text-field
+                      v-model="columnObj.description.data"
+                      :label="columnObj.description.text"
+                      :rules="columnObj.description.rules"
+                      :placeholder="columnObj.description.placeholder"
+                      :counter="columnObj.description.counter"
+                      :disabled="columnObj.description.disabled"
+                      required
+                    />
 
 
-                      <v-text-field
-                        v-model="columnObj.menuOrder.data"
-                        :label="columnObj.menuOrder.text"
-                        :rules="columnObj.menuOrder.rules"
-                        :placeholder="columnObj.menuOrder.placeholder"
-                        :counter="columnObj.menuOrder.counter"
-                        :disabled="columnObj.menuOrder.disabled"
-                        required
-                      />
 
-                      <v-text-field
-                        v-model="columnObj.insId.data"
-                        :label="columnObj.insId.text"
-                        :placeholder="columnObj.insId.placeholder"
-                        :disabled="columnObj.insId.disabled"
-                      />
-                      <v-text-field
-                        v-model="columnObj.insDate.data"
-                        :label="columnObj.insDate.text"
-                        :placeholder="columnObj.insDate.placeholder"
-                        :disabled="columnObj.insDate.disabled"
-                      />
 
-                      <v-text-field
-                        v-model="columnObj.updId.data"
-                        :label="columnObj.updId.text"
-                        :placeholder="columnObj.updId.placeholder"
-                        :disabled="columnObj.updId.disabled"
-                      />
+                    <v-select
+                      v-model="columnObj.menuShowYn.data"
+                      :label="columnObj.menuShowYn.text"
 
-                      <v-text-field
-                        v-model="columnObj.updDate.data"
-                        :label="columnObj.updDate.text"
-                        :placeholder="columnObj.updDate.placeholder"
-                        :disabled="columnObj.updDate.disabled"
-                      />
-                    </v-card-text>
+                      :rules="columnObj.menuShowYn.rules"
+                      :items="displayYnItem"
+                      item-text="textItem"
+                      item-value="valueItem"
+                      required
+                    />
 
-                    <v-divider class="mt-12" />
-                    <v-row justify="space-between">
-                      <v-col cols="4">
-                        <v-btn
 
-                          text
-                          @click="cancelBtnCLick()"
-                        >
-                          취소
-                        </v-btn>
-                      </v-col>
+                    <v-text-field
+                      v-model="columnObj.menuOrder.data"
+                      :label="columnObj.menuOrder.text"
+                      :rules="columnObj.menuOrder.rules"
+                      :placeholder="columnObj.menuOrder.placeholder"
+                      :counter="columnObj.menuOrder.counter"
+                      :disabled="columnObj.menuOrder.disabled"
+                      required
+                    />
 
-                      <v-col cols="4">
-                        <v-btn
-                          v-show="regTypeBool"
-                          color="error"
-                          text
-                          @click="deleteBtnCLick()"
-                        >
-                          삭제
-                        </v-btn>
-                      </v-col>
-                      <v-col cols="4">
-                        <v-btn
-                          color="secondary"
-                          text
-                          @click="saveBtnCLick()"
-                        >
-                          저장
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-form>
-          </template>
+                    <v-text-field
+                      v-model="columnObj.insId.data"
+                      :label="columnObj.insId.text"
+                      :placeholder="columnObj.insId.placeholder"
+                      :disabled="columnObj.insId.disabled"
+                    />
+                    <v-text-field
+                      v-model="columnObj.insDate.data"
+                      :label="columnObj.insDate.text"
+                      :placeholder="columnObj.insDate.placeholder"
+                      :disabled="columnObj.insDate.disabled"
+                    />
+
+                    <v-text-field
+                      v-model="columnObj.updId.data"
+                      :label="columnObj.updId.text"
+                      :placeholder="columnObj.updId.placeholder"
+                      :disabled="columnObj.updId.disabled"
+                    />
+
+                    <v-text-field
+                      v-model="columnObj.updDate.data"
+                      :label="columnObj.updDate.text"
+                      :placeholder="columnObj.updDate.placeholder"
+                      :disabled="columnObj.updDate.disabled"
+                    />
+                  </v-card-text>
+
+                  <v-divider class="mt-12" />
+                  <v-row justify="space-between">
+                    <v-col cols="4">
+                      <v-btn
+
+                        text
+                        @click="cancelBtnCLick()"
+                      >
+                        취소
+                      </v-btn>
+                    </v-col>
+
+                    <v-col cols="4">
+                      <v-btn
+                        v-show="regTypeBool"
+                        color="error"
+                        text
+                        @click="deleteBtnCLick()"
+                      >
+                        삭제
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="4">
+                      <v-btn
+                        color="secondary"
+                        text
+                        @click="saveBtnCLick()"
+                      >
+                        저장
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-form>
+        </template>
         <!--   <userForm
             ref="userForm"
           /> -->
-        </v-col>
-      </v-row>
-    </div>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 
 import { get, set, sync, call } from 'vuex-pathify'
+import cmmnFnStore from '@/store/modules/cmmnFnStore' //store 와 관련된 데이터를 처리하는 공통 함수 파일
 
 export default {
   name: 'MenuView',
@@ -230,8 +229,8 @@ export default {
     viewListCols: 12,
     viewInfoCols:3,
     viewInfoDisabled:false,
-
-/*
+    cmmnList:{},
+    /*
 
 private String menuId;
 private String menuNm;
@@ -334,6 +333,23 @@ private String menuType; */
         data:null,
         update:true,
         insert:true,
+        tableShow:false,
+        sortable: false,
+        search:false,
+        counter:1,
+        placeholder:" ",
+        disabled:true,
+        rules: [
+          v => !!v || '필수 입력',
+        //  v => (!v || v.length <= 1) || '입력 글자 수 초과.',
+        ],
+      },
+      menuShowNm: {
+        text:"표시여부",
+        value:"menuShowYn",
+        data:null,
+        update:true,
+        insert:true,
         tableShow:true,
         sortable: false,
         search:false,
@@ -380,7 +396,7 @@ private String menuType; */
         ],
       },
 
-        menuType: {
+      menuType: {
         text:"메뉴 타입",
         value:"menuType",
         data:null,
@@ -469,52 +485,55 @@ private String menuType; */
 
     searchObj: {},
     dataObj:{
-      id: localStorage.getItem("loginUserID"),
+      id: null
     },
     tableHeaderArr:[],
   }),
   computed: {
-      ...get('appStore', [
+    ...get('appStore', [
       'selectDrawerItem'
     ]),
-      ...get('menuStore', [
+    ...get('menuStore', [
       'menuList'
     ]),
-
     ...sync('userStore',[
       'parkSeq','id','parkItemSelected',
     ]),
     ...get('cmmnStore', [
       'cmmnCodeItem', 'useYnItem' , 'displayYnItem'
-  ]),
+    ]),
   },
-
-
-  mounted(){
-  //  this.$store.dispatch('userStore/park');
-  //  this.$store.dispatch('cmmnStore/code');
-    this.$store.dispatch('menuStore/list');
+  async created(){
+    //  store.getters["cmmnStore/loginUserID"]
+    this.setID();
     this.makeTableHeaderArr();
     this.makeSearchObj();
-    this.loading = true;  // 돔 그린 후 바인딩 하기 위해 처리
+    console.log(await cmmnFnStore.fn.getCmmnCodeGroup("PC","04"))
+    this.cmmnList.PC04=await cmmnFnStore.fn.getCmmnCodeGroup("PC","04");
+    await  this.searchBtnClick();
+  },
+
+  mounted(){
+
   },
 
   methods: {
-
+    setID (){
+      this.dataObj.id =this.$store.getters["cmmnStore/loginUserID"]
+    },
     manageShow() { //화면 오른쪽에 폼을 표시
       this.reset();
       this.viewListCols =  9;
       this.viewInfoDisabled =  true;
     },
-      manageHide() { //화면 오른쪽의 폼을 숨김
+    manageHide() { //화면 오른쪽의 폼을 숨김
       this.reset();
       this.viewListCols = 12;
       this.viewInfoDisabled= false;
     },
 
 
-  makeTableHeaderArr(){  // 테이블의 헤더를 만듦
-
+    makeTableHeaderArr(){  // 테이블의 헤더를 만듦
       var columnObj = this.columnObj;
       for(var i in  columnObj){
         if(columnObj[i].tableShow){
@@ -526,7 +545,6 @@ private String menuType; */
           })
         }
       }
-
     },
 
     makeSearchObj(){  //검색  객체를 만듦
@@ -541,7 +559,6 @@ private String menuType; */
 
         }
       }
-
     },
 
     validate () {
@@ -568,9 +585,9 @@ private String menuType; */
       this.errorMessages = []
       this.formHasErrors = false
     },
-submit: call('menuStore/submit'),
+    submit: call('menuStore/submit'),
 
-      async  rowClick  (event, { item } ) {
+    async  rowClick  (event, { item } ) {
       await   this.manageShow();
       this.regTypeBool = true
       this.regType= "change";
@@ -580,13 +597,13 @@ submit: call('menuStore/submit'),
       }
     },
 
-  async searchBtnClick(){
+    async searchBtnClick(){
 
-      this.$store.dispatch('menuStore/list');
+      await this.$store.dispatch('menuStore/list');
       await  this.manageHide();
 
     },
-  async addBtnClick( ){  // 신규 버튼 클릭
+    async addBtnClick( ){  // 신규 버튼 클릭
       await  this.manageShow();
       this.regTypeBool = false;
       this.regType= "add";
@@ -602,13 +619,13 @@ submit: call('menuStore/submit'),
         this.dataObj[i] = this.columnObj[i].data
       }
 
-        await   this.submit(this.dataObj);
-        await  this.searchBtnClick(this.searchOj);
+      await  this.submit(this.dataObj);
+      await  this.searchBtnClick(this.searchOj);
 
 
 
     },
-  cancelBtnCLick(){
+    cancelBtnCLick(){
       this.userManageHide();
     },
 
