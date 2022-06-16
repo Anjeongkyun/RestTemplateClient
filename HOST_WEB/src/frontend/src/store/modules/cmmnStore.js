@@ -28,12 +28,13 @@ const state = {
       valueItem: "N",
     }
   ],
-
   loginUserYN: null, // 실제 로그인 여부
   loginUserID: null, // 사용자 ID, 새로고침시 id를 유지하기 위해 사용
   loginUserNM: null, // 사용자 이름,
   loginUserLevel: "PC0404",  //  기본 비로그인
-  loginUserMenu:[],
+  loginUserMenu: [],
+
+  cmmnDataYN: null,  // 데이터 초기화 여부  null이면 모든 데이터들이 null 상태
   cmmnCode: null,
   cmmnMenu: null,
   cmmnLevelMenu:null,
@@ -76,7 +77,9 @@ const mutations = {
     state.loginUserNM = null; // 사용자 이름,
     state.loginUserLevel = "PC0404"; // 기본 비로그인
     state.loginUserMenu = [];
-    state.cmmnCode= null;
+
+    state.cmmnDataYN = null;
+    state.cmmnCode = null;
     state.cmmnMenu = null;
     state.cmmnLevelMenu = null;
 
@@ -84,6 +87,10 @@ const mutations = {
   setLoginUserMenu(state, payload) { // 로그인 사용자의 정보와 공통 데이터를 초기화
     state.loginUserMenu = payload
 
+  },
+  setCmmnDataYN() {
+    console.log("=====123123")
+    state.cmmnDataYN = true;
   },
   test(state, payload) { // 로그인 사용자의 정보와 공통 데이터를 초기화
     state.test = 1234; // 실제 로그인 여부
@@ -164,6 +171,8 @@ const actions = {
     await this.dispatch("cmmnStore/code");
     await this.dispatch("menuStore/cmmnMenulist");
     await this.dispatch("levelMenuStore/cmmnLevelMenulist");
+    commit('setCmmnDataYN',{})
+
   },
 
   setLoginUserMenu({

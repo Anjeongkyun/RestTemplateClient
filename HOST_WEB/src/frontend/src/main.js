@@ -11,6 +11,7 @@ import axios from 'axios'
 Vue.prototype.$http = axios
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false;
+
 sync(store, router);
 
 new Vue({
